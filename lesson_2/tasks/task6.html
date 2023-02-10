@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 2 / Задача 6</title>
+</head>
+<body>
+    <a href="../index.html">Lesson 2</a> / <a href="./task6.html">Задача 6</a>
+    <hr>
+    
+    <h1>Задача 6.</h1>
+
+    <p>З клавіатури вводяться вартість товару та кількість одиниць 3 товарів. Обчислити вартість кожного товару окремо та загальну вартість. Вивести чек (як у супермаркеті) використовуючи елементи розмітки.</p>
+
+    <script>
+        var price1 = parseFloat(prompt("Введіть ціну товару 1", 0));
+        var quantity1 = parseInt(prompt("Введіть кількість товару 1", 0));
+        var price2 = parseFloat(prompt("Введіть ціну товару 2", 0));
+        var quantity2 = parseInt(prompt("Введіть кількість товару 2", 0));
+        var price3 = parseFloat(prompt("Введіть ціну товару 3", 0));
+        var quantity3 = parseInt(prompt("Введіть кількість товару 3", 0));
+        
+        var total1 = price1 * quantity1;
+        var total2 = price2 * quantity2;
+        var total3 = price3 * quantity3;
+        var total = total1 + total2 + total3;
+        
+        document.write(`<table border="1">
+            <tr>
+                <td>Товар 1</td>
+                <td>${price1.toFixed(2)}</td>
+                <td>${quantity1}</td>
+                <td>${total1.toFixed(2)}</td>
+            </tr>
+            <tr>
+                <td>Товар 2</td>
+                <td>${price2.toFixed(2)}</td>
+                <td>${quantity2}</td>
+                <td>${total2.toFixed(2)}</td>
+            </tr>
+            <tr>
+                <td>Товар 3</td>
+                <td>${price3.toFixed(2)}</td>
+                <td>${quantity3}</td>
+                <td>${total3.toFixed(2)}</td>
+            </tr>
+            <tr>
+                <td colspan="3">Загальна вартість</td>
+                <td>${total.toFixed(2)}</td>
+            </tr>
+        </table>`);
+    </script>
+</body>
+</html>
