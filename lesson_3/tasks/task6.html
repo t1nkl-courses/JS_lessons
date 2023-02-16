@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 3 / Задача 6</title>
+</head>
+<body>
+    <a href="../index.html">Lesson 3</a> / <a href="./task6.html">Задача 6</a>
+    <hr>
+    
+    <h1>Задача 6.</h1>
+
+    <p>
+        З клавіатури вводиться номер дня тижня.
+        Вивести на екран назву дня.
+    </p>
+
+    <script>
+        const dayNumberInWeek = parseInt(prompt("Введіть номер дня тижня -", 0));
+        
+        switch (dayNumberInWeek) {
+            case 1:
+                document.write(`Понеділок`);
+                break;
+            case 2:
+                document.write(`Вівторок`);
+                break;
+            case 3:
+                document.write(`Середа`);
+                break;
+            case 4:
+                document.write(`Четвер`);
+                break;
+            case 5:
+                document.write(`П'ятниця`);
+                break;
+            case 6:
+                document.write(`Субота`);
+                break;
+            case 7:
+                document.write(`Неділя`);
+                break;
+            default:
+                document.write(`Ви ввели невірний номер дня тижня`);
+                break;
+        }
+    </script>
+</body>
+</html>

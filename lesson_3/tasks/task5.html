@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 3 / Задача 5</title>
+</head>
+<body>
+    <a href="../index.html">Lesson 3</a> / <a href="./task5.html">Задача 5</a>
+    <hr>
+    
+    <h1>Задача 5.</h1>
+
+    <p>
+        З клавіатури вводиться назва категорії водія (А-мотоцикл, В-легковий автомобіль, С-вантажний автомобіль).
+        Вивести на екран назву транспортного засобу, яким він може керувати.
+    </p>
+
+    <script>
+        const userDriverLicense = prompt("Введіть назву категорії водія -").toUpperCase();
+
+        switch (userDriverLicense) {
+            case `A`:
+                document.write(`Ви можете керувати мотоциклом`);
+                break;
+            case `B`:
+                document.write(`Ви можете керувати легковим автомобілем`);
+                break;
+            case `C`:
+                document.write(`Ви можете керувати вантажним автомобілем`);
+                break;
+            default:
+                document.write(`Ви не можете керувати жодним транспортним засобом`);
+        }
+    </script>
+</body>
+</html>
