@@ -23,11 +23,11 @@
 
         if (userAge < 7) {
             result = 'Ви ще дитина';
-        } else if (userAge < 18) {
+        } else if (userAge >= 7 && userAge < 18) {
             result = 'Ви ще школяр';
-        } else if (userAge < 25) {
+        } else if (userAge >= 18 && userAge < 25) {
             result = 'Ви ще студент';
-        } else if (userAge < 60) {
+        } else if (userAge >= 25 && userAge < 60) {
             result = 'Ви ще працівник';
         } else {
             result = 'Щасливої дороги';
