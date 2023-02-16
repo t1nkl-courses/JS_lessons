@@ -29,13 +29,13 @@
             case userAge < KIDS_AGE:
                 result = 'Ви ще дитина';
                 break;
-            case (userAge >= KIDS_AGE && userAge < STUDENT_AGE):
+            case userAge < STUDENT_AGE:
                 result = 'Ви ще школяр';
                 break;
-            case (userAge >= STUDENT_AGE && userAge < WORKER_AGE):
+            case userAge < WORKER_AGE:
                 result = 'Ви ще студент';
                 break;
-            case (userAge >= WORKER_AGE && userAge < PENSIONER_AGE):
+            case userAge < PENSIONER_AGE:
                 result = 'Ви ще працівник';
                 break;
             case userAge >= PENSIONER_AGE:
