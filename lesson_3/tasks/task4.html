@@ -21,19 +21,25 @@
         const userAge = parseInt(prompt("Введіть вік людини -", 0));
         let result = '';
 
-        if (userAge < 7) {
-            result = 'Ви ще дитина';
-        } else if (userAge < 18) {
-            result = 'Ви ще школяр';
-        } else if (userAge < 25) {
-            result = 'Ви ще студент';
-        } else if (userAge < 60) {
-            result = 'Ви ще працівник';
-        } else {
-            result = 'Щасливої дороги';
+        switch (true) {
+            case userAge < 7:
+                result = 'Ви ще дитина';
+                break;
+            case (userAge >= 7 && userAge < 18):
+                result = 'Ви ще школяр';
+                break;
+            case (userAge >= 18 && userAge < 25):
+                result = 'Ви ще студент';
+                break;
+            case (userAge >= 25 && userAge < 60):
+                result = 'Ви ще працівник';
+                break;
+            case userAge >= 60:
+                result = 'Ви ще пенсіонер';
+                break;
         }
 
-        document.write(result);
+        document.write(`Ви ще працівник`);
     </script>
 </body>
 </html>
