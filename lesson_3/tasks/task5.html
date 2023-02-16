@@ -18,20 +18,23 @@
     </p>
 
     <script>
+        const A = 'A';
+              B = 'B';
+              C = 'C';
         const userDriverLicense = prompt("Введіть назву категорії водія -").toUpperCase();
 
         switch (userDriverLicense) {
-            case `A`:
-                document.write(`Ви можете керувати мотоциклом`);
+            case A:
+                document.write('Ви можете керувати мотоциклом');
                 break;
-            case `B`:
-                document.write(`Ви можете керувати легковим автомобілем`);
+            case B:
+                document.write('Ви можете керувати легковим автомобілем');
                 break;
-            case `C`:
-                document.write(`Ви можете керувати вантажним автомобілем`);
+            case C:
+                document.write('Ви можете керувати вантажним автомобілем');
                 break;
             default:
-                document.write(`Ви не можете керувати жодним транспортним засобом`);
+                document.write('Ви не можете керувати жодним транспортним засобом');
         }
     </script>
 </body>

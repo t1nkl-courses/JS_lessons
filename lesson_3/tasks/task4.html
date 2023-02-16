@@ -18,23 +18,27 @@
     </p>
 
     <script>
+        const KIDS_AGE = 7;
+              STUDENT_AGE = 18;
+              WORKER_AGE = 25;
+              PENSIONER_AGE = 60;
         const userAge = parseInt(prompt("Введіть вік людини -", 0));
         let result = '';
 
         switch (true) {
-            case userAge < 7:
+            case userAge < KIDS_AGE:
                 result = 'Ви ще дитина';
                 break;
-            case (userAge >= 7 && userAge < 18):
+            case (userAge >= KIDS_AGE && userAge < STUDENT_AGE):
                 result = 'Ви ще школяр';
                 break;
-            case (userAge >= 18 && userAge < 25):
+            case (userAge >= STUDENT_AGE && userAge < WORKER_AGE):
                 result = 'Ви ще студент';
                 break;
-            case (userAge >= 25 && userAge < 60):
+            case (userAge >= WORKER_AGE && userAge < PENSIONER_AGE):
                 result = 'Ви ще працівник';
                 break;
-            case userAge >= 60:
+            case userAge >= PENSIONER_AGE:
                 result = 'Ви вже пенсіонер';
                 break;
         }
