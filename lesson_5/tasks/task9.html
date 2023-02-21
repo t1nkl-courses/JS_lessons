@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 5 / Задача 9</title>
+</head>
+<body>
+    <a href="../index.html">Lesson 5</a> / <a href="./task9.html">Задача 9</a>
+    <hr>
+    
+    <h1>Задача 9.</h1>
+
+    <p>
+        Користувач загадує число. Комп’ютер задає питання поки не вгадає число користувача (використати confirm)
+    </p>
+
+    <script>
+        const userNumber = parseInt(prompt('Загадайте число', 0));
+
+        if (isNaN(userNumber)) {
+            alert('Введіть число!');
+            throw new Error('Помилка! Введіть число!'); // return; - Uncaught SyntaxError: Illegal return statement
+        }
+
+        do {
+            var guess = Math.floor(Math.random() * userNumber) + 1;
+            var answer = confirm(`Ваше число ${guess}?`);
+        } while (!answer);
+
+        alert('Я вгадав!');
+    </script>
+</body>
+</html>

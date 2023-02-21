@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 5 / Задача 10</title>
+</head>
+<body>
+    <a href="../index.html">Lesson 5</a> / <a href="./task10.html">Задача 10</a>
+    <hr>
+    
+    <h1>Задача 10.</h1>
+
+    <p>
+        Знайти суму всіх непарних чисел, що знаходяться між заданими користувачем числами.
+    </p>
+
+    <script>
+        const firstNumber = parseInt(prompt('Введіть перше число', 0));
+        const secondNumber = parseInt(prompt('Введіть друге число', 0));
+
+        if (isNaN(firstNumber) || isNaN(secondNumber)) {
+            alert('Введіть число!');
+            throw new Error('Помилка! Введіть число!'); // return; - Uncaught SyntaxError: Illegal return statement
+        }
+
+        var sum = 0;
+
+        for (var i = firstNumber; i <= secondNumber; i++) {
+            if (i % 2 !== 0) {
+                sum += i;
+            }
+        }
+
+        document.write(`Сума всіх непарних чисел, що знаходяться між заданими числами: ${sum}`);
+    </script>
+</body>
+</html>

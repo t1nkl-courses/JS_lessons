@@ -27,7 +27,7 @@
         var attempts = 0;
 
         while (attempts < 3) {
-            var guess = Math.floor(Math.random() * (userNumber * 2)) + 1; // Роблю діапазон вдвічі більше за число, яке вводить користувач
+            var guess = Math.floor(Math.random() * (userNumber * 2)) + 1; // Роблю діапазон у вдвічі більше за число, яке вводить користувач
             var answer = confirm(`Ваше число ${guess}?`);
 
             if (answer) {
