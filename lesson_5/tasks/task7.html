@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 5 / Задача 7</title>
+</head>
+<body>
+    <a href="../index.html">Lesson 5</a> / <a href="./task7.html">Задача 7</a>
+    <hr>
+    
+    <h1>Задача 7.</h1>
+
+    <p>
+        Вивести на екран N абзаців (N вводиться користувачем) за зразком
+    </p>
+
+    <script>
+        const paragraph = parseInt(prompt('Введіть кількість абзаців', 1));
+
+        if (isNaN(paragraph)) {
+            document.write('Введіть число!');
+            throw new Error('Помилка! Введіть число!'); // return; - Uncaught SyntaxError: Illegal return statement
+        }
+
+        var result = '';
+
+        for (var i = 1; i <= paragraph; i++) {
+            result += `<h1>Заголовок ${i}</h1>`;
+
+            for (var j = 1; j <= i; j++) {
+                result += `<p>Розділ ${i}, параграф ${j}</p>`;
+            }
+
+            result += '<hr>';
+        }
+
+        document.write(result);
+    </script>
+</body>
+</html>

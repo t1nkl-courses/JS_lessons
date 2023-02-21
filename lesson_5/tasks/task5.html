@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 5 / Задача 5</title>
+</head>
+<body>
+    <a href="../index.html">Lesson 5</a> / <a href="./task5.html">Задача 5</a>
+    <hr>
+    
+    <h1>Задача 5.</h1>
+
+    <p>
+        Вивести таблицю
+    </p>
+
+    <script>
+        var number = 1;
+        var table = '<table border="1">';
+
+        for (var i = 1; i <= 3; i++) {
+            table += '<tr>';
+
+            for (var j = 1; j <= 3; j++) {
+                table += `<td>Число: ${number}</td>`;
+                number++;
+            }
+
+            table += '</tr>';
+        }
+
+        table += '</table>';
+
+        document.write(table);
+    </script>
+</body>
+</html>

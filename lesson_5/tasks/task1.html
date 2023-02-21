@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 5 / Задача 1</title>
+</head>
+<body>
+    <a href="../index.html">Lesson 5</a> / <a href="./task1.html">Задача 1</a>
+    <hr>
+    
+    <h1>Задача 1.</h1>
+
+    <p>
+        Вивести з використанням циклів маркований список з випадковими числами (1-100).
+        Кількість випадкових чисел вводиться користувачем.
+        Приклад: 12 21 34 51
+    </p>
+
+    <script>
+        const randomInt = parseInt(prompt('Введіть кількість випадкових чисел', 1));
+
+        if (randomInt < 1 || randomInt > 100 || isNaN(randomInt)) {
+            document.write('Помилка! Введіть число від 1 до 100');
+            throw new Error('Помилка! Введіть число від 1 до 100'); // return; - Uncaught SyntaxError: Illegal return statement
+        }
+
+        let list = '<ul>';
+
+        for (let i = 0; i < randomInt; i++) {
+            list += '<li>' + Math.floor(Math.random() * 100) + '</li>';
+        }
+
+        list += '</ul>';
+
+        document.write(list);
+    </script>
+</body>
+</html>

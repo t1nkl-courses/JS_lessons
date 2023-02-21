@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 5 / Задача 3</title>
+</head>
+<body>
+    <a href="../index.html">Lesson 5</a> / <a href="./task3.html">Задача 3</a>
+    <hr>
+    
+    <h1>Задача 3.</h1>
+
+    <p>
+        Вивести таблицю з одним рядком і 7 стовпцями
+    </p>
+
+    <script>
+        var table = '<table border="1"><tr>';
+
+        for (var i = 1; i <= 7; i++) {
+            table += `<td>Стовпець ${i}</td>`;
+        }
+
+        table += '</tr></table>';
+
+        document.write(table);
+    </script>
+</body>
+</html>
