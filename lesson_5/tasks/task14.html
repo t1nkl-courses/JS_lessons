@@ -30,12 +30,12 @@
 
             if (isNaN(cashInput)) {
                 alert('Введіть число!');
-                throw new Error('Помилка! Введіть число!'); // return; - Uncaught SyntaxError: Illegal return statement, а continue вважаю не доречним тут використовувати
+                continue;
             }
 
             if (cashInput < 0) {
                 alert('Введіть додатнє число!');
-                throw new Error('Помилка! Введіть додатнє число!'); // return; - Uncaught SyntaxError: Illegal return statement, а continue вважаю не доречним тут використовувати
+                continue;
             }
 
             cashCurrent += cashInput;

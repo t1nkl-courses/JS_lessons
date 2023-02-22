@@ -38,18 +38,18 @@
                   bombardaY = parseInt(prompt('Введіть координату Y снаряду', ));
 
             if (isNaN(bombardaX) || isNaN(bombardaY)) {
-                alert('Введіть число!');
-                throw new Error('Помилка! Введіть число!'); // return; - Uncaught SyntaxError: Illegal return statement, а continue вважаю не доречним тут використовувати
+                alert('Помилка! Введіть число!');
+                continue;
             }
 
             if (bombardaX < 1 || bombardaX > areaX) {
                 alert(`Введіть координати від 1 до ${areaX}!`);
-                throw new Error(`Помилка! Введіть координати від 1 до ${areaX}!`); // return; - Uncaught SyntaxError: Illegal return statement, а continue вважаю не доречним тут використовувати
+                continue;
             }
 
             if (bombardaY < 1 || bombardaY > areaY) {
                 alert(`Введіть координати від 1 до ${areaY}!`);
-                throw new Error(`Помилка! Введіть координати від 1 до ${areaY}!`); // return; - Uncaught SyntaxError: Illegal return statement, а continue вважаю не доречним тут використовувати
+                continue;
             }
 
             if (bombardaX === shipX && bombardaY === shipY) {
