@@ -39,17 +39,17 @@
 
             if (isNaN(bombardaX) || isNaN(bombardaY)) {
                 alert('Введіть число!');
-                throw new Error('Помилка! Введіть число!'); // return; - Uncaught SyntaxError: Illegal return statement
+                throw new Error('Помилка! Введіть число!'); // return; - Uncaught SyntaxError: Illegal return statement, а continue вважаю не доречним тут використовувати
             }
 
             if (bombardaX < 1 || bombardaX > areaX) {
                 alert(`Введіть координати від 1 до ${areaX}!`);
-                throw new Error(`Помилка! Введіть координати від 1 до ${areaX}!`); // return; - Uncaught SyntaxError: Illegal return statement
+                throw new Error(`Помилка! Введіть координати від 1 до ${areaX}!`); // return; - Uncaught SyntaxError: Illegal return statement, а continue вважаю не доречним тут використовувати
             }
 
             if (bombardaY < 1 || bombardaY > areaY) {
                 alert(`Введіть координати від 1 до ${areaY}!`);
-                throw new Error(`Помилка! Введіть координати від 1 до ${areaY}!`); // return; - Uncaught SyntaxError: Illegal return statement
+                throw new Error(`Помилка! Введіть координати від 1 до ${areaY}!`); // return; - Uncaught SyntaxError: Illegal return statement, а continue вважаю не доречним тут використовувати
             }
 
             if (bombardaX === shipX && bombardaY === shipY) {

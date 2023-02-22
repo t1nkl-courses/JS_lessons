@@ -67,7 +67,7 @@
 
             if (isNaN(monthTemperature)) {
                 alert('Введіть число!');
-                throw new Error('Помилка! Введіть число!'); // return; - Uncaught SyntaxError: Illegal return statement
+                throw new Error('Помилка! Введіть число!'); // return; - Uncaught SyntaxError: Illegal return statement, а continue вважаю не доречним тут використовувати
             }
 
             temperature += monthTemperature;
