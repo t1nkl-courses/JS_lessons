@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 5 / Задача 13</title>
+</head>
+<body>
+    <a href="../index.html">Lesson 5</a> / <a href="./task13.html">Задача 13</a>
+    <hr>
+    
+    <h1>Задача 13.</h1>
+
+    <p>
+        Морський бій.
+        Комп’ютер випадково розташовує одиночний корабель на полі розміром N*M.
+        Маючи К снарядів користувач намагається потопити корабель.
+    </p>
+
+    <script>
+        const areaX = parseInt(prompt('Введіть розмір поля N', 5));
+        const areaY = parseInt(prompt('Введіть розмір поля M', 5));
+        const bombarda = parseInt(prompt('Введіть кількість снарядів', 10));
+        
+        if (isNaN(areaX) || isNaN(areaY) || isNaN(bombarda)) {
+            alert('Введіть число!');
+            throw new Error('Помилка! Введіть число!');
+        }
+
+        var shipX = Math.floor(Math.random() * areaX);
+        var shipY = Math.floor(Math.random() * areaY);
+        var bombardaCount = 0;
+        var isShip = false;
+
+        while (bombardaCount < bombarda) {
+            var bombardaX = parseInt(prompt('Введіть координату X снаряду', 0));
+            var bombardaY = parseInt(prompt('Введіть координату Y снаряду', 0));
+
+            if (isNaN(bombardaX) || isNaN(bombardaY)) {
+                alert('Введіть число!');
+                throw new Error('Помилка! Введіть число!');
+            }
+
+            if (shipX > areaX || shipY > areaY) {
+                alert(`Введіть координати від 0 до ${areaY}!`);
+                throw new Error(`Помилка! Введіть координати від 0 до ${areaY}!`);
+            }
+
+            if (bombardaX === shipX && bombardaY === shipY) {
+                isShip = true;
+                break;
+            }
+            
+            alert('Ви промахнулися!');
+
+            bombardaCount++;
+        }
+
+        if (isShip) {
+            document.write(`Корабель потоплено за ${bombardaCount} снарядів!`);
+        } else {
+            document.write(`Корабель не потоплено!`);
+        }
+    </script>
+</body>
+</html>

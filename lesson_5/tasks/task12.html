@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 5 / Задача 12</title>
+</head>
+<body>
+    <a href="../index.html">Lesson 5</a> / <a href="./task12.html">Задача 12</a>
+    <hr>
+    
+    <h1>Задача 12.</h1>
+
+    <p>
+        Ігровий автомат. Випадково вибираємо зображення у 3 позиціях.
+        Вибір у кожній позиції вибирається як одне з чотирьох зображень.
+        Вивести ці зображення і повідомити виграш користувача (три перших зображення 100 грн, три других – 200, три третіх – 500, три четвертих зображення – 1000грн).
+        Використати цикли і switch (для вибору зображення за номером).
+    </p>
+
+    <script>
+        const images = [
+            '../img/1.png',
+            '../img/2.png',
+            '../img/3.png',
+            '../img/4.png',
+        ];
+        const imagesCount = images.length;
+        const positionsCount = 3;
+
+        let win = 0;
+
+        for (let i = 0; i < positionsCount; i++) {
+            const imageIndex = Math.floor(Math.random() * imagesCount);
+            const image = images[imageIndex];
+
+            document.write(`<img src="${image}" alt="image" width="100">`);
+
+            switch (imageIndex) {
+                case 0:
+                    win += 100;
+                    break;
+                case 1:
+                    win += 200;
+                    break;
+                case 2:
+                    win += 500;
+                    break;
+                case 3:
+                    win += 1000;
+                    break;
+            }
+        }
+
+        document.write(`<h1 style="color:red">Виграш: ${win} грн.</h1>`);
+    </script>
+</body>
+</html>
