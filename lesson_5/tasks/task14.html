@@ -49,10 +49,10 @@
         } while (cashCurrent < price);
 
         if (isEnough) {
-            alert(`Ви внесли ${cashInput} грн. Всього внесено: ${cashCurrent} грн. Всього до сплати: ${price} грн. Ваша решта: ${cashCurrent - price} грн.`);
+            document.write(`Ви внесли ${cashInput} грн. Всього внесено: ${cashCurrent} грн. Всього до сплати: ${price} грн. Ваша решта: ${cashCurrent - price} грн.`);
         }
 
-        alert('Дякуємо за покупку!');
+        document.write('Дякуємо за покупку!');
     </script>
 </body>
 </html>
