@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 5 / Задача 15</title>
+</head>
+<body>
+    <a href="../index.html">Lesson 5</a> / <a href="./task15.html">Задача 15</a>
+    <hr>
+    
+    <h1>Задача 15.</h1>
+
+    <p>
+        Користувача поступово вводить показники температури протягом року.
+        Знайти середню температуру.
+    </p>
+
+    <script>
+        var temperature = 0;
+        var monthCount = 1;
+
+        while (monthCount <= 12) {
+            var monthName = '';
+
+            switch (monthCount) {
+                case 1:
+                    monthName = 'січень';
+                    break;
+                case 2:
+                    monthName = 'лютий';
+                    break;
+                case 3:
+                    monthName = 'березень';
+                    break;
+                case 4:
+                    monthName = 'квітень';
+                    break;
+                case 5:
+                    monthName = 'травень';
+                    break;
+                case 6:
+                    monthName = 'червень';
+                    break;
+                case 7:
+                    monthName = 'липень';
+                    break;
+                case 8:
+                    monthName = 'серпень';
+                    break;
+                case 9:
+                    monthName = 'вересень';
+                    break;
+                case 10:
+                    monthName = 'жовтень';
+                    break;
+                case 11:
+                    monthName = 'листопад';
+                    break;
+                case 12:
+                    monthName = 'грудень';
+                    break;
+            }
+            
+            const monthTemperature = parseFloat(prompt(`Введіть показник температури за місяць - ${monthName}`, 0));
+
+            if (isNaN(monthTemperature)) {
+                alert('Введіть число!');
+                throw new Error('Помилка! Введіть число!'); // return; - Uncaught SyntaxError: Illegal return statement
+            }
+
+            temperature += monthTemperature;
+            monthCount++;
+        }
+
+        const averageTemperature = parseFloat(temperature / monthCount).toFixed(2);
+
+        document.write(`Середня температура: ${averageTemperature}`);
+    </script>
+</body>
+</html>

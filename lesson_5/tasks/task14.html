@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 5 / Задача 14</title>
+</head>
+<body>
+    <a href="../index.html">Lesson 5</a> / <a href="./task14.html">Задача 14</a>
+    <hr>
+    
+    <h1>Задача 14.</h1>
+
+    <p>
+        Каса.
+        Користувачу повідомляють суму, яку йому треба сплатити.
+        Користувач поступово вводить суму грошей до тих пір,
+        поки суми не буде достатньо для оплати товарів
+        (кожного разу користувачу повідомляють, яку ще суму потрібно ввести).
+    </p>
+
+    <script>
+        const price = Math.floor(Math.random() * 100); // просто генерую випадкову ціну
+        var cashCurrent = 0;
+        var isEnough = false;
+
+        do {
+            const cashInput = parseInt(prompt(`Введіть суму грошей, яку ви хочете внести. Всього до сплати: ${price}`, 0));
+
+            if (isNaN(cashInput)) {
+                alert('Введіть число!');
+                throw new Error('Помилка! Введіть число!'); // return; - Uncaught SyntaxError: Illegal return statement
+            }
+
+            if (cashInput < 0) {
+                alert('Введіть додатнє число!');
+                throw new Error('Помилка! Введіть додатнє число!'); // return; - Uncaught SyntaxError: Illegal return statement
+            }
+
+            cashCurrent += cashInput;
+
+            if (cashCurrent < price) {
+                alert(`Ви внесли ${cashInput} грн. Всього внесено: ${cashCurrent} грн. Всього до сплати: ${price} грн. Вам потрібно внести ще ${price - cashCurrent} грн.`);
+            } else {
+                isEnough = true;
+                break;
+            }
+        } while (cashCurrent < price);
+
+        if (isEnough) {
+            alert(`Ви внесли ${cashInput} грн. Всього внесено: ${cashCurrent} грн. Всього до сплати: ${price} грн. Ваша решта: ${cashCurrent - price} грн.`);
+        }
+
+        alert('Дякуємо за покупку!');
+    </script>
+</body>
+</html>

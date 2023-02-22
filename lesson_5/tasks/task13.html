@@ -19,32 +19,37 @@
     </p>
 
     <script>
-        const areaX = parseInt(prompt('Введіть розмір поля N', 5));
-        const areaY = parseInt(prompt('Введіть розмір поля M', 5));
-        const bombarda = parseInt(prompt('Введіть кількість снарядів', 10));
+        const areaX = parseInt(prompt('Введіть розмір поля N', 5))
+              areaY = parseInt(prompt('Введіть розмір поля M', 5))
+              bombarda = parseInt(prompt('Введіть кількість снарядів', 10))
+              shipX = Math.floor(Math.random() * areaX) + 1 // вирішив робити від 1 до N
+              shipY = Math.floor(Math.random() * areaY) + 1; // вирішив робити від 1 до N
         
         if (isNaN(areaX) || isNaN(areaY) || isNaN(bombarda)) {
             alert('Введіть число!');
-            throw new Error('Помилка! Введіть число!');
+            throw new Error('Помилка! Введіть число!'); // return; - Uncaught SyntaxError: Illegal return statement
         }
-
-        var shipX = Math.floor(Math.random() * areaX);
-        var shipY = Math.floor(Math.random() * areaY);
+    
         var bombardaCount = 0;
         var isShip = false;
 
-        while (bombardaCount < bombarda) {
-            var bombardaX = parseInt(prompt('Введіть координату X снаряду', 0));
-            var bombardaY = parseInt(prompt('Введіть координату Y снаряду', 0));
+        while (bombardaCount < bombarda) { // можна робити і через do while, але bombardaCount може бути 0, тому використовую while
+            const bombardaX = parseInt(prompt('Введіть координату X снаряду', 1))
+                  bombardaY = parseInt(prompt('Введіть координату Y снаряду', ));
 
             if (isNaN(bombardaX) || isNaN(bombardaY)) {
                 alert('Введіть число!');
-                throw new Error('Помилка! Введіть число!');
+                throw new Error('Помилка! Введіть число!'); // return; - Uncaught SyntaxError: Illegal return statement
             }
 
-            if (shipX > areaX || shipY > areaY) {
-                alert(`Введіть координати від 0 до ${areaY}!`);
-                throw new Error(`Помилка! Введіть координати від 0 до ${areaY}!`);
+            if (bombardaX < 1 || bombardaX > areaX) {
+                alert(`Введіть координати від 1 до ${areaX}!`);
+                throw new Error(`Помилка! Введіть координати від 1 до ${areaX}!`); // return; - Uncaught SyntaxError: Illegal return statement
+            }
+
+            if (bombardaY < 1 || bombardaY > areaY) {
+                alert(`Введіть координати від 1 до ${areaY}!`);
+                throw new Error(`Помилка! Введіть координати від 1 до ${areaY}!`); // return; - Uncaught SyntaxError: Illegal return statement
             }
 
             if (bombardaX === shipX && bombardaY === shipY) {
