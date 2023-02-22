@@ -26,7 +26,7 @@
         var isEnough = false;
 
         do {
-            const cashInput = parseInt(prompt(`Введіть суму грошей, яку ви хочете внести. Всього до сплати: ${price}`, 0));
+            const cashInput = parseFloat(prompt(`Введіть суму грошей, яку ви хочете внести. Всього до сплати: ${price}`, 0));
 
             if (isNaN(cashInput)) {
                 alert('Введіть число!');
@@ -41,7 +41,7 @@
             cashCurrent += cashInput;
 
             if (cashCurrent < price) {
-                alert(`Ви внесли ${cashInput} грн. Всього внесено: ${cashCurrent} грн. Всього до сплати: ${price} грн. Вам потрібно внести ще ${price - cashCurrent} грн.`);
+                alert(`Ви внесли ${cashInput.toFixed(2)} грн. Всього внесено: ${cashCurrent.toFixed(2)} грн. Всього до сплати: ${price} грн. Вам потрібно внести ще ${(price - cashCurrent).toFixed(2)} грн.`);
             } else {
                 isEnough = true;
                 break;
@@ -49,7 +49,7 @@
         } while (cashCurrent < price);
 
         if (isEnough) {
-            document.write(`Всього внесено: ${cashCurrent} грн. Всього до сплати: ${price} грн. Ваша решта: ${cashCurrent - price} грн.<br>`);
+            document.write(`Всього внесено: ${cashCurrent.toFixed(2)} грн. Всього до сплати: ${price} грн. Ваша решта: ${(cashCurrent - price).toFixed(2)} грн.<br>`);
         }
 
         document.write('Дякуємо за покупку!');
