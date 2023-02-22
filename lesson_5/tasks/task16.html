@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 5 / Задача 16</title>
+</head>
+<body>
+    <a href="../index.html">Lesson 5</a> / <a href="./task16.html">Задача 16</a>
+    <hr>
+    
+    <h1>Задача 16.</h1>
+
+    <p>
+        Користувач поступово вводить прибуток магазину за кожен день протягом N тижнів.
+        Знайти загальну величину прибутку та вивести величину прибутку протягом кожного окремого тижня.
+    </p>
+
+    <script>
+        const daysInWeek = 7;
+        const weekCount = parseInt(prompt(`Введіть кількість тижнів`, 0));
+
+        if (isNaN(weekCount)) {
+            alert('Введіть число!');
+            throw new Error('Помилка! Введіть число!'); // return; - Uncaught SyntaxError: Illegal return statement
+        }
+
+        var totalProfit = 0;
+
+        for (var i = 1; i <= weekCount; i++) {
+            var weekProfit = 0;
+
+            for (var j = 1; j <= daysInWeek; j++) {
+                var dayProfit = parseFloat(prompt(`Введіть прибуток за ${j} день ${i} тижня`, 0));
+
+                if (isNaN(dayProfit)) {
+                    alert('Введіть число!');
+                    throw new Error('Помилка! Введіть число!'); // return; - Uncaught SyntaxError: Illegal return statement
+                }
+
+                weekProfit += dayProfit;
+            }
+
+            totalProfit += weekProfit;
+
+            document.write(`Прибуток за ${i} тиждень: ${weekProfit.toFixed(2)}<br>`);
+        }
+
+        document.write(`Загальний прибуток: ${totalProfit.toFixed(2)}`);
+    </script>
+</body>
+</html>
