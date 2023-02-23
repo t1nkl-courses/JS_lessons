@@ -22,8 +22,8 @@
 
     <script>
         const price = Math.floor(Math.random() * 100); // просто генерую випадкову ціну
-        var cashCurrent = 0;
-        var isEnough = false;
+        let cashCurrent = 0
+            isEnough = false;
 
         do {
             const cashInput = parseFloat(prompt(`Введіть суму грошей, яку ви хочете внести. Всього до сплати: ${price}`, 0));

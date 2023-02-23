@@ -24,12 +24,12 @@
             throw new Error('Помилка! Введіть число!'); // return; - Uncaught SyntaxError: Illegal return statement
         }
 
-        var result = '';
+        let result = '';
 
-        for (var i = 1; i <= paragraph; i++) {
+        for (let i = 1; i <= paragraph; i++) {
             result += `<h1>Заголовок ${i}</h1>`;
 
-            for (var j = 1; j <= i; j++) {
+            for (let j = 1; j <= i; j++) {
                 result += `<p>Розділ ${i}, параграф ${j}</p>`;
             }
 

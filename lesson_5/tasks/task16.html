@@ -26,13 +26,13 @@
             throw new Error('Помилка! Введіть число!'); // return; - Uncaught SyntaxError: Illegal return statement
         }
 
-        var totalProfit = 0;
+        let totalProfit = 0;
 
-        for (var i = 1; i <= weekCount; i++) {
-            var weekProfit = 0;
+        for (let i = 1; i <= weekCount; i++) {
+            let weekProfit = 0;
 
-            for (var j = 1; j <= daysInWeek; j++) {
-                var dayProfit = parseFloat(prompt(`Введіть прибуток за ${j} день ${i} тижня`, 0));
+            for (let j = 1; j <= daysInWeek; j++) {
+                let dayProfit = parseFloat(prompt(`Введіть прибуток за ${j} день ${i} тижня`, 0));
 
                 if (isNaN(dayProfit)) {
                     alert('Введіть число!');

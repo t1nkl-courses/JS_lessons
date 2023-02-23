@@ -30,8 +30,8 @@
             throw new Error('Помилка! Введіть число!'); // return; - Uncaught SyntaxError: Illegal return statement
         }
     
-        var bombardaCount = 0;
-        var isShip = false;
+        let bombardaCount = 0
+            isShip = false;
 
         while (bombardaCount < bombarda) { // можна робити і через do while, але bombardaCount може бути 0, тому використовую while
             const bombardaX = parseInt(prompt('Введіть координату X снаряду', 1))

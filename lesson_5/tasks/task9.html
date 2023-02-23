@@ -25,8 +25,8 @@
         }
 
         do {
-            var guess = Math.floor(Math.random() * userNumber) + 1;
-            var answer = confirm(`Ваше число ${guess}?`);
+            let guess = Math.floor(Math.random() * userNumber) + 1;
+            let answer = confirm(`Ваше число ${guess}?`);
         } while (!answer);
 
         alert('Я вгадав!');

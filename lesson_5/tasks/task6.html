@@ -17,16 +17,16 @@
     </p>
 
     <script>
-        var number = 1;
-        var table = '';
+        let number = 1;
+            table = '';
 
-        for (var i = 1; i <= 3; i++) {
+        for (let i = 1; i <= 3; i++) {
             table += '<table border="1">';
 
-            for (var j = 1; j <= 3; j++) {
+            for (let j = 1; j <= 3; j++) {
                 table += '<tr>';
 
-                for (var k = 1; k <= 3; k++) {
+                for (let k = 1; k <= 3; k++) {
                     table += `<td>Число: ${number}</td>`;
                     number++;
                 }

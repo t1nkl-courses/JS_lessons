@@ -24,11 +24,11 @@
             throw new Error('Помилка! Введіть число!'); // return; - Uncaught SyntaxError: Illegal return statement
         }
         
-        var attempts = 0;
+        let attempts = 0;
 
         while (attempts < 3) {
-            var guess = Math.floor(Math.random() * (userNumber * 2)) + 1; // Роблю діапазон у вдвічі більше за число, яке вводить користувач, щоб було меньше випадків, коли комп'ютер не вгадує остеннє число
-            var answer = confirm(`Ваше число ${guess}?`);
+            let guess = Math.floor(Math.random() * (userNumber * 2)) + 1; // Роблю діапазон у вдвічі більше за число, яке вводить користувач, щоб було меньше випадків, коли комп'ютер не вгадує остеннє число
+            let answer = confirm(`Ваше число ${guess}?`);
 
             if (answer) {
                 alert('Я вгадав!');
