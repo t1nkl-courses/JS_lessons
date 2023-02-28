@@ -17,21 +17,18 @@
     </p>
 
     <script>
-        const imagePath = prompt('Введіть шлях до зображення:', `../img/${Math.floor(Math.random() * 4) + 1}.png`);
-        const title = prompt('Введіть заголовок:', 'Заголовок');
-        const link = prompt('Введіть посилання:', 'https://google.com');
-
         function getBanner(image, title, link) {
             return `<a href="${link}"><img src="${image}" alt="${title}" width="100"></a>`;
         }
 
-        const result = getBanner(
-            imagePath,
-            title,
-            link
+        // спробував одразу все визивати в функції  
+        document.write(
+            getBanner(
+                prompt('Введіть шлях до зображення:', `../img/${Math.floor(Math.random() * 4) + 1}.png`),
+                prompt('Введіть заголовок:', 'Заголовок'),
+                prompt('Введіть посилання:', 'https://google.com')
+            )
         );
-
-        document.write(result);
     </script>
 </body>
 </html>
