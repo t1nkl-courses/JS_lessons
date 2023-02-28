@@ -17,6 +17,7 @@
     </p>
 
     <script>
+        // я використав 10 констант просто для того щоб потім вивести їх в документ, хоча можна було б передавати їх в функцію як аргументи
         const temperature1 = Math.floor(Math.random() * 100) - 50;
         const temperature2 = Math.floor(Math.random() * 100) - 50;
         const temperature3 = Math.floor(Math.random() * 100) - 50;
@@ -27,6 +28,12 @@
         const temperature8 = Math.floor(Math.random() * 100) - 50;
         const temperature9 = Math.floor(Math.random() * 100) - 50;
         const temperature10 = Math.floor(Math.random() * 100) - 50;
+        // знаю що можно було б зробити через масив у циклі for, але ми ще не проходили масиви
+        // var temperatures = [];
+        // for (var i = 0; i < 10; i++) {
+        //     temperatures[i] = Math.floor(Math.random() * 100) - 50;
+        // }
+        // getAveragePositiveTemperature(temperatures)
 
         function getAveragePositiveTemperature(...temperatures) {
             let positiveTemperaturesSum = 0;
