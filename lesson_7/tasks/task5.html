@@ -17,6 +17,43 @@
     </p>
 
     <script>
+        function getResults(...numbers) {
+            let evenCount = 0;
+            let positiveCount = 0;
+            let greaterThan100Count = 0;
+
+            for (const number of numbers) {
+                if (number % 2 === 0) {
+                    evenCount++;
+                }
+
+                if (number > 0) {
+                    positiveCount++;
+                }
+
+                if (number > 100) {
+                    greaterThan100Count++;
+                }
+            }
+
+            return {
+                evenCount,
+                positiveCount,
+                greaterThan100Count
+            };
+        }
+
+        const results = getResults(
+            parseFloat(prompt('Введіть перше число:', 1)).toFixed(2),
+            parseFloat(prompt('Введіть друге число:', 1)).toFixed(2),
+            parseFloat(prompt('Введіть третє число:', 1)).toFixed(2)
+        );
+
+        document.write(
+            `Кількість парних: ${results.evenCount}
+            <br>Кількість додатних: ${results.positiveCount}
+            <br>Кількість більших за 100: ${results.greaterThan100Count}`
+        );
     </script>
 </body>
 </html>

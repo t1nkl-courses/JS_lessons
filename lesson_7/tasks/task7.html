@@ -17,6 +17,28 @@
     </p>
 
     <script>
+        const rows = parseInt(prompt('Введіть кількість рядків:', 1));
+        const cols = parseInt(prompt('Введіть кількість стовпців:', 1));
+
+        function createTable(rows = 1, cols = 1) { // просто приклад дефолтних значень
+            let table = '<table border="1">';
+
+            for (let i = 0; i < rows; i++) {
+                table += '<tr>';
+
+                for (let j = 0; j < cols; j++) {
+                    table += `<td>Текст рядка ${i}, стовпця ${j}</td>`; // шаблонні рядки
+                }
+
+                table += '</tr>';
+            }
+
+            table += '</table>';
+
+            return table;
+        }
+
+        document.write(createTable(rows, cols));
     </script>
 </body>
 </html>

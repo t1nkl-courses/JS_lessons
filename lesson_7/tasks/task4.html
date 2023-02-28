@@ -13,14 +13,39 @@
     <h1>Задача 4.</h1>
 
     <p>
-        Створити окремі функції, які для 4 чисел знаходять:
-            1)суму;
-            2)добуток;
-            3)середнє арифметичне;
+        Створити окремі функції, які для 4 чисел знаходять:<br>
+            1)суму;<br>
+            2)добуток;<br>
+            3)середнє арифметичне;<br>
             4)мінімальне значення.
     </p>
 
     <script>
+        const number1 = parseFloat(prompt('Введіть перше число:', 1));
+        const number2 = parseFloat(prompt('Введіть друге число:', 1));
+        const number3 = parseFloat(prompt('Введіть третє число:', 1));
+        const number4 = parseFloat(prompt('Введіть четверте число:', 1));
+
+        function getSum(a, b, c, d) {
+            return (a + b + c + d).toFixed(2); // можно округляти одразу у return
+        }
+
+        function getProduct(a, b, c, d) {
+            return (a * b * c * d).toFixed(2); // можно округляти одразу у return
+        }
+
+        function getAverage(a, b, c, d) {
+            return (a + b + c + d) / 4;
+        }
+
+        function getMin(a, b, c, d) {
+            return Math.min(a, b, c, d);
+        }
+
+        document.write(`Сума: ${getSum(number1, number2, number3, number4)}<br>`);
+        document.write(`Добуток: ${getProduct(number1, number2, number3, number4)}<br>`);
+        document.write(`Середнє арифметичне: ${getAverage(number1, number2, number3, number4).toFixed(2)}<br>`); // можно округляти у місці виклику функції
+        document.write(`Мінімальне значення: ${getMin(number1, number2, number3, number4).toFixed(2)}`); // можно округляти у місці виклику функції
     </script>
 </body>
 </html>

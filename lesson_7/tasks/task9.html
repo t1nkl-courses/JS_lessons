@@ -17,6 +17,21 @@
     </p>
 
     <script>
+        const imagePath = prompt('Введіть шлях до зображення:', `../img/${Math.floor(Math.random() * 4) + 1}.png`);
+        const title = prompt('Введіть заголовок:', 'Заголовок');
+        const link = prompt('Введіть посилання:', 'https://google.com');
+
+        function getBanner(image, title, link) {
+            return `<a href="${link}"><img src="${image}" alt="${title}" width="100"></a>`;
+        }
+
+        const result = getBanner(
+            imagePath,
+            title,
+            link
+        );
+
+        document.write(result);
     </script>
 </body>
 </html>

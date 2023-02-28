@@ -17,6 +17,46 @@
     </p>
 
     <script>
+        const temperature1 = Math.floor(Math.random() * 100) - 50;
+        const temperature2 = Math.floor(Math.random() * 100) - 50;
+        const temperature3 = Math.floor(Math.random() * 100) - 50;
+        const temperature4 = Math.floor(Math.random() * 100) - 50;
+        const temperature5 = Math.floor(Math.random() * 100) - 50;
+        const temperature6 = Math.floor(Math.random() * 100) - 50;
+        const temperature7 = Math.floor(Math.random() * 100) - 50;
+        const temperature8 = Math.floor(Math.random() * 100) - 50;
+        const temperature9 = Math.floor(Math.random() * 100) - 50;
+        const temperature10 = Math.floor(Math.random() * 100) - 50;
+
+        function getAveragePositiveTemperature(...temperatures) {
+            let positiveTemperaturesSum = 0;
+            let positiveTemperaturesCount = 0;
+
+            for (const temperature of temperatures) {
+                if (temperature > 0) {
+                    positiveTemperaturesSum += temperature;
+                    positiveTemperaturesCount++;
+                }
+            }
+
+            return positiveTemperaturesSum / positiveTemperaturesCount;
+        }
+
+        const averagePositiveTemperature = getAveragePositiveTemperature(
+            temperature1,
+            temperature2,
+            temperature3,
+            temperature4,
+            temperature5,
+            temperature6,
+            temperature7,
+            temperature8,
+            temperature9,
+            temperature10
+        );
+
+        document.write(`Покази температур: ${temperature1}, ${temperature2}, ${temperature3}, ${temperature4}, ${temperature5}, ${temperature6}, ${temperature7}, ${temperature8}, ${temperature9}, ${temperature10}<br>`);
+        document.write(`Середнє значення для додатних показів температури: ${averagePositiveTemperature.toFixed(1)}`);
     </script>
 </body>
 </html>

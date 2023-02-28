@@ -20,6 +20,32 @@
     </p>
 
     <script>
+        // мені більше подобається такий запис констант для всесвітньо точних речей ніж const centimetersInInch = 2.54; :)
+        const CENTIMETERS_IN_INCH = 2.54; 
+        const KILOGRAMS_IN_POUND = 2.2046;
+        const KILOMETERS_IN_MILE = 0.6214;
+
+        function convertCentimetersToInches(centimeters) {
+            return (centimeters / CENTIMETERS_IN_INCH).toFixed(2); // можно округляти одразу у return
+        }
+
+        function convertKilogramsToPounds(kilograms) {
+            return kilograms * KILOGRAMS_IN_POUND;
+        }
+
+        function convertKilometersToMiles(kilometers) {
+            return kilometers * KILOMETERS_IN_MILE;
+        }
+
+        const centimeters = parseFloat(prompt('Введіть кількість сантиметрів:', 1));
+        const kilograms = parseFloat(prompt('Введіть кількість кілограмів:', 1));
+        const kilometers = parseFloat(prompt('Введіть кількість кілометрів:', 1));
+
+        document.write(
+            `Сантиметри у дюйми: ${convertCentimetersToInches(centimeters)}
+            <br>Кілограми у фунти: ${convertKilogramsToPounds(kilograms).toFixed(2)}
+            <br>Кілометри у милі: ${convertKilometersToMiles(kilometers).toFixed(2)}`
+        ); // можно округляти у місці виклику функції
     </script>
 </body>
 </html>

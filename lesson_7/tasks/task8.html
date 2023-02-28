@@ -17,6 +17,18 @@
     </p>
 
     <script>
+        function getRandomImage(...images) {
+            return images[Math.floor(Math.random() * images.length)];
+        }
+
+        const result = getRandomImage(
+            '../img/1.png',
+            '../img/2.png',
+            '../img/3.png',
+            '../img/4.png'
+        );
+
+        document.write(`<img src="${result}" width="100">`);
     </script>
 </body>
 </html>

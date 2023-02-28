@@ -17,6 +17,25 @@
     </p>
 
     <script>
+        const dayNumber = parseInt(prompt('Введіть номер дня:', 1));
+
+        function isWorkingDay(day) {
+            switch (day) {
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                    return 'Робочий день';
+                case 6:
+                case 7:
+                    return 'Вихідний день';
+                default:
+                    return 'Невідомий день';
+            }
+        }
+
+        document.write(isWorkingDay(dayNumber));
     </script>
 </body>
 </html>
