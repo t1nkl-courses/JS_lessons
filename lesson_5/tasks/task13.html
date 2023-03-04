@@ -19,6 +19,7 @@
     </p>
 
     <script>
+        let result = `Корабель не потоплено!`
         const areaX = parseInt(prompt('Введіть розмір поля N', 5))
               areaY = parseInt(prompt('Введіть розмір поля M', 5))
               bombarda = parseInt(prompt('Введіть кількість снарядів', 10))
@@ -33,7 +34,7 @@
         let bombardaCount = 0
             isShip = false;
 
-        while (bombardaCount < bombarda) { // можна робити і через do while, але bombardaCount може бути 0, тому використовую while
+        while (bombardaCount < bombarda && !isShip) { // можна робити і через do while, але bombardaCount може бути 0, тому використовую while
             const bombardaX = parseInt(prompt('Введіть координату X снаряду', 1))
                   bombardaY = parseInt(prompt('Введіть координату Y снаряду', ));
 
@@ -54,19 +55,15 @@
 
             if (bombardaX === shipX && bombardaY === shipY) {
                 isShip = true;
-                break;
-            }
+                result = `Корабель потоплено за ${bombardaCount+1} снарядів!`
+            } else 
+                alert('Ви промахнулися!')
             
-            alert('Ви промахнулися!');
 
             bombardaCount++;
         }
 
-        if (isShip) {
-            document.write(`Корабель потоплено за ${bombardaCount} снарядів!`);
-        } else {
-            document.write(`Корабель не потоплено!`);
-        }
+        document.write(result)
     </script>
 </body>
 </html>
