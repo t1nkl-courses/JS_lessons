@@ -18,6 +18,21 @@
     </p>
 
     <script>
+        const students = [
+            'Іван',
+            'Петро',
+            'Іван',
+            'Іван',
+        ];
+        let count = 0;
+
+        for (let i = 0; i < students.length; i++) {
+            if (students[i] === 'Іван') {
+                count++;
+            }
+        }
+
+        document.write(`Кількість імен Іван: ${count}`);
     </script>
 </body>
 </html>

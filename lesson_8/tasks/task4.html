@@ -13,13 +13,45 @@
     <h1>Задача 4.</h1>
 
     <p>
-        Дано послідовність номерів автомобілів. Підрахувати кількість номерів, які:<br>
-•	починаються на букву «А»;<br>
-•	перша і остання літери співпадають;<br>
-•	складаються з більше ніш 5 символів;
+        Дано послідовність номерів автомобілів.
+        Підрахувати кількість номерів, які:
+        <ul>
+            <li>починаються на букву «А»;</li>
+            <li>перша і остання літери співпадають;</li>
+            <li>складаються з більше ніш 5 символів;</li>
+        </ul>
     </p>
 
     <script>
+        const numbers = [
+            'АА1АА',
+            'BА12АА',
+            'АА123АB',
+            'BА1234АB',
+            'CА12345АА',
+            'CА123456АB',
+        ];
+        let startsWithLetterA = 0
+            startAndEndsWithSameLetter = 0
+            moreThanFiveSymbols = 0;
+
+        for (let i = 0; i < numbers.length; i++) {
+            if (numbers[i].startsWith('А')) {
+                startsWithLetterA++;
+            }
+            
+            if (numbers[i].charAt(0) === numbers[i].charAt(numbers[i].length - 1)) {
+                startAndEndsWithSameLetter++;
+            }
+
+            if (numbers[i].length > 5) {
+                moreThanFiveSymbols++;
+            }
+        }
+
+        document.write(`Кількість номерів, які починаються на букву «А»: ${startsWithLetterA}<br>`);
+        document.write(`Кількість номерів, які починаються і закінчуються на букву «А»: ${startAndEndsWithSameLetter}<br>`);
+        document.write(`Кількість номерів, які складаються з більше ніж 5 символів: ${moreThanFiveSymbols}`);
     </script>
 </body>
 </html>

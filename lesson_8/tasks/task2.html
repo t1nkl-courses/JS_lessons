@@ -13,14 +13,67 @@
     <h1>Задача 2.</h1>
 
     <p>
-        Дано масив, який зберігає кількість відвідувачів магазину протягом тижня. Вивести на екран:<br>
-номери днів, протягом яких кількість відвідувачів була меншою за 20;<br>
-номери днів, коли кількість відвідувачів була мінімальною;<br>
-номери днів, коли кількість відвідувачів була мінімальною;<br>
-загальну кількість клієнтів у робочі дні та окремо загальну кількість днів на вихідних.
+        Дано масив, який зберігає кількість відвідувачів магазину протягом тижня.
+        Вивести на екран:
+        <ul>
+            <li>номери днів, протягом яких кількість відвідувачів була меншою за 20;</li>
+            <li>номери днів, коли кількість відвідувачів була мінімальною;</li>
+            <li>номери днів, коли кількість відвідувачів була мінімальною;</li>
+            <li>загальну кількість клієнтів у робочі дні та окремо загальну кількість днів на вихідних;</li>
+        </ul>
     </p>
 
     <script>
+        const visitors = Array.from({length: 7}, () => Math.floor(Math.random() * 100) + 1);
+        let minVisitors = visitors[0]
+            maxVisitors = visitors[0]
+            minVisitorsDays = []
+            maxVisitorsDays = []
+            workDays = 0
+            weekendDays = 0;
+
+        for (let i = 0; i < visitors.length; i++) {
+            if (visitors[i] < minVisitors) {
+                minVisitors = visitors[i];
+            }
+
+            if (visitors[i] > maxVisitors) {
+                maxVisitors = visitors[i];
+            }
+        }
+
+        for (let i = 0; i < visitors.length; i++) {
+            if (visitors[i] == minVisitors) {
+                minVisitorsDays.push(i + 1);
+            }
+
+            if (visitors[i] == maxVisitors) {
+                maxVisitorsDays.push(i + 1);
+            }
+
+            if (i < 5) {
+                workDays += visitors[i];
+            } else {
+                weekendDays += visitors[i];
+            }
+        }
+
+        let result = '';
+        result += '<table border="1">';
+        result += '<tr><th>День</th><th>Кількість відвідувачів</th></tr>';
+
+        for (let i = 0; i < visitors.length; i++) {
+            result +=`<tr><td>${i + 1}</td><td>${visitors[i]}</td></tr>`;
+        }
+
+        result += '</table><br>';
+        result += `Номери днів, протягом яких кількість відвідувачів була меншою за 20: ${minVisitorsDays.join(', ')}<br>`;
+        result += `Номери днів, коли кількість відвідувачів була мінімальною: ${minVisitorsDays.join(', ')}<br>`;
+        result += `Номери днів, коли кількість відвідувачів була максимальною: ${maxVisitorsDays.join(', ')}<br>`;
+        result += `Загальна кількість клієнтів у робочі дні: ${workDays}<br>`;
+        result += `Загальна кількість клієнтів на вихідних: ${weekendDays}`;
+        
+        document.write(result);
     </script>
 </body>
 </html>

@@ -13,17 +13,62 @@
     <h1>Задача 7.</h1>
 
     <p>
-        Дано послідовність платіжок протягом року. Знайти сумарну кількість грошей за:<br>
-за весь рік;<br>
-у першій половині року;<br>
-у другій половині року;<br>
-за літо;<br>
-за ІІ квартал;<br>
-за парні місяці (з парними номерами);<br>
-за місяці, які є початковими у сезоні (весна, літо, осінь, зима).
+        Дано послідовність платіжок протягом року.
+        Знайти сумарну кількість грошей за:
+        <ul>
+            <li>за весь рік;</li>
+            <li>у першій половині року;</li>
+            <li>у другій половині року;</li>
+            <li>за літо;</li>
+            <li>за ІІ квартал;</li>
+            <li>за парні місяці (з парними номерами);</li>
+            <li>за місяці, які є початковими у сезоні (весна, літо, осінь, зима);</li>
+        </ul>
     </p>
 
     <script>
+        const payments = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200];
+        let sum = 0
+            sumFirstHalf = 0
+            sumSecondHalf = 0
+            sumSummer = 0
+            sumSecondQuarter = 0
+            sumEvenMonth = 0
+            sumSeason = 0;
+
+        for (let i = 0; i < payments.length; i++) {
+            sum += payments[i];
+            
+            if (i < 6) {
+                sumFirstHalf += payments[i];
+
+                if (i > 2 && i < 6) {
+                    sumSecondQuarter += payments[i];
+                }
+            } else {
+                sumSecondHalf += payments[i];
+            }
+            
+            if (i > 4 && i < 8) {
+                sumSummer += payments[i];
+            }
+            
+            if (i % 2 == 0) {
+                sumEvenMonth += payments[i];
+            }
+            
+            if (i == 0 || i == 3 || i == 6 || i == 9) {
+                sumSeason += payments[i];
+            }
+        }
+
+        document.write(`Сума за весь рік: ${sum}<br>`);
+        document.write(`Сума за першу половину року: ${sumFirstHalf}<br>`);
+        document.write(`Сума за другу половину року: ${sumSecondHalf}<br>`);
+        document.write(`Сума за літо: ${sumSummer}<br>`);
+        document.write(`Сума за другий квартал: ${sumSecondQuarter}<br>`);
+        document.write(`Сума за парні місяці: ${sumEvenMonth}<br>`);
+        document.write(`Сума за місяці, які є початковими у сезоні: ${sumSeason}`);
     </script>
 </body>
 </html>

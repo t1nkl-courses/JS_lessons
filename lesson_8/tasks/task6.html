@@ -13,13 +13,42 @@
     <h1>Задача 6.</h1>
 
     <p>
-        Дано послідовність цін товарів та назв (у окремих масивах). Вивести на екран ті, які може собі дозволити користувач (кількість грошей задається).<br>
-Приклад збереження даних<br>
-let productsPrices = [1000, 20, 31]<br>
-let productsTitles = [‘cheese’, ‘juice’, ‘bread’]
+        Дано послідовність цін товарів та назв (у окремих масивах).
+        Вивести на екран ті, які може собі дозволити користувач (кількість грошей задається).<br>
+        Приклад збереження даних:<br>
+        <code>
+            let productsPrices = [1000, 20, 31]<br>
+            let productsTitles = [‘cheese’, ‘juice’, ‘bread’]
+        </code>
     </p>
 
     <script>
+        const productsPrices = [34, 2, 3.1, 10, 20, 30, 4.5, 50, 6.1, 7.6, 1.8, 9.6];
+        const productsTitles = ['cheese', 'juice', 'bread', 'milk', 'meat', 'potato', 'tomato', 'cucumber', 'carrot', 'apple', 'orange', 'banana'];
+        const money = parseFloat(prompt('Введіть суму грошей, яку Ви маєте на рахунку', 0));
+        let products = []
+            leaveMoney = money;
+
+        for (let i = 0; i < productsPrices.length; i++) {
+            if (productsPrices[i] <= leaveMoney) {
+                products.push(productsTitles[i]);
+                leaveMoney -= productsPrices[i];
+            }
+        }
+
+        // виводимо результат у вигляді рядка
+        document.write(`Ви можете купити: ${products.join(', ')}`);
+
+        // виводимо результат у вигляді таблиці
+        var result = '';
+        result += '<table border="1">';
+        result += '<tr><th>Назва товару</th><th>Ціна</th></tr>';
+        for (let i = 0; i < products.length; i++) {
+            result += '<tr><td>' + products[i] + '</td><td>' + productsPrices[productsTitles.indexOf(products[i])] + '</td></tr>';
+        }
+        result += '</table>';
+        
+        document.write(result);
     </script>
 </body>
 </html>
