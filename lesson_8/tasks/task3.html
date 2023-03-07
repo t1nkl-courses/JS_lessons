@@ -24,15 +24,20 @@
             'Іван',
             'Іван',
         ];
-        let count = 0;
 
-        for (let i = 0; i < students.length; i++) {
-            if (students[i] === 'Іван') {
-                count++;
+        function getIvanCount(students) {
+            let count = 0;
+
+            for (let i = 0; i < students.length; i++) {
+                if (students[i] === 'Іван') {
+                    count++;
+                }
             }
+
+            return count;
         }
 
-        document.write(`Кількість імен Іван: ${count}`);
+        document.write(`Кількість імен Іван: ${getIvanCount(students)}`);
     </script>
 </body>
 </html>

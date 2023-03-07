@@ -25,28 +25,43 @@
     <script>
         const productsPrices = [34, 2, 3.1, 10, 20, 30, 4.5, 50, 6.1, 7.6, 1.8, 9.6];
         const productsTitles = ['cheese', 'juice', 'bread', 'milk', 'meat', 'potato', 'tomato', 'cucumber', 'carrot', 'apple', 'orange', 'banana'];
-        const money = parseFloat(prompt('Введіть суму грошей, яку Ви маєте на рахунку', 0));
-        let products = []
-            leaveMoney = money;
+        // const money = parseFloat(prompt('Введіть суму грошей, яку Ви маєте на рахунку', 0));
+        const money = Math.floor(Math.random() * 50) + 1;
 
-        for (let i = 0; i < productsPrices.length; i++) {
-            if (productsPrices[i] <= leaveMoney) {
-                products.push(productsTitles[i]);
-                leaveMoney -= productsPrices[i];
+        document.write(`Ви маєте на рахунку: ${money}<br>`);
+
+        if (Math.min(productsPrices) > money) {
+            document.write('На жаль, Ви не можете купити нічого');
+            throw new Error('На жаль, Ви не можете купити нічого'); // return; - Uncaught SyntaxError: Illegal return statement
+        }
+        
+        function calculateUserProducts(productsPrices, productsTitles, money) {
+            let products = [];
+                leaveMoney = money;
+
+            for (let i = 0; i < productsPrices.length; i++) {
+                if (productsPrices[i] <= leaveMoney) {
+                    products.push(productsTitles[i]);
+                    leaveMoney -= productsPrices[i];
+                }
             }
+
+            return products;
         }
 
+        const products = calculateUserProducts(productsPrices, productsTitles, money);
+
         // виводимо результат у вигляді рядка
-        document.write(`Ви можете купити: ${products.join(', ')}`);
+        document.write(`Ви можете купити: ${products.join(', ')}<br>`);
 
         // виводимо результат у вигляді таблиці
         var result = '';
-        result += '<table border="1">';
-        result += '<tr><th>Назва товару</th><th>Ціна</th></tr>';
-        for (let i = 0; i < products.length; i++) {
-            result += '<tr><td>' + products[i] + '</td><td>' + productsPrices[productsTitles.indexOf(products[i])] + '</td></tr>';
-        }
-        result += '</table>';
+            result += '<table border="1">';
+            result += '<tr><th>Назва товару</th><th>Ціна</th></tr>';
+            for (let i = 0; i < products.length; i++) {
+                result += '<tr><td>' + products[i] + '</td><td>' + productsPrices[productsTitles.indexOf(products[i])] + '</td></tr>';
+            }
+            result += '</table>';
         
         document.write(result);
     </script>

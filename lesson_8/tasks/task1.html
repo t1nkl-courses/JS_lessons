@@ -25,27 +25,37 @@
 
     <script>
         const marks = Array.from({length: 20}, () => Math.floor(Math.random() * 5) + 1);
-        const averageMark = marks.reduce((a, b) => { return a + b }) / marks.length;
-        let sum = 0
-            category = '';
 
-        switch (true) {
-            case averageMark == 5:
-                category = 'Відмінник';
-                break;
-            case averageMark < 5 && averageMark >= 4:
-                category = 'Хорошист';
-                break;
-            case averageMark < 4 && averageMark >= 3:
-                category = 'Трійочник';
-                break;
-            case averageMark < 3:
-                category = 'Двійочник';
-                break;
+        // const averageMark = (marks) => { return marks.reduce((a, b) => { return a + b }) / marks.length };
+        function getAverageMark(marks) {
+            return marks.reduce((a, b) => { return a + b }) / marks.length;
         }
 
+        function getUserCategory(averageMark) {
+            let category = '';
+
+            switch (true) {
+                case averageMark === 5:
+                    category = 'Відмінник';
+                    break;
+                case averageMark < 5 && averageMark >= 4:
+                    category = 'Хорошист';
+                    break;
+                case averageMark < 4 && averageMark >= 3:
+                    category = 'Трійочник';
+                    break;
+                case averageMark < 3:
+                    category = 'Двійочник';
+                    break;
+            }
+
+            return category;
+        }
+
+        const averageMark = getAverageMark(marks);
+
         document.write(`Середній бал: ${averageMark.toFixed(1)}<br>`);
-        document.write(`Категорія: ${category}`);
+        document.write(`Категорія: ${getUserCategory(averageMark)}`);
     </script>
 </body>
 </html>

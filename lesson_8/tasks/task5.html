@@ -24,32 +24,42 @@
 
     <script>
         const marks = Array.from({length: 20}, () => Math.floor(Math.random() * 5) + 1);
-        const averageMark = marks.reduce((a, b) => { return a + b }) / marks.length;
-        let marksWithNumberTwo = 0
-            marksAboveFour = 0
-            marksBelowAverage = 0;
+        
+        const averageMark = (marks) => { return marks.reduce((a, b) => { return a + b }) / marks.length };
 
-        for (let i = 0; i < marks.length; i++) {
-            if (marks[i] < averageMark) {
-                marksBelowAverage++;
+        function calculateUserMarks(marks) {
+            let marksWithNumberTwo = 0
+                marksAboveFour = 0
+                marksBelowAverage = 0;
+
+            for (let i = 0; i < marks.length; i++) {
+                if (marks[i] < averageMark(marks)) {
+                    marksBelowAverage++;
+                }
+
+                if (marks[i] === 2) {
+                    marksWithNumberTwo++;
+                    continue;
+                }
+
+                if (marks[i] >= 4) {
+                    marksAboveFour++;
+                }
             }
 
-            if (marks[i] === 2) {
-                marksWithNumberTwo++;
-                continue;
-            }
-
-            if (marks[i] >= 4) {
-                marksAboveFour++;
+            return {
+                marksWithNumberTwo,
+                marksAboveFour,
+                marksBelowAverage
             }
         }
 
         let result = '';
-        result += `Оцінки: ${marks.join(', ')}<br>`;
-        result += `Кількість двійок: ${marksWithNumberTwo}<br>`;
-        result += `Кількість хороших оцінок: ${marksAboveFour}<br>`;
-        result += `Кількість оцінок, які нижче середнього: ${marksBelowAverage}<br>`;
-        result += `Середня оцінка: ${averageMark.toFixed(1)}`;
+            result += `Оцінки: ${marks.join(', ')}<br>`;
+            result += `Кількість двійок: ${calculateUserMarks(marks).marksWithNumberTwo}<br>`;
+            result += `Кількість хороших оцінок: ${calculateUserMarks(marks).marksAboveFour}<br>`;
+            result += `Кількість оцінок, які нижче середнього: ${calculateUserMarks(marks).marksBelowAverage}<br>`;
+            result += `Середня оцінка: ${averageMark(marks).toFixed(1)}`;
 
         document.write(result);
     </script>

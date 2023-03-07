@@ -31,27 +31,48 @@
             'CА12345АА',
             'CА123456АB',
         ];
-        let startsWithLetterA = 0
-            startAndEndsWithSameLetter = 0
-            moreThanFiveSymbols = 0;
 
-        for (let i = 0; i < numbers.length; i++) {
-            if (numbers[i].startsWith('А')) {
-                startsWithLetterA++;
-            }
-            
-            if (numbers[i].charAt(0) === numbers[i].charAt(numbers[i].length - 1)) {
-                startAndEndsWithSameLetter++;
+        // вирішив тут зробити 3 функції, але у 5-му завданні зробив одну функцію
+        function getNumbersCountStartsWithLetterA(numbers) {
+            let count = 0;
+
+            for (let i = 0; i < numbers.length; i++) {
+                if (numbers[i].startsWith('А')) {
+                    count++;
+                }
             }
 
-            if (numbers[i].length > 5) {
-                moreThanFiveSymbols++;
-            }
+            return count;
         }
 
-        document.write(`Кількість номерів, які починаються на букву «А»: ${startsWithLetterA}<br>`);
-        document.write(`Кількість номерів, які починаються і закінчуються на букву «А»: ${startAndEndsWithSameLetter}<br>`);
-        document.write(`Кількість номерів, які складаються з більше ніж 5 символів: ${moreThanFiveSymbols}`);
+        function getNumbersCountStartAndEndsWithSameLetter(numbers) {
+            let count = 0;
+
+            for (let i = 0; i < numbers.length; i++) {
+                if (numbers[i].charAt(0) === numbers[i].charAt(numbers[i].length - 1)) {
+                    count++;
+                }
+            }
+
+            return count;
+        }
+
+        function getNumbersCountMoreThanFiveSymbols(numbers) {
+            let count = 0;
+
+            for (let i = 0; i < numbers.length; i++) {
+                if (numbers[i].length > 5) {
+                    count++;
+                }
+            }
+
+            return count;
+        }
+
+        document.write(`Всі номери: ${numbers.length}<br>`);
+        document.write(`Кількість номерів, які починаються на букву «А»: ${getNumbersCountStartsWithLetterA(numbers)}<br>`);
+        document.write(`Кількість номерів, які починаються і закінчуються на букву «А»: ${getNumbersCountStartAndEndsWithSameLetter(numbers)}<br>`);
+        document.write(`Кількість номерів, які складаються з більше ніж 5 символів: ${getNumbersCountMoreThanFiveSymbols(numbers)}`);
     </script>
 </body>
 </html>
