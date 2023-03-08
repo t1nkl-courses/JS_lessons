@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 9 / Задача 4</title>
+</head>
+
+<body>
+    <a href="../index.html">Lesson 9</a> / <a href="./task4.html">Задача 4</a>
+    <hr>
+
+    <h1>Задача 4.</h1>
+
+    <p>
+        Дано масив елементів.
+        Вивести на екран елементи, що більші за 100 (Тут використати цикл for..of)
+    </p>
+
+    <script>
+        const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110];
+
+        for (let item of arr) {
+            if (item > 100) {
+                document.write(item + ' ');
+            }
+        }
+    </script>
+</body>
+
+</html>

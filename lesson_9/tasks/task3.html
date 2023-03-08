@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 9 / Задача 3</title>
+</head>
+
+<body>
+    <a href="../index.html">Lesson 9</a> / <a href="./task3.html">Задача 3</a>
+    <hr>
+
+    <h1>Задача 3.</h1>
+
+    <p>
+        Користувач вводить кількість елементів.
+        Створити масив, у якому перші 5 елементів заповнені 1-цями, а інші до кінця масиву заповнені 7-ками.
+    </p>
+
+    <script>
+        let arr = [],
+            arrLength = parseInt(prompt('Введіть кількість елементів масиву', 1));
+
+        // просто для тестування
+        if (arrLength === 1) {
+            arrLength = 10;
+        }
+
+        for (let i = 0; i < arrLength; i++) {
+            if (i < 5) {
+                arr[i] = 1;
+            } else {
+                arr[i] = 7;
+            }
+        }
+
+        document.write(arr);
+    </script>
+</body>
+
+</html>
