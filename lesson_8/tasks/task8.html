@@ -1,63 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Lesson 8 / Задача 8</title>
 </head>
+
 <body>
     <a href="../index.html">Lesson 8</a> / <a href="./task8.html">Задача 8</a>
     <hr>
-    
+
     <h1>Задача 8.</h1>
 
     <p>
-        Дано одновимірний масив, у якому зберігається певна виграшна сума (елементи заповнюються випадковим чином значеннями від -500 до 500).
+        Дано одновимірний масив, у якому зберігається певна виграшна сума (елементи заповнюються випадковим чином
+        значеннями від -500 до 500).
         Надаючи користувачу можливість вибирати номери елементів (поки він не відмовиться).
         Знаходити сумарний виграш.
     </p>
 
     <script>
-        const randomElements = 20;
-        let randomElementsArray = []
-            sum = 0
-            win = 0
-            lose = 0
-            gameOver = false;
-
-        for (let i = 0; i < randomElements; i++) {
-            randomElementsArray[i] = Math.floor(Math.random() * 1001) - 500;
+        function getRandomElementsArray(count) {
+            const randomElementsArray = [];
+            for (let i = 0; i < count; i++) {
+                randomElementsArray[i] = Math.floor(Math.random() * 1001) - 500;
+            }
+            return randomElementsArray;
         }
 
-        while (!gameOver) {
-            const userChoice = parseInt(prompt('Введіть номер елемента, який хочете вибрати'));
-            if (userChoice < 0 || userChoice > randomElements) {
-                alert(`Введіть число від 0 до ${randomElements}`);
-                continue;
+        function getUserChoice(max) {
+            const userChoice = parseInt(prompt(`Введіть номер елемента, який хочете вибрати (від 0 до ${max})`, 0));
+            if (userChoice < 0 || userChoice > max) {
+                alert(`Введіть число від 0 до ${max}`);
+                return getUserChoice(max);
             }
-            
-            if (randomElementsArray[userChoice] > 0) {
-                alert('Ви виграли ' + randomElementsArray[userChoice]);
-                
-                sum += randomElementsArray[userChoice];
-                win++;
-            } else if (randomElementsArray[userChoice] < 0) {
-                alert('Ви програли ' + randomElementsArray[userChoice]);
-                
-                sum += randomElementsArray[userChoice];
-                lose++;
-            } else {
-                alert('Ви вибрали нуль');
-            }
-            
-            const continueAnswer = confirm('Продовжити гру?');
-            if (!continueAnswer) {
-                gameOver = true;
-            }
+            return userChoice;
         }
 
-        document.write(`Ви виграли ${win} разів, програли ${lose} разів. Ваш виграш становить ${sum}`);
+        function getContinueAnswer() {
+            return !confirm('Продовжити гру?');
+        }
+
+        function playGame() {
+            const randomElements = 20;
+            const randomElementsArray = getRandomElementsArray(randomElements);
+            let sum = 0;
+            let win = 0;
+            let lose = 0;
+            let gameOver = false;
+
+            while (!gameOver) {
+                const userChoice = getUserChoice(randomElements);
+                const choiceValue = randomElementsArray[userChoice];
+
+                if (choiceValue > 0) {
+                    alert(`Ви виграли ${choiceValue}`);
+                    sum += choiceValue;
+                    win++;
+                } else if (choiceValue < 0) {
+                    alert(`Ви програли ${choiceValue}`);
+                    sum += choiceValue;
+                    lose++;
+                } else {
+                    alert('Ви вибрали нуль');
+                }
+
+                gameOver = getContinueAnswer();
+            }
+
+            document.write(`Ви виграли ${win} разів, програли ${lose} разів. Ваш виграш становить ${sum}`);
+        }
+
+        playGame();
     </script>
 </body>
 </html>

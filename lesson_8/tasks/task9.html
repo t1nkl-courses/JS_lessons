@@ -1,68 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Lesson 8 / Задача 9</title>
 </head>
+
 <body>
     <a href="../index.html">Lesson 8</a> / <a href="./task9.html">Задача 9</a>
     <hr>
-    
+
     <h1>Задача 9.</h1>
 
     <p>
         Морський бій.
         Користувач вводить кількість клітинок одновимірного масиву та кількість одиночних кораблів.
-        Комп’ютер довільно розміщує ці одиночні кораблі у масиві по один у клітинці - якщо у клітинці 0, то клітинка пуста, якщо 1 – то це означає, що там є корабель.
+        Комп’ютер довільно розміщує ці одиночні кораблі у масиві по один у клітинці - якщо у клітинці 0, то клітинка
+        пуста, якщо 1 – то це означає, що там є корабель.
         Користувач вводить номер клітинки, куди стріляє.
         Гра продовжується до тих пір, поки не будуть потоплені усі кораблі.
     </p>
 
     <script>
+        function createGameBoard(cells) {
+            const gameBoard = [];
+
+            for (let i = 0; i < cells; i++) {
+                gameBoard[i] = 0;
+            }
+
+            return gameBoard;
+        }
+
+        function placeShips(gameBoard, ships) {
+            let shipCount = 1;
+
+            while (shipCount <= ships) {
+                const cell = Math.floor(Math.random() * gameBoard.length);
+
+                if (gameBoard[cell] === 0) {
+                    gameBoard[cell] = 1;
+                    shipCount++;
+                }
+            }
+        }
+
+        function playGame(gameBoard) {
+            let shotCount = 0;
+            let hitCount = 0;
+            let missCount = 0;
+            let isGameOver = false;
+
+            while (!isGameOver) {
+                const shot = parseInt(prompt('Введіть номер клітинки, куди стріляєте', 0));
+
+                if (gameBoard[shot] === 1) {
+                    gameBoard[shot] = 2;
+                    hitCount++;
+                    alert('Попадання!');
+                } else {
+                    missCount++;
+                    alert('Промах!');
+                }
+
+                shotCount++;
+
+                if (hitCount === countShips(gameBoard)) {
+                    isGameOver = true;
+                    alert('Ви перемогли!');
+                }
+            }
+
+            return { shotCount, hitCount, missCount };
+        }
+
+        function countShips(gameBoard) {
+            return gameBoard.filter(cell => cell === 1).length;
+        }
+
         const cells = parseInt(prompt('Введіть кількість клітинок', 10));
         const ships = parseInt(prompt('Введіть кількість кораблів', 5));
-        let arr = []
-            ship = 1
-            cell = 0
-            shot = 0
-            hit = 0
-            miss = 0
-            win = 0;
 
-        for (let i = 0; i < cells; i++) {
-            arr[i] = 0;
-        }
+        const gameBoard = createGameBoard(cells);
+        placeShips(gameBoard, ships);
 
-        while (ship <= ships) {
-            cell = Math.floor(Math.random() * cells);
-            
-            if (arr[cell] === 0) {
-                arr[cell] = 1;
-                ship++;
-            }
-        }
+        const gameResults = playGame(gameBoard);
 
-        while (win === 0) {
-            shot = parseInt(prompt('Введіть номер клітинки, куди стріляєте', 0));
-            
-            if (arr[shot] === 1) {
-                arr[shot] = 2;
-                hit++;
-                alert('Попадання!');
-            } else {
-                miss++;
-                alert('Промах!');
-            }
-            
-            if (hit === ships) {
-                win = 1;
-                alert('Ви перемогли!');
-            }
-        }
-
-        document.write(`Ви зробили ${hit} попадань, ${miss} промахів та ${shot} пострілів`);
+        document.write(`Ви зробили ${gameResults.hitCount} попадань, ${gameResults.missCount} промахів та ${gameResults.shotCount} пострілів`);
     </script>
 </body>
 </html>
