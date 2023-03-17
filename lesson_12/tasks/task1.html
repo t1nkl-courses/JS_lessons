@@ -19,6 +19,31 @@
     </p>
 
     <script>
+        const randomNumbers = Array.from({ length: 30 }, () => Math.floor(Math.random() * 100) + 1);
+
+        function bubbleSort(arr) {
+            let count = 0;
+
+            for (let i = 0; i < arr.length; i++) {
+                for (let j = 0; j < arr.length - 1; j++) {
+                    if (arr[j] > arr[j + 1]) {
+                        let temp = arr[j];
+
+                        arr[j] = arr[j + 1];
+                        arr[j + 1] = temp;
+
+                        count++;
+                    }
+                }
+            }
+
+            return count;
+        }
+
+        const result = bubbleSort(randomNumbers);
+
+        document.write(`${randomNumbers}<br>`);
+        document.write(`Кількість обмінів: ${result}`);  
     </script>
 </body>
 
