@@ -15,11 +15,13 @@
     <h1>Задача 6.</h1>
 
     <p>
-        Дано масив імен. Застосовуючи відповідне сортування та бінарний пошук визначити, чи є у масиві ім’я довжиною 5 символів і під яким індексом
+        Дано масив імен.
+        Застосовуючи відповідне сортування та бінарний пошук визначити, чи є у масиві ім’я довжиною 5 символів і під яким індексом
     </p>
 
     <script>
         const names = ['Ivan', 'Petro', 'Olga', 'Ira', 'Oleg', 'Igor', 'Olena', 'Oksana', 'Oleksandr', 'Oleksiy'];
+        const searchNameLength = 5;
 
         function bubbleSort(arr) {
             for (let i = 0; i < arr.length; i++) {
@@ -41,8 +43,8 @@
             let end = arr.length - 1;
             let middle = Math.floor((start + end) / 2);
 
-            while (arr[middle] !== value && start <= end) {
-                if (value < arr[middle]) {
+            while (arr[middle].length !== value && start <= end) {
+                if (value < arr[middle].length) {
                     end = middle - 1;
                 } else {
                     start = middle + 1;
@@ -51,11 +53,16 @@
                 middle = Math.floor((start + end) / 2);
             }
 
-            return arr[middle] === value ? middle : -1;
+            return arr[middle].length === value ? middle : -1;
         }
 
         const sortedNames = bubbleSort(names);
-        const index = binarySearch(sortedNames, 'Olena');
+        const searchNameIndex = binarySearch(sortedNames, searchNameLength);
+
+        document.write(`Масив імен: ${names}<br>`);
+        document.write(`Сортований масив імен: ${sortedNames}<br>`);
+        document.write(`Ім'я довжиною ${searchNameLength} символів: ${sortedNames[searchNameIndex]}<br>`);
+        document.write(`Індекс імені довжиною ${searchNameLength} символів: ${searchNameIndex}<br>`);
     </script>
 </body>
 

@@ -15,7 +15,8 @@
     <h1>Задача 5.</h1>
 
     <p>
-        Дано масив імен. Застосовуючи відповідне сортування та бінарний пошук визначити, чи є у масиві ім’я «Olga» і під яким індексом.
+        Дано масив імен.
+        Застосовуючи відповідне сортування та бінарний пошук визначити, чи є у масиві ім’я «Olga» і під яким індексом.
     </p>
 
     <script>
@@ -60,9 +61,9 @@
         const sortedNames = bubbleSort(names);
         const result = binarySearch(sortedNames, 'Olga');
 
-        document.write(`Вхідний масив: ${names}<br>`);
-        document.write(table);
-        document.write(`Результат: ${result}`);
+        document.write(`Масив імен: ${names}<br>`);
+        document.write(`Сортування: <br>${table}<br>`);
+        document.write(`Індекс імені «Olga»: ${result}`);
     </script>
 </body>
 
