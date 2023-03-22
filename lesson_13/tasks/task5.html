@@ -20,6 +20,21 @@
     </p>
 
     <script>
+        const timerId = setInterval(() => {
+            const a = Math.floor(Math.random() * 10);
+            const b = Math.floor(Math.random() * 10);
+            const result = +parseInt(prompt(`${a} + ${b} = ?`, 0));
+
+            if (result === a + b) {
+                alert('Вірно!');
+            } else {
+                alert('Невірно!');
+            }
+        }, 10000);
+
+        setTimeout(() => {
+            clearInterval(timerId);
+        }, 100000);
     </script>
 </body>
 

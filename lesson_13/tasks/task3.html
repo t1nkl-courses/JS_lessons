@@ -22,6 +22,23 @@
     </p>
 
     <script>
+        function iterator(min, max) {
+            let current = min;
+
+            return function () {
+                if (current > max) {
+                    current = min;
+                }
+
+                return current++;
+            }
+        }
+
+        let monthIterator = iterator(1, 12);
+
+        for (let i = 0; i < 13; i++) {
+            document.write(`${monthIterator()}<br>`);
+        }
     </script>
 </body>
 

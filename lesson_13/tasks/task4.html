@@ -23,6 +23,43 @@
     </p>
 
     <script>
+        function iterator(word) {
+            let current = 0;
+
+            return function () {
+                if (current > word.length - 1) {
+                    current = 0;
+                }
+
+                return word[current++];
+            }
+        }
+
+        const word = 'прекладач';
+        const wordIterator = iterator(word);
+        let userWord = '';
+
+        for (let i = 0; i < word.length; i++) {
+            userWord += wordIterator();
+        }
+
+        document.write(`Опис слова: ${userWord}<br>`);
+
+        let userAnswer = prompt('Введіть переклад слова');
+
+        if (userAnswer === word) {
+            document.write('Вітаю, ви вгадали слово!');
+        } else {
+            let correctLetters = 0;
+
+            for (let i = 0; i < word.length; i++) {
+                if (word[i] === userAnswer[i]) {
+                    correctLetters++;
+                }
+            }
+
+            document.write(`Ви вгадали ${correctLetters} з ${word.length} букв`);
+        }
     </script>
 </body>
 

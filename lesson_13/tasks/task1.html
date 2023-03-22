@@ -19,7 +19,27 @@
         Розв’язати з використанням рекурсивних і нерекурсивних алгоритмів
     </p>    
 
-    <script> 
+    <script>
+        function recursive(x) {
+            if (x === 0) {
+                return 1;
+            }
+
+            return recursive(x - 1) + 2 * x;
+        }
+
+        function nonRecursive(x) {
+            let result = 1;
+
+            for (let i = 1; i <= x; i++) {
+                result += 2 * i;
+            }
+
+            return result;
+        }
+
+        document.write(`Рекурсивний алгоритм: ${recursive(10)}<br>`);
+        document.write(`Нерекурсивний алгоритм: ${nonRecursive(10)}`);
     </script>
 </body>
 
