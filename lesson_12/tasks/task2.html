@@ -15,10 +15,47 @@
     <h1>Задача 2.</h1>
 
     <p>
-        Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів під час сортування змішуванням
+        Дано масив 30 випадкових цілих чисел.
+        Підрахувати скільки було обмінів під час сортування змішуванням
     </p>
 
     <script>
+        const randomNumbers = Array.from({ length: 30 }, () => Math.floor(Math.random() * 100) + 1);
+
+        function cocktailSort(arr) {
+            let count = 0;
+
+            for (let i = 0; i < arr.length / 2; i++) {
+                for (let j = i; j < arr.length - 1 - i; j++) {
+                    if (arr[j] > arr[j + 1]) {
+                        let temp = arr[j];
+
+                        arr[j] = arr[j + 1];
+                        arr[j + 1] = temp;
+
+                        count++;
+                    }
+                }
+
+                for (let j = arr.length - 2 - i; j > i; j--) {
+                    if (arr[j] < arr[j - 1]) {
+                        let temp = arr[j];
+
+                        arr[j] = arr[j - 1];
+                        arr[j - 1] = temp;
+
+                        count++;
+                    }
+                }
+            }
+
+            return count;
+        }
+
+        const result = cocktailSort(randomNumbers);
+
+        document.write(`${randomNumbers}<br>`);
+        document.write(`Кількість обмінів: ${result}`);
     </script>
 </body>
 

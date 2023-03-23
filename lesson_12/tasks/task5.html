@@ -15,10 +15,63 @@
     <h1>Задача 5.</h1>
 
     <p>
-        Дано масив імен. Застосовуючи відповідне сортування та бінарний пошук визначити, чи є у масиві ім’я «Olga» і під яким індексом.
+        Дано масив імен.
+        Застосовуючи відповідне сортування та бінарний пошук визначити, чи є у масиві ім’я «Olga» і під яким індексом.
     </p>
 
     <script>
+        const names = [
+            "Ivan",
+            "Petro",
+            "Olga",
+            "Ira",
+            "Oleg",
+            "Igor",
+            "Olena",
+            "Oksana",
+            "Oleksandr",
+            "Oleksiy",
+        ];
+        let table = "";
+
+        function bubbleSort(arr) {
+            for (let i = 0; i < arr.length; i++) {
+                for (let j = 0; j < arr.length - 1; j++) {
+                    if (arr[j] > arr[j + 1]) {
+                        [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+                        table += `[${arr}]<br>`;
+                    }
+                }
+            }
+
+            return arr;
+        }
+
+        function binarySearch(arr, value) {
+            let start = 0;
+            let end = arr.length - 1;
+
+            while (start <= end) {
+                const middle = Math.floor((start + end) / 2);
+
+                if (arr[middle] === value) {
+                    return middle;
+                } else if (arr[middle] < value) {
+                    start = middle + 1;
+                } else {
+                    end = middle - 1;
+                }
+            }
+
+            return -1;
+        }
+
+        const sortedNames = bubbleSort([...names]);
+        const result = binarySearch(sortedNames, "Olga");
+
+        document.write(`Масив імен: ${names}<br>`);
+        document.write(`Сортування: <br>${table}<br>`);
+        document.write(`Індекс імені «Olga»: ${result}`);
     </script>
 </body>
 

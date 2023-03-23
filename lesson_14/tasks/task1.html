@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 14 / Задача 1</title>
+</head>
+
+<body>
+    <a href="../index.html">Lesson 14</a> / <a href="./task1.html">Задача 1</a>
+    <hr>
+
+    <h1>Задача 1.</h1>
+
+    <p>
+        Описати масив об’єктів – сайтів розроблених компанією з такими властивостями:<br>
+        <ul>
+            <li>Властивості:</li>
+            <ul>
+                <li>назва компанії на час розробки (назву періодично змінюють)</li>
+                <li>власник компанії</li>
+                <li>споснсори (масив спонсорів)</li>
+                <ul>
+                    <li>прізвище спонсора</li>
+                    <li>ім’я  спонсора</li>
+                    <li>сума вкладень спонсора</li>
+                </ul>
+                <li>рік випуску</li>
+                <li>вартість сайту</li>
+            </ul>
+            <li>Знайти:</li>
+            <ul>
+                <li>загальну вартість усіх сайтів</li>
+                <li>кількість сайтів, що було зроблено між 2000 та 2009 рр.</li>
+                <li>кількість сайтів, де сума спонсорських вкладень була більшою за 100000</li>
+                <li>створити загальний список усіх спонсорів (поки можуть повторюватись, просто зібрати усі у масив)</li>
+                <li>знайти рік, коли прибуток був найбільшим</li>
+                <li>упорядкувати список за спаданням прибутку</li>
+                <li>cтворити 2 окремих списки з копіями об’єктів, що містять сайти з вартість до 10000 і більше 10000</li>
+            </ul>
+        </ul>
+    </p>
+
+    <script>
+        const sites = [
+            {
+                name: 'Google',
+                owner: 'Alphabet',
+                sponsors: [
+                    {
+                        surname: 'Brin',
+                        name: 'Sergey',
+                        sum: 1000000
+                    },
+                    {
+                        surname: 'Page',
+                        name: 'Larry',
+                        sum: 1000000
+                    }
+                ],
+                year: 1998,
+                cost: 1000000
+            },
+            {
+                name: 'Facebook',
+                owner: 'Facebook',
+                sponsors: [
+                    {
+                        surname: 'Zuckerberg',
+                        name: 'Mark',
+                        sum: 1000000
+                    }
+                ],
+                year: 2004,
+                cost: 1000000
+            },
+            {
+                name: 'Yahoo',
+                owner: 'Verizon',
+                sponsors: [
+                    {
+                        surname: 'Kahn',
+                        name: 'David',
+                        sum: 1000000
+                    }
+                ],
+                year: 1994,
+                cost: 1000000
+            },
+            {
+                name: 'Amazon',
+                owner: 'Amazon',
+                sponsors: [
+                    {
+                        surname: 'Bezos',
+                        name: 'Jeff',
+                        sum: 1000000
+                    }
+                ],
+                year: 1994,
+                cost: 1000000
+            },
+            {
+                name: 'Microsoft',
+                owner: 'Microsoft',
+                sponsors: [
+                    {
+                        surname: 'Gates',
+                        name: 'Bill',
+                        sum: 1000000
+                    }
+                ],
+                year: 1975,
+                cost: 1000000
+            },
+            {
+                name: 'Apple',
+                owner: 'Apple',
+                sponsors: [
+                    {
+                        surname: 'Jobs',
+                        name: 'Steve',
+                        sum: 1000000
+                    }
+                ],
+                year: 1976,
+                cost: 1000000
+            },
+            {
+                name: 'Twitter',
+                owner: 'Twitter',
+                sponsors: [
+                    {
+                        surname: 'Omidyar',
+                        name: 'Jack',
+                        sum: 1000000
+                    }
+                ],
+                year: 2006,
+                cost: 1000000
+            },
+            {
+                name: 'Instagram',
+                owner: 'Facebook',
+                sponsors: [
+                    {
+                        surname: 'Krieger',
+                        name: 'Kevin',
+                        sum: 1000000
+                    },
+                    {
+                        surname: 'Systrom',
+                        name: 'Mike',
+                        sum: 1000000
+                    }
+                ],
+                year: 2010,
+                cost: 1000000
+            },
+            {
+                name: 'LinkedIn',
+                owner: 'Microsoft',
+                sponsors: [
+                    {
+                        surname: 'Reed',
+                        name: 'Reid',
+                        sum: 1000000
+                    }
+                ],
+                year: 2003,
+                cost: 1000000
+            },
+            {
+                name: 'YouTube',
+                owner: 'Google',
+                sponsors: [
+                    {
+                        surname: 'Chen',
+                        name: 'Steve',
+                        sum: 1000000
+                    },
+                    {
+                        surname: 'Brenner',
+                        name: 'Jawed',
+                        sum: 1000000
+                    }
+                ],
+                year: 2005,
+                cost: 1000000
+            },
+            {
+                name: 'Snapchat',
+                owner: 'Snapchat',
+                sponsors: [
+                    {
+                        surname: 'Spiegel',
+                        name: 'Evan',
+                        sum: 1000000
+                    },
+                    {
+                        surname: 'Burr',
+                        name: 'Bobby',
+                        sum: 1000000
+                    }
+                ],
+                year: 2011,
+                cost: 1000000
+            },
+            {
+                name: 'Pinterest',
+                owner: 'Pinterest',
+                sponsors: [
+                    {
+                        surname: 'Brodie',
+                        name: 'Ben',
+                        sum: 1000000
+                    },
+                    {
+                        surname: 'Fisher',
+                        name: 'Paul',
+                        sum: 1000000
+                    }
+                ],
+                year: 2010,
+                cost: 1000000
+            },
+            {
+                name: 'Reddit',
+                owner: 'Reddit',
+                sponsors: [
+                    {
+                        surname: 'Khan',
+                        name: 'Steve',
+                        sum: 1000000
+                    }
+                ],
+                year: 2005,
+                cost: 1000000
+            }
+        ];
+
+        // 1. Знайти загальну вартість усіх сайтів
+        const totalCost = sites.reduce((previousValue, site) => previousValue + site.cost, 0);
+
+        // 2. Знайти кількість сайтів, що було зроблено між 2000 та 2009 рр.
+        const sitesCount = sites.filter(site => site.year >= 2000 && site.year <= 2009).length;
+
+        // 3. Знайти кількість сайтів, де сума спонсорських вкладень була більшою за 100000
+        const sitesCountWithSponsorsSum = sites.filter(site => site.sponsors.reduce((previousValue, sponsor) => previousValue + sponsor.sum, 0) > 100000).length;
+
+        // 4. Створити загальний список усіх спонсорів (поки можуть повторюватись, просто зібрати усі у масив)
+        const sponsors = sites.reduce((previousValue, site) => previousValue.concat(site.sponsors), []);
+
+        // 5. Знайти рік, коли прибуток був найбільшим
+        const maxProfitYear = sites.reduce((previousValue, site) => site.cost > previousValue.cost ? site : previousValue).year;
+
+        // 6. Упорядкувати список за спаданням прибутку
+        const sortedSites = sites.sort((a, b) => b.cost - a.cost);
+
+        // 7. Створити 2 окремих списки з копіями об’єктів, що містять сайти з вартість до 10000 і більше 10000
+        const cheapSites = sites.filter(site => site.cost < 10000);
+        const expensiveSites = sites.filter(site => site.cost >= 10000);
+
+        document.write(`
+            <p><b>1. Знайти загальну вартість усіх сайтів</b></p>
+            <p>${totalCost}</p>
+            <p><b>2. Знайти кількість сайтів, що було зроблено між 2000 та 2009 рр.</b></p>
+            <p>${sitesCount}</p>
+            <p><b>3. Знайти кількість сайтів, де сума спонсорських вкладень була більшою за 100000</b></p>
+            <p>${sitesCountWithSponsorsSum}</p>
+            <p><b>4. Створити загальний список усіх спонсорів (поки можуть повторюватись, просто зібрати усі у масив)</b></p>
+            <p>${JSON.stringify(sponsors)}</p>
+            <p><b>5. Знайти рік, коли прибуток був найбільшим</b></p>
+            <p>${maxProfitYear}</p>
+            <p><b>6. Упорядкувати список за спаданням прибутку</b></p>
+            <p>${JSON.stringify(sortedSites)}</p>
+            <p><b>7. Створити 2 окремих списки з копіями об’єктів, що містять сайти з вартість до 10000 і більше 10000</b></p>
+            <p>${JSON.stringify(cheapSites)}</p>
+            <p>${JSON.stringify(expensiveSites)}</p>
+        `);
+    </script>
+</body>
+
+</html>

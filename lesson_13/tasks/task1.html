@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 13 / Задача 1</title>
+</head>
+
+<body>
+    <a href="../index.html">Lesson 13</a> / <a href="./task1.html">Задача 1</a>
+    <hr>
+
+    <h1>Задача 1.</h1>
+
+    <p>
+        Нехай <code>X0 = 1, Xi = Xi - 1 + 2i</code>, де <code>i = 1,2,3...</code> Визначити X10.
+        Розв’язати з використанням рекурсивних і нерекурсивних алгоритмів
+    </p>    
+
+    <script>
+        function recursive(x) {
+            if (x === 0) {
+                return 1;
+            }
+
+            return recursive(x - 1) + 2 * x;
+        }
+
+        function nonRecursive(x) {
+            let result = 1;
+
+            for (let i = 1; i <= x; i++) {
+                result += 2 * i;
+            }
+
+            return result;
+        }
+
+        document.write(`Рекурсивний алгоритм: ${recursive(10)}<br>`);
+        document.write(`Нерекурсивний алгоритм: ${nonRecursive(10)}`);
+    </script>
+</body>
+
+</html>
