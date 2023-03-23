@@ -23,32 +23,33 @@
     </p>
 
     <script>
-        function iterator(word) {
+        function createIterator(word) {
             let current = 0;
 
-            return function () {
+            return function next() {
                 if (current > word.length - 1) {
                     current = 0;
                 }
 
                 return word[current++];
-            }
+            };
         }
 
-        const word = 'прекладач';
-        const wordIterator = iterator(word);
-        let userWord = '';
+        const word = "прекладач";
+        const iterator = createIterator(word);
 
-        for (let i = 0; i < word.length; i++) {
-            userWord += wordIterator();
+        let userWord = "";
+
+        for (const char of word) {
+            userWord += iterator();
         }
 
         document.write(`Опис слова: ${userWord}<br>`);
 
-        let userAnswer = prompt('Введіть переклад слова');
+        const userAnswer = prompt("Введіть переклад слова");
 
         if (userAnswer === word) {
-            document.write('Вітаю, ви вгадали слово!');
+            document.write("Вітаю, ви вгадали слово!");
         } else {
             let correctLetters = 0;
 
