@@ -19,6 +19,23 @@
     </p>
 
     <script>
+        function getYearAfterNMonths(date, n) {
+            const year = date.getFullYear()
+                  month = date.getMonth()
+                  day = date.getDate();
+
+            const seachMonth = month + n;
+            const newYear = year + Math.floor(seachMonth / 12);
+            const newMonth = seachMonth % 12;
+
+            return new Date(newYear, newMonth, day);
+        }
+
+        const newMonth = parseInt(prompt('Введіть кількість місяців: ', 1));
+
+        document.write(
+            getYearAfterNMonths(new Date(), newMonth)
+        );
     </script>
 </body>
 
