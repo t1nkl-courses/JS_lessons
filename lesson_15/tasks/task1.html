@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 15 / Задача 1</title>
+</head>
+
+<body>
+    <a href="../index.html">Lesson 15</a> / <a href="./task1.html">Задача 1</a>
+    <hr>
+
+    <h1>Задача 1.</h1>
+
+    <p>
+        Дано два об’єкта.
+        Обидва містять масив цілих чисел.
+        При цьому у одному з них є функція знаходження суми, а у іншому – функція для знаходження добутку тих, які знаходяться між заданими мінімальним і максимальних значенням.
+        Використати обидва методи стосовно обидвох об’єктів (використати call, apply)
+    </p>
+
+    <script>
+        const obj1 = {
+            arr: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            
+            sum: function () {
+                let sum = 0;
+                
+                for (let i = 0; i < this.arr.length; i++) {
+                    sum += this.arr[i];
+                }
+                
+                return sum;
+            }
+        }
+
+        const obj2 = {
+            arr: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            
+            product: function (min, max) {
+                let product = 1;
+                
+                for (let i = min; i <= max; i++) {
+                    product *= this.arr[i];
+                }
+                
+                return product;
+            }
+        }
+
+        document.write(`Сума елементів масиву: ${obj1.sum()}<br>`);
+        document.write(`Добуток елементів масиву (call): ${obj2.product.call(obj2, 2, 5)}<br>`);
+        document.write(`Добуток елементів масиву (apply): ${obj2.product.apply(obj2, [2, 5])}<br>`);
+    </script>
+</body>
+
+</html>

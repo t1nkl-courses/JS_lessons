@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 15 / Задача 5</title>
+</head>
+
+<body>
+    <a href="../index.html">Lesson 15</a> / <a href="./task5.html">Задача 5</a>
+    <hr>
+
+    <h1>Задача 5.</h1>
+
+    <p>
+        Розробити клас Baner
+        
+        <ul>
+            <li>Поля (властивості)</li>
+            <ul>
+                <li>Масив об’єктів (графічних зображень та посилань на сайти)</li>
+            </ul>
+            <li>Методи (дії)</li>
+            <ul>
+                <li>Метод випадкового вибору об’єкта (графічного зображення та посилання)</li>
+                <li>Метод виведення випадкового банера</li>
+            </ul>
+        </ul>
+    </p>
+
+    <script>
+        class Baner {
+            constructor(images) {
+                this.images = images;
+            }
+
+            getRandomImage() {
+                return this.images[Math.floor(Math.random() * this.images.length)];
+            }
+
+            showRandomImage() {
+                const image = this.getRandomImage();
+                document.write(`<a href="${image.link}"><img width=150 src="${image.src}" alt="${image.alt}"></a>`);
+            }
+        }
+
+        const random = [
+            {
+                alt: 'Google',
+                src: 'https://www.google.com.ua/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png',
+                link: 'https://www.google.com.ua/'
+            },
+            {
+                alt: 'Facebook',
+                src: 'https://www.facebook.com/images/fb_icon_325x325.png',
+                link: 'https://www.facebook.com/'
+            },
+            {
+                alt: 'YouTube',
+                src: 'https://www.youtube.com/yts/img/favicon_32-vflOogEID.png',
+                link: 'https://www.youtube.com/'
+            },
+            {
+                alt: 'Instagram',
+                src: 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png',
+                link: 'https://www.instagram.com/'
+            }
+        ];
+
+        const baner = new Baner(random);
+        baner.showRandomImage();
+    </script>
+</body>
+
+</html>

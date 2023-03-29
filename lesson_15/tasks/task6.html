@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 15 / Задача 6</title>
+</head>
+
+<body>
+    <a href="../index.html">Lesson 15</a> / <a href="./task6.html">Задача 6</a>
+    <hr>
+
+    <h1>Задача 6.</h1>
+
+    <p>
+        Розробити клас «Керівник танців»
+        
+        <ul>
+            <li>Поля (властивості)</li>
+            <ul>
+                <li>Масив імен хлопців</li>
+                <li>Масив імен дівчат</li>
+            </ul>
+            <li>Методи (дії)</li>
+            <ul>
+                <li>Метод випадкового вибору імені хлопця</li>
+                <li>Метод випадкового вибору імені дівчини</li>
+                <li>Метод виведення пари для танців</li>
+                <li>Метод run, який ініціює через кожні 5 секунд виведення нової пари для танців</li>
+            </ul>
+        </ul>
+    </p>
+
+    <script>
+        class HeadOfDances {
+            constructor(boys, girls) {
+                this.boys = boys;
+                this.girls = girls;
+            }
+
+            getRandomBoysName() {
+                return this.boys[Math.floor(Math.random() * this.boys.length)];
+            }
+
+            getRandomGirlsName() {
+                return this.girls[Math.floor(Math.random() * this.girls.length)];
+            }
+
+            getPair() {
+                return `${this.getRandomBoysName()} - ${this.getRandomGirlsName()}`;
+            }
+
+            run() {
+                setInterval(() => {
+                    console.log(this.getPair());
+                }, 5000);
+            }
+        }
+
+        const headOfDances = new HeadOfDances(['Vasya', 'Petya', 'Kolya'], ['Olya', 'Katya', 'Masha']);
+        headOfDances.run();
+    </script>
+</body>
+
+</html>
