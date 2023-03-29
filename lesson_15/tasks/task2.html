@@ -32,6 +32,57 @@
     </p>
 
     <script>
+        function Tyr () {
+            this.field = [];
+        }
+        Tyr.prototype.setField = function () {
+            for (let i = 0; i < 10; i++) {
+                this.field[i] = [];
+                
+                for (let j = 0; j < 10; j++) {
+                    this.field[i][j] = Math.round(Math.random());
+                }
+            }
+        }
+        Tyr.prototype.shoot = function (x, y) {
+            if (this.field[x][y] === 1) {
+                this.field[x][y] = 0;
+                
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        // class Tyr {
+        //     constructor() {
+        //         this.field = [];
+        //     }
+
+        //     setField() {
+        //         for (let i = 0; i < 10; i++) {
+        //             this.field[i] = [];
+                    
+        //             for (let j = 0; j < 10; j++) {
+        //                 this.field[i][j] = Math.round(Math.random());
+        //             }
+        //         }
+        //     }
+
+        //     shoot(x, y) {
+        //         if (this.field[x][y] === 1) {
+        //             this.field[x][y] = 0;
+                    
+        //             return true;
+        //         } else {
+        //             return false;
+        //         }
+        //     }
+        // }
+
+        const tyr = new Tyr();
+        tyr.setField();
+        document.write(tyr.field);
     </script>
 </body>
 

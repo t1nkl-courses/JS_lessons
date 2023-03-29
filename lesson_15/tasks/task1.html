@@ -22,6 +22,37 @@
     </p>
 
     <script>
+        const obj1 = {
+            arr: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            
+            sum: function () {
+                let sum = 0;
+                
+                for (let i = 0; i < this.arr.length; i++) {
+                    sum += this.arr[i];
+                }
+                
+                return sum;
+            }
+        }
+
+        const obj2 = {
+            arr: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            
+            product: function (min, max) {
+                let product = 1;
+                
+                for (let i = min; i <= max; i++) {
+                    product *= this.arr[i];
+                }
+                
+                return product;
+            }
+        }
+
+        document.write(`Сума елементів масиву: ${obj1.sum()}<br>`);
+        document.write(`Добуток елементів масиву (call): ${obj2.product.call(obj2, 2, 5)}<br>`);
+        document.write(`Добуток елементів масиву (apply): ${obj2.product.apply(obj2, [2, 5])}<br>`);
     </script>
 </body>
 

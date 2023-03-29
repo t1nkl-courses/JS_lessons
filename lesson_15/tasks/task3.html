@@ -37,6 +37,58 @@
     </p>
 
     <script>
+        class Car {
+            constructor(brand, tankSize, liters, seats, passengers) {
+                this.brand = brand;
+                this.tankSize = tankSize;
+                this.liters = liters;
+                this.seats = seats;
+                this.passengers = passengers;
+            }
+
+            refuel(liters) {
+                if (this.liters + liters > this.tankSize) {
+                    this.liters = this.tankSize;
+                } else {
+                    this.liters += liters;
+                }
+            }
+
+            getPassengers() {
+                return this.passengers;
+            }
+
+            addPassengers(passengers) {
+                if (this.passengers + passengers > this.seats) {
+                    this.passengers = this.seats;
+                } else {
+                    this.passengers += passengers;
+                }
+            }
+
+            removePassengers(passengers) {
+                if (this.passengers - passengers < 0) {
+                    this.passengers = 0;
+                } else {
+                    this.passengers -= passengers;
+                }
+            }
+        }
+
+        const car = new Car('{mashina_name}', 60, 30, 5, 3);
+        document.write(`Початковий об'єкт: ${JSON.stringify(car)}<br>`);
+        
+        // Заправка на вказану кількість літрів
+        car.refuel(4000);
+        document.write(`Заправка на 4000 літрів: ${JSON.stringify(car)}<br>`);
+        
+        // Додавання пасажирів
+        car.addPassengers(2);
+        document.write(`Додавання 2 пасажирів: ${JSON.stringify(car)}<br>`);
+        
+        // Висадка пасажирів
+        car.removePassengers(1);
+        document.write(`Висадка 1 пасажира: ${JSON.stringify(car)}<br>`);
     </script>
 </body>
 

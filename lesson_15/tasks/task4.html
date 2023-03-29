@@ -34,6 +34,49 @@
     </p>
 
     <script>
+        class MultChecker {
+            constructor(number) {
+                this.number = number;
+                this.correctAnswers = 0;
+                this.incorrectAnswers = 0;
+            }
+
+            generateExample() {
+                const secondNumber = Math.floor(Math.random() * 10);
+                const result = this.number * secondNumber;
+                
+                return {
+                    firstNumber: this.number,
+                    secondNumber: secondNumber,
+                    result: result
+                };
+            }
+
+            checkAnswer(answer) {
+                const example = this.generateExample();
+                const result = example.firstNumber * example.secondNumber;
+
+                if (answer === result) {
+                    this.correctAnswers++;
+                    
+                    return true;
+                } else {
+                    this.incorrectAnswers++;
+                    
+                    return false;
+                }
+            }
+
+            render() {
+                document.write(`Число: ${this.number}<br>`);
+                document.write(`Кількість правильних відповідей: ${this.correctAnswers}<br>`);
+                document.write(`Кількість неправильних відповідей: ${this.incorrectAnswers}<br>`);
+            }
+        }
+         
+        const multChecker = new MultChecker(7);
+        multChecker.checkAnswer(49);
+        multChecker.render();
     </script>
 </body>
 
