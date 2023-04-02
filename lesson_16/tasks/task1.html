@@ -18,10 +18,111 @@
         Створити клас TDate для роботи із датами у форматі “день.місяць.рік”.
         Дата представляється структурою із трьома полями.
         Реалізувати методи збільшення/зменшення дати на певну кількість днів, місяців чи років.
-        Введення та виведення дати реалізувати за допомогою методу  toString.
+        Введення та виведення дати реалізувати за допомогою методу toString.
     </p>
 
     <script>
+        class TDate {
+            constructor(day, month, year) {
+                this.day = day;
+                this.month = month;
+                this.year = year;
+            }
+
+            toString() {
+                return `${this.day}.${this.month}.${this.year}`;
+            }
+
+            addDays(days) {
+                if (days > 0) {
+                    this.day += days;
+                    
+                    while (this.day > 31) {
+                        this.day -= 31;
+                        this.month++;
+
+                        if (this.month > 12) {
+                            this.month -= 12;
+                            this.year++;
+                        }
+                    }
+                } else {
+                    this.day += days;
+                    
+                    while (this.day < 1) {
+                        this.day += 31;
+                        this.month--;
+
+                        if (this.month < 1) {
+                            this.month += 12;
+                            this.year--;
+                        }
+                    }
+                }
+                
+                return this;
+            }
+
+            addMonths(months) {
+                if (months > 0) {
+                    this.month += months;
+                    
+                    while (this.month > 12) {
+                        this.month -= 12;
+                        this.year++;
+                    }
+                } else {
+                    this.month += months;
+                    
+                    while (this.month < 1) {
+                        this.month += 12;
+                        this.year--;
+                    }
+                }
+                
+                return this;
+            }
+
+            addYears(years) {
+                this.year += years;
+                return this;
+            }
+
+            subDays(days) {
+                return this.addDays(-days);
+            }
+
+            subMonths(months) {
+                return this.addMonths(-months);
+            }
+
+            subYears(years) {
+                return this.addYears(-years);
+            }
+        }
+
+        const date = new TDate(1, 1, 2000);
+        document.write(`Дата: ${date.toString()}<br>`);
+
+        const random = Math.floor(Math.random() * 100);
+
+        date.addDays(random);
+        document.write(`Дата + ${random} день: ${date.toString()}<br>`);
+
+        date.addMonths(random);
+        document.write(`Дата + ${random} місяць: ${date.toString()}<br>`);
+
+        date.addYears(random);
+        document.write(`Дата + ${random} рік: ${date.toString()}<br>`);
+
+        date.subDays(random);
+        document.write(`Дата - ${random} день: ${date.toString()}<br>`);
+
+        date.subMonths(random);
+        document.write(`Дата - ${random} місяць: ${date.toString()}<br>`);
+
+        date.subYears(random);
+        document.write(`Дата - ${random} рік: ${date.toString()}<br>`);
     </script>
 </body>
 

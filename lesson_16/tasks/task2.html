@@ -22,6 +22,48 @@
     </p>
 
     <script>
+        class TMoney {
+            #_dollars;
+            #_rate;
+
+            constructor(dollars = 0, rate = 100) {
+                this.Dollars = dollars;
+                this.Rate = rate;
+            }
+
+            addMoney(value) {
+                this.Dollars += value / this.Rate;
+            }
+
+            removeMoney(value) {
+                this.Dollars -= value / this.Rate;
+            }
+
+            get Rate() {
+                return this._rate;
+            }
+
+            set Rate(value) {
+                this._rate = value;
+            }
+
+            get Dollars() {
+                return this._dollars;
+            }
+
+            set Dollars(value) {
+                this._dollars = value;
+            }
+        }
+    
+        const money = new TMoney();
+        document.write(`Грошова сума: ${money.Dollars} доларів<br>`);
+
+        money.addMoney(100);
+        document.write(`Грошова сума після додавання: ${money.Dollars} доларів<br>`);
+
+        money.removeMoney(50);
+        document.write(`Грошова сума після вилучення: ${money.Dollars} доларів<br>`);
     </script>
 </body>
 
