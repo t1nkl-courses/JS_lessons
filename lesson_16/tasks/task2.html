@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 16 / Задача 2</title>
+</head>
+
+<body>
+    <a href="../index.html">Lesson 16</a> / <a href="./task2.html">Задача 2</a>
+    <hr>
+
+    <h1>Задача 2.</h1>
+
+    <p>
+        Створити клас TMoney для роботи з грошовими сумами.
+        Сума повинна зберігатися у вигляді доларового еквіваленту.
+        Реалізувати методи додавання/вилучення грошової маси, вказуючи необхідну суму у гривнях, та визначення курсу долара, при якому сума у гривнях збільшиться на 100.
+        Курс долара зберігати в окремому полі.
+    </p>
+
+    <script>
+        class TMoney {
+            #_dollars;
+            #_rate;
+
+            constructor(dollars = 0, rate = 100) {
+                this.Dollars = dollars;
+                this.Rate = rate;
+            }
+
+            addMoney(value) {
+                this.Dollars += value / this.Rate;
+            }
+
+            removeMoney(value) {
+                this.Dollars -= value / this.Rate;
+            }
+
+            get Rate() {
+                return this._rate;
+            }
+
+            set Rate(value) {
+                this._rate = value;
+            }
+
+            get Dollars() {
+                return this._dollars;
+            }
+
+            set Dollars(value) {
+                this._dollars = value;
+            }
+        }
+    
+        const money = new TMoney();
+        document.write(`Грошова сума: ${money.Dollars} доларів<br>`);
+
+        money.addMoney(100);
+        document.write(`Грошова сума після додавання: ${money.Dollars} доларів<br>`);
+
+        money.removeMoney(50);
+        document.write(`Грошова сума після вилучення: ${money.Dollars} доларів<br>`);
+    </script>
+</body>
+
+</html>

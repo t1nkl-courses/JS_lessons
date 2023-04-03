@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 16 / Задача 4</title>
+</head>
+
+<body>
+    <a href="../index.html">Lesson 16</a> / <a href="./task4.html">Задача 4</a>
+    <hr>
+
+    <h1>Задача 4.</h1>
+
+    <p>
+        Створити клас TBankomat, який моделює роботу банкомата.
+        Клас повинен містити поля для зберігання кількості купюр кожного із номіналів від 5 до 200 гривень.
+        Реалізувати методи знаходження максимальної та мінімальної сум, які може видати банкомат, та метод зняття деякої суми.
+    </p>
+
+    <script>
+        class TBankomat {
+            #_banknotes = {
+                1: 0,
+                5: 0,
+                10: 0,
+                20: 0,
+                50: 0,
+                100: 0,
+                200: 0
+            };
+
+            constructor(banknotes) {
+                this.Banknotes = banknotes;
+            }
+
+            get Banknotes() {
+                return this.#_banknotes;
+            }
+
+            set Banknotes(value) {
+                this.#_banknotes = value;
+            }
+
+            get MinSum() {
+                let minSum = 0;
+
+                for (let banknote in this.Banknotes) {
+                    if (this.Banknotes[banknote] > 0) {
+                        minSum = banknote;
+                        break;
+                    }
+                }
+
+                return minSum;
+            }
+
+            get MaxSum() {
+                let maxSum = 0;
+
+                for (let banknote in this.Banknotes) {
+                    maxSum += banknote * this.Banknotes[banknote];
+                }
+
+                return maxSum;
+            }
+
+            withdraw(amount) {
+                if (amount < this.MinSum) {
+                    throw new Error(`Задана сума менша за мінімальну суму для зняття (${this.MinSum} грн.)`);
+                }
+
+                if (amount > this.MaxSum) {
+                    throw new Error(`Задана сума більша за максимальну суму для зняття (${this.MaxSum} грн.)`);
+                }
+
+                const banknotesToWithdraw = {};
+                let banknotes = Object.keys(this.Banknotes).reverse();
+
+                for (let banknote of banknotes) {
+                    if (amount >= banknote) {
+                        let banknotesCount = Math.floor(amount / banknote);
+
+                        if (banknotesCount > this.Banknotes[banknote]) {
+                            banknotesCount = this.Banknotes[banknote];
+                        }
+
+                        banknotesToWithdraw[banknote] = banknotesCount;
+                        amount -= banknote * banknotesCount;
+                    }
+                }
+
+                return banknotesToWithdraw;
+            }
+        }
+
+        const bankomat = new TBankomat({
+            1: 10,
+            5: 10,
+            10: 10,
+            20: 10,
+            50: 10,
+            100: 10,
+            200: 10
+        });
+
+        document.write(`Мінімальна сума: ${bankomat.MinSum} грн.<br>`);
+        document.write(`Максимальна сума: ${bankomat.MaxSum} грн.<br><br>`);
+
+        const ranmonAmount = Math.floor(Math.random() * 1000);
+        document.write(`Сума для зняття: ${ranmonAmount} грн.<br>`);
+        
+        try {
+            const banknotesToWithdraw = bankomat.withdraw(ranmonAmount);
+            document.write(`Купюри для зняття: <br>`);
+            
+            for (let banknote in banknotesToWithdraw) {
+                document.write(`${banknote} грн. - ${banknotesToWithdraw[banknote]} шт.<br>`);
+            }
+        } catch (error) {
+            document.write(error.message);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 16 / Задача 3</title>
+</head>
+
+<body>
+    <a href="../index.html">Lesson 16</a> / <a href="./task3.html">Задача 3</a>
+    <hr>
+
+    <h1>Задача 3.</h1>
+
+    <p>
+        Об’єкт “Фірма” (використати члени-класи) 
+        <ul>
+            <li>Поля (властивості)</li>
+            <ul>
+                <li>назва фірми;</li>
+                <li>дата заснування (рік, місяць);</li>
+                <li>послуги (назва послуги, вартість, термін виконання);</li>
+                <li>адреси філіалів (країна, місто, вулиця, номер будинку);</li>
+            </ul>
+            <li>Методи (дії)</li>
+            <ul>
+                <li>визначення кількості років існування фірми;</li>
+                <li>виведення всіх філіалів фірми у вказаному місті;</li>
+                <li>виведення на екран послуг, що можуть бути виконані за вказану суму грошей та вказаний термін часу;</li>
+            </ul>
+        </ul>
+    </p>
+
+    <script>
+        class TCompany {
+            #_name;
+            #_foundationDate;
+            #_services;
+            #_branches;
+
+            constructor(name, foundationDate, services, branches) {
+                this.Name = name;
+                this.FoundationDate = foundationDate;
+                this.Services = services;
+                this.Branches = branches;
+            }
+
+            get Name() {
+                return this.#_name;
+            }
+
+            set Name(value) {
+                this.#_name = value;
+            }
+
+            get FoundationDate() {
+                return this.#_foundationDate;
+            }
+
+            set FoundationDate(value) {
+                this.#_foundationDate = value;
+            }
+
+            get Services() {
+                return this.#_services;
+            }
+
+            set Services(value) {
+                this.#_services = value;
+            }
+
+            get Branches() {
+                return this.#_branches;
+            }
+
+            set Branches(value) {
+                this.#_branches = value;
+            }
+
+            getAge() {
+                const now = new Date();
+                const year = now.getFullYear();
+                const month = now.getMonth() + 1;
+
+                return year - this.FoundationDate.Year + (month < this.FoundationDate.Month ? -1 : 0);
+            }
+
+            getBranchesByCity(city) {
+                return this.Branches.filter(branch => branch.City === city);
+            }
+
+            getServicesByPriceAndTime(price, time) {
+                return this.Services.filter(service => service.Price <= price && service.Time <= time);
+            }
+        }
+
+        const company = new TCompany(
+            'Company',
+            {
+                Year: 2019,
+                Month: 1
+            },
+            [
+                {
+                    Name: 'Service 1',
+                    Price: 100,
+                    Time: 1
+                },
+                {
+                    Name: 'Service 2',
+                    Price: 200,
+                    Time: 2
+                },
+                {
+                    Name: 'Service 3',
+                    Price: 300,
+                    Time: 3
+                }
+            ],
+            [
+                {
+                    Country: 'Ukraine',
+                    City: 'Kyiv',
+                    Street: 'Street 1',
+                    House: 1
+                },
+                {
+                    Country: 'Ukraine',
+                    City: 'Kyiv',
+                    Street: 'Street 2',
+                    House: 2
+                },
+                {
+                    Country: 'Ukraine',
+                    City: 'Lviv',
+                    Street: 'Street 3',
+                    House: 3
+                }
+            ]
+        );
+
+        document.write(`Назва фірми: ${company.Name}<br>`);
+        document.write(`Кількість років існування фірми: ${company.getAge()}<br>`);
+
+        const branchesByCity = company.getBranchesByCity('Kyiv').map(branch => `${branch.Country}, ${branch.City}, ${branch.Street}, ${branch.House}`).join(' | ');
+        document.write(`Філіали фірми у місті Київ: ${branchesByCity}<br>`);
+
+        const servicesByPriceAndTime = company.getServicesByPriceAndTime(200, 2).map(service => `${service.Name}, ${service.Price}, ${service.Time}`).join(' | ');
+        document.write(`Послуги, що можуть бути виконані за вказану суму грошей та вказаний термін часу: ${servicesByPriceAndTime}`);
+    </script>
+</body>
+
+</html>
