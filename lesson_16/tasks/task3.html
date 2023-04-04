@@ -34,121 +34,153 @@
     </p>
 
     <script>
-        class TCompany {
-            #_name;
-            #_foundationDate;
-            #_services;
-            #_branches;
-
-            constructor(name, foundationDate, services, branches) {
-                this.Name = name;
-                this.FoundationDate = foundationDate;
-                this.Services = services;
-                this.Branches = branches;
+        class TDate {
+            constructor(day, month, year) {
+                this.day = day;
+                this.month = month;
+                this.year = year;
             }
 
-            get Name() {
-                return this.#_name;
+            toString() {
+                return `${this.day}.${this.month}.${this.year}`;
             }
 
-            set Name(value) {
-                this.#_name = value;
-            }
+            addDays(days) {
+                if (days > 0) {
+                    this.day += days;
+                    
+                    while (this.day > 31) {
+                        this.day -= 31;
+                        this.month++;
 
-            get FoundationDate() {
-                return this.#_foundationDate;
-            }
+                        if (this.month > 12) {
+                            this.month -= 12;
+                            this.year++;
+                        }
+                    }
+                } else {
+                    this.day += days;
+                    
+                    while (this.day < 1) {
+                        this.day += 31;
+                        this.month--;
 
-            set FoundationDate(value) {
-                this.#_foundationDate = value;
-            }
-
-            get Services() {
-                return this.#_services;
-            }
-
-            set Services(value) {
-                this.#_services = value;
-            }
-
-            get Branches() {
-                return this.#_branches;
-            }
-
-            set Branches(value) {
-                this.#_branches = value;
-            }
-
-            getAge() {
-                const now = new Date();
-                const year = now.getFullYear();
-                const month = now.getMonth() + 1;
-
-                return year - this.FoundationDate.Year + (month < this.FoundationDate.Month ? -1 : 0);
-            }
-
-            getBranchesByCity(city) {
-                return this.Branches.filter(branch => branch.City === city);
-            }
-
-            getServicesByPriceAndTime(price, time) {
-                return this.Services.filter(service => service.Price <= price && service.Time <= time);
+                        if (this.month < 1) {
+                            this.month += 12;
+                            this.year--;
+                        }
+                    }
+                }
             }
         }
 
-        const company = new TCompany(
-            'Company',
-            {
-                Year: 2019,
-                Month: 1
-            },
-            [
-                {
-                    Name: 'Service 1',
-                    Price: 100,
-                    Time: 1
-                },
-                {
-                    Name: 'Service 2',
-                    Price: 200,
-                    Time: 2
-                },
-                {
-                    Name: 'Service 3',
-                    Price: 300,
-                    Time: 3
+        class TService {
+            constructor(name, price, term) {
+                this.name = name;
+                this.price = price;
+                this.term = term;
+            }
+
+            toString() {
+                return `${this.name} (${this.price} грн., ${this.term} днів)`;
+            }
+        }
+
+        class TAddress {
+            constructor(country, city, street, house) {
+                this.country = country;
+                this.city = city;
+                this.street = street;
+                this.house = house;
+            }
+
+            toString() {
+                return `${this.country}, ${this.city}, ${this.street}, ${this.house}`;
+            }
+        }
+
+        class TCompany {
+            constructor(name, date, services, addresses) {
+                this.name = name;
+                this.date = date;
+                this.services = services;
+                this.addresses = addresses;
+            }
+
+            toString() {
+                return `${this.name} (${this.date.toString()})`;
+            }
+
+            getYears() {
+                let today = new TDate(1, 1, 2019);
+                let years = today.year - this.date.year;
+
+                if (today.month < this.date.month) {
+                    years--;
+                } else if (today.month == this.date.month) {
+                    if (today.day < this.date.day) {
+                        years--;
+                    }
                 }
-            ],
-            [
-                {
-                    Country: 'Ukraine',
-                    City: 'Kyiv',
-                    Street: 'Street 1',
-                    House: 1
-                },
-                {
-                    Country: 'Ukraine',
-                    City: 'Kyiv',
-                    Street: 'Street 2',
-                    House: 2
-                },
-                {
-                    Country: 'Ukraine',
-                    City: 'Lviv',
-                    Street: 'Street 3',
-                    House: 3
+
+                return years;
+            }
+
+            getAddresses(city) {
+                let addresses = [];
+
+                for (let i = 0; i < this.addresses.length; i++) {
+                    if (this.addresses[i].city == city) {
+                        addresses.push(this.addresses [i]);
+                    }
                 }
-            ]
-        );
 
-        document.write(`Назва фірми: ${company.Name}<br>`);
-        document.write(`Кількість років існування фірми: ${company.getAge()}<br>`);
+                return addresses;
+            }
 
-        const branchesByCity = company.getBranchesByCity('Kyiv').map(branch => `${branch.Country}, ${branch.City}, ${branch.Street}, ${branch.House}`).join(' | ');
-        document.write(`Філіали фірми у місті Київ: ${branchesByCity}<br>`);
+            getServices(price, term) {
+                let services = [];
 
-        const servicesByPriceAndTime = company.getServicesByPriceAndTime(200, 2).map(service => `${service.Name}, ${service.Price}, ${service.Time}`).join(' | ');
-        document.write(`Послуги, що можуть бути виконані за вказану суму грошей та вказаний термін часу: ${servicesByPriceAndTime}`);
+                for (let i = 0; i < this.services.length; i++) {
+                    if (this.services [i].price <= price && this.services [i].term <= term) {
+                        services.push(this.services [i]);
+                    }
+                }
+
+                return services;
+            }
+        }
+
+        const date = new TDate(1, 1, 2018);
+        const services = [
+            new TService('Перевезення', 100, 1),
+            new TService('Перевезення', 200, 2),
+            new TService('Перевезення', 300, 3),
+            new TService('Перевезення', 400, 4),
+            new TService('Перевезення', 500, 5),
+            new TService('Перевезення', 600, 6),
+            new TService('Перевезення', 700, 7),
+            new TService('Перевезення', 800, 8),
+            new TService('Перевезення', 900, 9),
+            new TService('Перевезення', 1000, 10),
+        ];
+        const addresses = [
+            new TAddress('Україна', 'Київ', 'Вулиця', 1),
+            new TAddress('Україна', 'Київ', 'Вулиця', 2),
+            new TAddress('Україна', 'Київ', 'Вулиця', 3),
+            new TAddress('Україна', 'Київ', 'Вулиця', 4),
+            new TAddress('Україна', 'Київ', 'Вулиця', 5),
+            new TAddress('Україна', 'Київ', 'Вулиця', 6),
+            new TAddress('Україна', 'Київ', 'Вулиця', 7),
+            new TAddress('Україна', 'Київ', 'Вулиця', 8),
+            new TAddress('Україна', 'Київ', 'Вулиця', 9),
+            new TAddress('Україна', 'Київ', 'Вулиця', 10),
+        ];
+        const company = new TCompany('Назва', date, services, addresses);
+
+        document.write(`Кількість років існування: ${company.getYears()}<br>`);
+        document.write(`Філіали у Києві: ${company.getAddresses('Київ')}<br>`);
+        document.write(`Послуги за 1000 грн. та 10 днів: ${company.getServices(1000, 10)}<br>`);
     </script>
 </body>
 
