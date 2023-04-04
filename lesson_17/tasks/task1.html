@@ -24,6 +24,32 @@
     </p>
 
     <script>
+        class ArrayOperations {
+            constructor(array) {
+                this.array = array;
+            }
+
+            getPositiveCount() {
+                return this.array.filter(item => item > 0).length;
+            }
+
+            getNegativeCount() {
+                return this.array.filter(item => item < 0).length;
+            }
+
+            static getNumberCount(array, number) {
+                return array.filter(item => item === number).length;
+            }
+        }
+
+        const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10];
+        const arrayOperations = new ArrayOperations(array);
+
+        document.write(`Кількість додатніх: ${arrayOperations.getPositiveCount()}<br>`);
+        document.write(`Кількість від'ємних: ${arrayOperations.getNegativeCount()}<br>`);
+
+        const randomNumber = Math.floor(Math.random() * 10);
+        document.write(`Кількість входжень числа ${randomNumber}: ${ArrayOperations.getNumberCount(array, randomNumber)}<br>`);
     </script>
 </body>
 

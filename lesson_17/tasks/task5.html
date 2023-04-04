@@ -22,6 +22,118 @@
     </p>
 
     <script>
+        class Book {
+            constructor(title, genre, publisher, authors) {
+                this.title = title;
+                this.genre = genre;
+                this.publisher = publisher;
+                this.authors = authors;
+            }
+        }
+
+        class Author {
+            constructor(name, yearOfBirth, shortDescription) {
+                this.name = name;
+                this.yearOfBirth = yearOfBirth;
+                this.shortDescription = shortDescription;
+            }
+        }
+
+        class Publisher {
+            constructor(name, registrationNumber, yearOfFoundation) {
+                this.name = name;
+                this.registrationNumber = registrationNumber;
+                this.yearOfFoundation = yearOfFoundation;
+            }
+        }
+
+        class Library {
+            constructor() {
+                this.books = [];
+            }
+
+            addBook(book) {
+                this.books.push(book);
+            }
+
+            removeBook(book) {
+                this.books = this.books.filter(b => b !== book);
+            }
+
+            getBooksByTitle(title) {
+                return this.books.filter(b => b.title === title);
+            }
+
+            getBooksByAuthor(author) {
+                return this.books.filter(b => b.authors.includes(author));
+            }
+
+            getBooksByPublisher(publisher) {
+                return this.books.filter(b => b.publisher === publisher);
+            }
+        }
+
+        const library = new Library();
+
+        const author1 = new Author('Author 1', 1990, 'Short description 1');
+        const author2 = new Author('Author 2', 1991, 'Short description 2');
+        const author3 = new Author('Author 3', 1992, 'Short description 3');
+        const author4 = new Author('Author 4', 1993, 'Short description 4');
+        const author5 = new Author('Author 5', 1994, 'Short description 5');
+
+        const publisher1 = new Publisher('Publisher 1', 1, 2000);
+        const publisher2 = new Publisher('Publisher 2', 2, 2001);
+        const publisher3 = new Publisher('Publisher 3', 3, 2002);
+        const publisher4 = new Publisher('Publisher 4', 4, 2003);
+        const publisher5 = new Publisher('Publisher 5', 5, 2004);
+
+        const book1 = new Book('Book 1', 'Genre 1', publisher1, [author1, author2]);
+        const book2 = new Book('Book 2', 'Genre 2', publisher2, [author3, author4]);
+        const book3 = new Book('Book 3', 'Genre 3', publisher3, [author5]);
+        const book4 = new Book('Book 4', 'Genre 4', publisher4, [author1, author2, author3, author4, author5]);
+        const book5 = new Book('Book 5', 'Genre 5', publisher5, [author1, author2, author3, author4, author5]);
+
+        library.addBook(book1);
+        library.addBook(book2);
+        library.addBook(book3);
+        library.addBook(book4);
+        library.addBook(book5);
+
+        document.write(`<h4>Книги по назві 'Book 1':</h4>`);
+        document.write(`<ul>`);
+        library.getBooksByTitle('Book 1').forEach(b => document.write(`<li>${b.title}</li>`));
+        document.write(`</ul>`);
+        
+        document.write(`<h4>Книги по автору 'Author 1':</h4>`);
+        document.write(`<ul>`);
+        library.getBooksByAuthor(author1).forEach(b => document.write(`<li>${b.title}</li>`));
+        document.write(`</ul>`);
+        
+        document.write(`<h4>Книги по видавництву 'Publisher 1':</h4>`);
+        document.write(`<ul>`);
+        library.getBooksByPublisher(publisher1).forEach(b => document.write(`<li>${b.title}</li>`));
+        document.write(`</ul>`);
+
+        library.removeBook(book1);
+        library.removeBook(book2);
+        library.removeBook(book3);
+
+        document.write('<hr>');
+
+        document.write(`<h4>Книги по назві 'Book 1' після вилучення:</h4>`);
+        document.write(`<ul>`);
+        library.getBooksByTitle('Book 1').forEach(b => document.write(`<li>${b.title}</li>`));
+        document.write(`</ul>`);
+        
+        document.write(`<h4>Книги по автору 'Author 1' після вилучення:</h4>`);
+        document.write(`<ul>`);
+        library.getBooksByAuthor(author1).forEach(b => document.write(`<li>${b.title}</li>`));
+        document.write(`</ul>`);
+        
+        document.write(`<h4>Книги по видавництву 'Publisher 1' після вилучення:</h4>`);
+        document.write(`<ul>`);
+        library.getBooksByPublisher(publisher1).forEach(b => document.write(`<li>${b.title}</li>`));
+        document.write(`</ul>`);
     </script>
 </body>
 
