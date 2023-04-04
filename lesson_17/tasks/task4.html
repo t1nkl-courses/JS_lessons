@@ -27,6 +27,99 @@
     </p>
 
     <script>
+        class Product {
+            constructor(name, unit, quantity, manufacturer) {
+                this.name = name;
+                this.unit = unit;
+                this.quantity = quantity;
+                this.manufacturer = manufacturer;
+            }
+        }
+
+        class Warehouse {
+            constructor() {
+                this.products = [];
+            }
+
+            addProduct(product) {
+                this.products.push(product);
+            }
+
+            removeProduct(product, quantity = 1) {
+                // Перевіряємо чи є такий товар на складі
+                const productIndex = this.products.findIndex(p => p.name === product.name);
+                if (productIndex === -1) {
+                    document.write(`Товару ${product.name} немає на складі<br>`);
+                    return;
+                }
+
+                // Перевіряємо чи достатньо товару на складі
+                if (this.checkProductCount(product) < quantity) {
+                    document.write(`Tовару ${product.name} недостатньо на складі<br>`);
+                }
+
+                this.products.splice(productIndex, quantity);
+            }
+
+            checkProductCount(product) {
+                return this.filterByName(product.name).length;
+            }
+
+            filterByName(name) {
+                return this.products.filter(p => p.name === name);
+            }
+
+            filterByManufacturer(manufacturer) {
+                return this.products.filter(p => p.manufacturer === manufacturer);
+            }
+        }
+
+        const warehouse = new Warehouse();
+
+        const product1 = new Product('product1', 'pcs', 10, 'manufacturer1');
+        const product2 = new Product('product2', 'pcs', 20, 'manufacturer2');
+        const product3 = new Product('product3', 'pcs', 30, 'manufacturer3');
+
+        warehouse.addProduct(product1);
+        warehouse.addProduct(product2);
+        warehouse.addProduct(product2);
+        warehouse.addProduct(product3);
+        warehouse.addProduct(product3);
+        warehouse.addProduct(product3);
+
+        // Початковий склад
+        document.write(`Склад:<br>`);
+        warehouse.products.forEach(p => document.write(`${p.name} ${p.unit} ${p.quantity} ${p.manufacturer}<br>`));
+        document.write('<hr>');
+
+        // Додаємо товар
+        document.write(`<br>Додаємо товар ${product3.name}:<br>`);
+        warehouse.addProduct(product3);
+        warehouse.addProduct(product3);
+        warehouse.addProduct(product3);
+        warehouse.products.forEach(p => document.write(`${p.name} ${p.unit} ${p.quantity} ${p.manufacturer}<br>`));
+        document.write('<hr>');
+
+        // Відвантаження товару
+        document.write(`<br>Відвантаження товару ${product3.name}:<br>`);
+        warehouse.removeProduct(product3, 3); // Відвантажено 3 товари
+        warehouse.removeProduct(product3, 10); // Відвантажено всі товари - Товару недостатньо на складі
+        warehouse.products.forEach(p => document.write(`${p.name} ${p.unit} ${p.quantity} ${p.manufacturer}<br>`));
+        document.write('<hr>');
+
+        // Знову відвантаження товару
+        document.write(`<br>Знову відвантаження товару ${product3.name}:<br>`);
+        warehouse.removeProduct(product3, 1); // Товару немає на складі
+        document.write('<hr>');
+
+        // Фільтрація за назвою товару
+        document.write(`<br>Фільтрація за назвою товару ${product2.name}:<br>`);
+        warehouse.filterByName(product2.name).forEach(p => document.write(`${p.name} ${p.unit} ${p.quantity} ${p.manufacturer}<br>`));
+        document.write('<hr>');
+
+        // Фільтрація за назвою фірми
+        document.write(`<br>Фільтрація за назвою фірми ${product1.manufacturer}:<br>`);
+        warehouse.filterByManufacturer(product1.manufacturer).forEach(p => document.write(`${p.name} ${p.unit} ${p.quantity} ${p.manufacturer}<br>`));
     </script>
 </body>
 

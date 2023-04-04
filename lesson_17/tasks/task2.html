@@ -20,6 +20,39 @@
     </p>
 
     <script>
+        class Car {
+            constructor(driver, brand, number) {
+                this.driver = driver;
+                this.brand = brand;
+                this.number = number;
+            }
+
+            static getInstance(driver, brand, number) {
+                if (!Car.instance) {
+                    Car.instance = new Car(driver, brand, number);
+                }
+                
+                return Car.instance;
+            }
+        }
+
+        const randomName = () => {
+            const names = ['Ivan', 'Petro', 'Stepan', 'Mykola', 'Oleksandr'];
+            return names[Math.floor(Math.random() * names.length)];
+        }
+        const randomBrand = () => {
+            const brands = ['BMW', 'Audi', 'Mercedes', 'Toyota', 'Honda'];
+            return brands[Math.floor(Math.random() * brands.length)];
+        }
+
+        const car1 = Car.getInstance(randomName(), randomBrand(), 'AA1234AA');
+        document.write(`car1: ${car1.driver} ${car1.brand} ${car1.number}<br>`);
+
+        const car2 = Car.getInstance(randomName(), randomBrand(), 'AA5678BB');
+        document.write(`car2: ${car2.driver} ${car2.brand} ${car2.number}<br>`);
+
+        const car3 = Car.getInstance(randomName(), randomBrand(), 'AA9012CC');
+        document.write(`car3: ${car3.driver} ${car3.brand} ${car3.number}<br>`);
     </script>
 </body>
 

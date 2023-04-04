@@ -22,6 +22,60 @@
     </p>
 
     <script>
+        class Reminder {
+            constructor(message, interval) {
+                this.message = message;
+                this.interval = interval;
+                this.counter = 0;
+                this.timer = null;
+            }
+
+            start() {
+                this.timer = setInterval(() => {
+                    this.counter++;
+                    document.write(`${this.counter} - ${this.message} (${new Date().toLocaleTimeString()})<br>`);
+                }, this.interval);
+            }
+
+            stop() {
+                clearInterval(this.timer);
+            }
+
+            changeMessage(newMessage) {
+                this.message = newMessage;
+            }
+        }
+
+        const reminder1 = new Reminder('| Перше нагадування |', 1000);
+        const reminder2 = new Reminder('|| Друге нагадування ||', 2000);
+        const reminder3 = new Reminder('||| Третє нагадування |||', 3000);
+
+        // Запускаємо нагадування
+        reminder1.start();
+        reminder2.start();
+        reminder3.start();
+
+        // Зупиняємо друге та третє нагадування через 10 секунд
+        setTimeout(() => {
+            reminder2.stop();
+            reminder3.stop();
+            document.write('<hr>Зупинено друге та третє нагадування<hr>');
+        }, 10000);
+
+        // Змінюємо повідомлення для першого та третього нагадування через 11 секунд
+        setTimeout(() => {
+            reminder1.changeMessage('| Нове повідомлення для першого нагадування |');
+
+            reminder3.changeMessage('||| Нове повідомлення для третього нагадування |||');
+            reminder3.start();
+            document.write('<hr>Змінено повідомлення для першого та третього нагадування<hr>');
+        }, 11000);
+
+        // Зупиняємо перше та третє нагадування через 20 секунд
+        setTimeout(() => {
+            reminder1.stop();
+            reminder3.stop();
+        }, 20000);
     </script>
 </body>
 
