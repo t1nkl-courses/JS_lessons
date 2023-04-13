@@ -27,6 +27,10 @@
             }
 
             getAge() {
+                if (this.birthYear > new Date().getFullYear()) {
+                    return 0;
+                }
+
                 return new Date().getFullYear() - this.birthYear;
             }
 

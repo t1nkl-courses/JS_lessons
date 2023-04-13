@@ -36,11 +36,11 @@
             }
 
             convertToDollar() {
-                return this.inputMoney * DOLLAR_RATE;
+                return this.inputMoney / DOLLAR_RATE;
             }
 
             convertToEuro() {
-                return this.inputMoney * EURO_RATE;
+                return this.inputMoney / EURO_RATE;
             }
 
             // Тут вирішив використовувати властивість Element класу setAttribute
@@ -102,8 +102,9 @@
                     const outputMoneyDollar = document.getElementById('outputMoneyDollar');
                     const outputMoneyEuro = document.getElementById('outputMoneyEuro');
 
-                    outputMoneyDollar.value = inputMoney.value * DOLLAR_RATE;
-                    outputMoneyEuro.value = inputMoney.value * EURO_RATE;
+                    const converter = new Converter(inputMoney.value);
+                    outputMoneyDollar.value = converter.convertToDollar().toFixed(2);
+                    outputMoneyEuro.value = converter.convertToEuro().toFixed(2);
                 });
             }
         }

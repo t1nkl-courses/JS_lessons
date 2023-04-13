@@ -110,8 +110,11 @@
 
                     const sumDiv = document.createElement('div');
                     sumDiv.innerHTML = `Sum: ${sum}`;
-
                     container.appendChild(sumDiv);
+
+                    const avarageDiv = document.createElement('div');
+                    avarageDiv.innerHTML = `Avarage value: ${sum / inputs.length}`;
+                    container.appendChild(avarageDiv);
                 });
 
                 container.appendChild(priceNumberDiv);
