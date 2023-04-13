@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 18 / Задача 6</title>
+</head>
+
+<body>
+    <a href="../index.html">Lesson 18</a> / <a href="./task6.html">Задача 6</a>
+    <hr>
+
+    <h1>Задача 6.</h1>
+
+    <p>
+        Користувач задає кількість оцінок і натискає на кнопку «get table».
+        В результаті формується таблиця з input, куди користувач вводить оцінки.
+        Після цього натискає на кнопку “get sum” і знаходить середнє значення.
+        <ul>
+            <li>Price number - <code>&lt;input type="number" value="0" id="priceNumber"/&gt;</code></li>
+            <li>Get table - <code>&lt;button type="submit"&gt;Get table&lt;/button&gt;</code></li>
+            <li>Table with inputs for each price number</li>
+            <li>Get sum - <code>&lt;button type="submit"&gt;Get sum&lt;/button&gt;</code></li>
+            <li>Sum result</li>
+        </ul>
+    </p>
+
+    <div class="container" id="table"></div>
+
+    <script>
+        class Table {
+            constructor(rows, cols) {
+                this.rows = rows;
+                this.cols = cols;
+            }
+
+            getRows() {
+                let rows = '';
+
+                for (let i = 0; i < this.rows; i++) {
+                    rows += `<tr>${this.getCells()}</tr>`;
+                }
+
+                return rows;
+            }
+
+            getCells() {
+                let cells = '';
+
+                for (let i = 0; i < this.cols; i++) {
+                    cells += `<td><input type="number" value="0" id="priceNumber"/></td>`;
+                }
+
+                return cells;
+            }
+
+            destroyRenderedTable() {
+                const table = document.querySelector('table');
+
+                if (table) {
+                    table.remove();
+                }
+            }
+
+            render() {
+                const container = document.getElementById('table');
+
+                const priceNumberDiv = document.createElement('div');
+                const priceNumberLabel = document.createElement('label');
+                priceNumberLabel.innerHTML = 'Price number: ';
+                const priceNumberInput = document.createElement('input');
+                priceNumberInput.setAttribute('type', 'number');
+                priceNumberInput.setAttribute('value', '0');
+                priceNumberInput.setAttribute('id', 'priceNumber');
+                priceNumberDiv.appendChild(priceNumberLabel);
+                priceNumberDiv.appendChild(priceNumberInput);
+
+                const br = document.createElement('br');
+                const hr = document.createElement('hr');
+
+                const getTableButton = document.createElement('button');
+                getTableButton.innerHTML = 'Get table';
+                getTableButton.addEventListener('click', () => {
+                    this.destroyRenderedTable();
+                    
+                    const priceNumber = document.getElementById('priceNumber').value;
+
+                    this.rows = priceNumber;
+                    this.cols = priceNumber;
+
+                    const table = document.createElement('table');
+                    table.innerHTML = this.getRows();
+
+                    container.appendChild(table);
+                });
+
+                const getSumButton = document.createElement('button');
+                getSumButton.innerHTML = 'Get sum';
+                getSumButton.addEventListener('click', () => {
+                    const table = document.querySelector('table');
+                    const inputs = table.querySelectorAll('input');
+
+                    let sum = 0;
+
+                    for (let i = 0; i < inputs.length; i++) {
+                        sum += Number(inputs[i].value);
+                    }
+
+                    const sumDiv = document.createElement('div');
+                    sumDiv.innerHTML = `Sum: ${sum}`;
+
+                    container.appendChild(sumDiv);
+                });
+
+                container.appendChild(priceNumberDiv);
+                container.appendChild(br);
+                container.appendChild(getTableButton);
+                container.appendChild(hr);
+                container.appendChild(getSumButton);
+            }
+        }
+
+        const table = new Table(0, 0);
+        table.render();
+    </script>
+</body>
+
+</html>

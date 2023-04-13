@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 18 / Задача 7</title>
+</head>
+
+<body>
+    <a href="../index.html">Lesson 18</a> / <a href="./task7.html">Задача 7</a>
+    <hr>
+
+    <h1>Задача 7.</h1>
+
+    <p>
+        Подорож складається з 3 етапів.
+        На кожному етапі користувач може вибрати один з видів транспорту (авто, автобус, літак - випадаючий список), харчування (сніданок, обід, вечеря – checkbоx) та одного з 3-х гідів(використати  - radio buttons).
+        Ціни визначте самі.
+        Підрахувати загальну вартість.
+    </p>
+
+    <div class="container" id="trip"></div>
+
+    <script>
+        class Trip {
+            constructor(transport, food, guides) {
+                this.transport = transport;
+                this.food = food;
+                this.guides = guides;
+            }
+
+            getTransport() {
+                let transport = '';
+
+                for (let i = 0; i < this.transport.length; i++) {
+                    transport += `<option value="${this.transport[i].price}">${this.transport[i].name}</option>`;
+                }
+
+                return transport;
+            }
+
+            getFood() {
+                let food = '';
+
+                for (let i = 0; i < this.food.length; i++) {
+                    food += `<input type="checkbox" name="food" value="${this.food[i].price}">${this.food[i].name}<br>`;
+                }
+
+                return food;
+            }
+
+            getGuides() {
+                let guides = '';
+
+                for (let i = 0; i < this.guides.length; i++) {
+                    guides += `<input type="radio" name="guide" value="${this.guides[i].price}">${this.guides[i].name}<br>`;
+                }
+
+                return guides;
+            }
+
+            getTrip() {
+                return `
+                    <form>
+                        <label for="transport">Транспорт:</label>
+                        <select name="transport" id="transport">
+                            ${this.getTransport()}
+                        </select>
+                        <br>
+                        <label for="food">Харчування:</label>
+                        <br>
+                        ${this.getFood()}
+                        <br>
+                        <label for="guide">Гід:</label>
+                        <br>
+                        ${this.getGuides()}
+                        <br>
+                        <button type="submit">Підрахувати</button>
+                    </form >
+                `;
+            }
+        }
+
+        const trip = new Trip(
+            [
+                { name: 'Авто', price: 100 },
+                { name: 'Автобус', price: 50 },
+                { name: 'Літак', price: 200 }
+            ],
+            [
+                { name: 'Сніданок', price: 10 },
+                { name: 'Обід', price: 20 },
+                { name: 'Вечеря', price: 15 }
+            ],
+            [
+                { name: 'Гід 1', price: 50 },
+                { name: 'Гід 2', price: 100 },
+                { name: 'Гід 3', price: 150 }
+            ]
+        );
+
+        document.getElementById('trip').innerHTML = trip.getTrip();
+
+        // Вирішив не робити це через клас, а через звичайні функції для тренування
+        document.querySelector('form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const transport = document.querySelector('select').value;
+            const food = document.querySelectorAll('input[name="food"]:checked');
+            const guide = document.querySelector('input[name="guide"]:checked').value;
+
+            let foodPrice = 0;
+
+            for (let i = 0; i < food.length; i++) {
+                foodPrice += +food[i].value;
+            }
+
+            const totalPrice = +transport + foodPrice + +guide;
+
+            document.querySelector('form').innerHTML += `<p>Загальна вартість: ${totalPrice}</p>`;
+        });
+    </script>
+</body>
+
+</html>

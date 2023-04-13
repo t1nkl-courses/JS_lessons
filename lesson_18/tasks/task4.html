@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 18 / Задача 4</title>
+</head>
+
+<body>
+    <a href="../index.html">Lesson 18</a> / <a href="./task4.html">Задача 4</a>
+    <hr>
+
+    <h1>Задача 4.</h1>
+
+    <p>
+        Наперед задано у скрипті масив зі списком бажань.
+        Після завантаження сторінки випадковим чином вибираються 3 і відображаються у окремих div (їх треба створити і додати на сторінку)
+    </p>
+
+    <div class="container" id="wish_list"></div>
+
+    <script>
+        const wishes = [
+            '1. Хочу відпочити на морі',
+            '2. Хочу відпочити на горах',
+            '3. Хочу відпочити в лісі',
+            '4. Хочу відпочити в городі',
+            '5. Хочу відпочити в країні',
+            '6. Хочу відпочити в курорті',
+            '7. Хочу відпочити в готелі',
+            '8. Хочу відпочити в квартирі',
+            '9. Хочу відпочити в будинку',
+            '10. Хочу відпочити в котеджі',
+        ];
+
+        class WishList {
+            constructor(wishes) {
+                this.wishes = wishes;
+            }
+
+            render() {
+                const container = document.getElementById('wish_list');
+
+                // треба вибрати 3 випадкові бажання але без повторів
+                const randomWishes = new Set();
+
+                while (randomWishes.size < 3) {
+                    randomWishes.add(this.wishes[Math.floor(Math.random() * this.wishes.length)]);
+                }
+
+                container.innerHTML = [...randomWishes].map(wish => `<div>${wish}</div>`).join('');
+            }
+        }
+
+        window.onload = new WishList(wishes).render();
+    </script>
+</body>
+
+</html>

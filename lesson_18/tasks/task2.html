@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 18 / Задача 2</title>
+</head>
+
+<body>
+    <a href="../index.html">Lesson 18</a> / <a href="./task2.html">Задача 2</a>
+    <hr>
+
+    <h1>Задача 2.</h1>
+
+    <p>
+        Зробити конвертер валют (курси валют – константи у скрипті)
+        <ul>
+            <li>Сума в гривнях - <code>&lt;input type="number" value="0" id="inputMoney"/&gt;</code></li>
+            <li>Конвертувати - <code>&lt;button type="submit"&gt;Конвертувати&lt;/button&gt;</code></li>
+            <li>Сума в євро - <code>&lt;input type="number" value="0" id="outputMoneyDollar"/&gt;</code></li>
+            <li>Сума в доларах - <code>&lt;input type="number" value="0" id="outputMoneyEuro"/&gt;</code></li>
+        </ul>
+    </p>
+
+    <div class="container" id="converter"></div>
+
+    <script>
+        const DOLLAR_RATE = 27.5;
+        const EURO_RATE = 32.5;
+
+        class Converter {
+            constructor(inputMoney = 0) {
+                this.inputMoney = inputMoney;
+            }
+
+            convertToDollar() {
+                return this.inputMoney * DOLLAR_RATE;
+            }
+
+            convertToEuro() {
+                return this.inputMoney * EURO_RATE;
+            }
+
+            // Тут вирішив використовувати властивість Element класу setAttribute
+            // У задачі 1 використав властивості HTMLImputElement класу
+            // У задачі 3 використав цілу шмачину коду через innerHTML
+            render() {
+                const container = document.getElementById('converter');
+
+                const inputMoneyDiv = document.createElement('div');
+                const inputMoneyLabel = document.createElement('label');
+                inputMoneyLabel.innerText = 'Сума в гривнях';
+                const inputMoneyInput = document.createElement('input');
+                inputMoneyInput.setAttribute('type', 'number');
+                inputMoneyInput.setAttribute('value', this.inputMoney);
+                inputMoneyInput.setAttribute('id', 'inputMoney');
+                inputMoneyDiv.appendChild(inputMoneyLabel);
+                inputMoneyDiv.appendChild(inputMoneyInput);
+
+                const inputMoneyBr = document.createElement('br');
+
+                const convertButton = document.createElement('button');
+                convertButton.setAttribute('type', 'submit');
+                convertButton.innerText = 'Конвертувати';
+
+                const convertButtonHr = document.createElement('hr');
+
+                const outputMoneyDiv = document.createElement('div');
+                const outputMoneyDollarLabel = document.createElement('label');
+                outputMoneyDollarLabel.innerText = 'Сума в доларах';
+                const outputMoneyDollarInput = document.createElement('input');
+                outputMoneyDollarInput.setAttribute('type', 'number');
+                outputMoneyDollarInput.setAttribute('value', this.convertToDollar());
+                outputMoneyDollarInput.setAttribute('id', 'outputMoneyDollar');
+                outputMoneyDollarInput.setAttribute('readonly', 'readonly');
+                outputMoneyDiv.appendChild(outputMoneyDollarLabel);
+                outputMoneyDiv.appendChild(outputMoneyDollarInput);
+
+                const outputMoneyBr = document.createElement('br');
+                outputMoneyDiv.appendChild(outputMoneyBr);
+
+                const outputMoneyEuroLabel = document.createElement('label');
+                outputMoneyEuroLabel.innerText = 'Сума в євро';
+                const outputMoneyEuroInput = document.createElement('input');
+                outputMoneyEuroInput.setAttribute('type', 'number');
+                outputMoneyEuroInput.setAttribute('value', this.convertToEuro());
+                outputMoneyEuroInput.setAttribute('id', 'outputMoneyEuro');
+                outputMoneyEuroInput.setAttribute('readonly', 'readonly');
+                outputMoneyDiv.appendChild(outputMoneyEuroLabel);
+                outputMoneyDiv.appendChild(outputMoneyEuroInput);
+
+                container.appendChild(inputMoneyDiv);
+                container.appendChild(inputMoneyBr);
+                container.appendChild(convertButton);
+                container.appendChild(convertButtonHr);
+                container.appendChild(outputMoneyDiv);
+
+                convertButton.addEventListener('click', () => {
+                    const inputMoney = document.getElementById('inputMoney');
+                    const outputMoneyDollar = document.getElementById('outputMoneyDollar');
+                    const outputMoneyEuro = document.getElementById('outputMoneyEuro');
+
+                    outputMoneyDollar.value = inputMoney.value * DOLLAR_RATE;
+                    outputMoneyEuro.value = inputMoney.value * EURO_RATE;
+                });
+            }
+        }
+
+        const converter = new Converter();
+        converter.render();
+    </script>
+</body>
+
+</html>
