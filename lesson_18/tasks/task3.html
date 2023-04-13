@@ -18,7 +18,41 @@
         Користувач задає рік народження. Визначити кількість років користувача.
     </p>
 
+    <div class="container" id="user_age"></div>
+
     <script>
+        class UserAge {
+            constructor(birthYear = new Date().getFullYear()) {
+                this.birthYear = birthYear;
+            }
+
+            getAge() {
+                return new Date().getFullYear() - this.birthYear;
+            }
+
+            // Тут вирішив використовувати цілу шмачину коду через innerHTML
+            // У задачі 1 використав властивості HTMLImputElement класу
+            // У задачі 2 використав властивість Element класу setAttribute
+            render() {
+                const container = document.getElementById('user_age');
+
+                container.innerHTML = `
+                    <p>Ваш рік народження: <input type="number" value="${this.birthYear}" id="birthYear"/></p>
+                    <p>Ваш вік: <input type="number" value="${this.getAge()}" id="age" disabled/></p>
+                `;
+
+                const birthYearInput = document.getElementById('birthYear');
+                const ageInput = document.getElementById('age');
+
+                birthYearInput.addEventListener('input', () => {
+                    this.birthYear = birthYearInput.value;
+                    ageInput.value = this.getAge();
+                });
+            }
+        }
+
+        const userAge = new UserAge();
+        userAge.render();
     </script>
 </body>
 

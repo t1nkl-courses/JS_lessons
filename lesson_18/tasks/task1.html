@@ -27,7 +27,136 @@
         </ul>
     </p>
 
+    <div class="container" id="calculator"></div>
+
     <script>
+        class Calculator {
+            constructor(firstNumber = 0, secondNumber = 0) {
+                this.firstNumber = firstNumber;
+                this.secondNumber = secondNumber;
+            }
+
+            add() {
+                return this.firstNumber + this.secondNumber;
+            }
+
+            subtract() {
+                return this.firstNumber - this.secondNumber;
+            }
+
+            multiply() {
+                return this.firstNumber * this.secondNumber;
+            }
+
+            divide() {
+                if (this.secondNumber === 0) {
+                    alert('На нуль ділити не можна!');
+
+                    return 0;
+                }
+
+                return this.firstNumber / this.secondNumber;
+            }
+
+            addEventListeners(addButton, subtractButton, multiplyButton, divideButton) {
+                addButton.addEventListener('click', () => {
+                    this.firstNumber = Number(firstNumber.value);
+                    this.secondNumber = Number(secondNumber.value);
+                    result.value = this.add();
+                });
+
+                subtractButton.addEventListener('click', () => {
+                    this.firstNumber = Number(firstNumber.value);
+                    this.secondNumber = Number(secondNumber.value);
+                    result.value = this.subtract();
+                });
+
+                multiplyButton.addEventListener('click', () => {
+                    this.firstNumber = Number(firstNumber.value);
+                    this.secondNumber = Number(secondNumber.value);
+                    result.value = this.multiply();
+                });
+
+                divideButton.addEventListener('click', () => {
+                    this.firstNumber = Number(firstNumber.value);
+                    this.secondNumber = Number(secondNumber.value);
+                    result.value = this.divide();
+                });
+            }
+
+            // Тут вирішив використовувати властивості HTMLImputElement класу
+            // У задачі 2 використав властивість Element класу setAttribute
+            // У задачі 3 використав цілу шмачину коду через innerHTML
+            render() {
+                const container = document.getElementById('calculator');
+
+                const firstNumberDiv = document.createElement('div');
+                const firstNumberLabel = document.createElement('label');
+                firstNumberLabel.innerText = 'First number - ';
+                const firstNumber = document.createElement('input');
+                firstNumber.type = 'number';
+                firstNumber.value = 0;
+                firstNumber.id = 'firstNumber';
+                firstNumberDiv.appendChild(firstNumberLabel);
+                firstNumberDiv.appendChild(firstNumber);
+
+                const secondNumberDiv = document.createElement('div');
+                const secondNumberLabel = document.createElement('label');
+                secondNumberLabel.innerText = 'Second number - ';
+                const secondNumber = document.createElement('input');
+                secondNumber.type = 'number';
+                secondNumber.value = 0;
+                secondNumber.id = 'secondNumber';
+                secondNumberDiv.appendChild(secondNumberLabel);
+                secondNumberDiv.appendChild(secondNumber);
+                
+                const addButton = document.createElement('button');
+                addButton.type = 'submit';
+                addButton.innerText = 'Add';
+                addButton.id = 'addButton';
+
+                const subtractButton = document.createElement('button');
+                subtractButton.type = 'submit';
+                subtractButton.innerText = 'Subtract';
+                subtractButton.id = 'subtractButton';
+
+                const multiplyButton = document.createElement('button');
+                multiplyButton.type = 'submit';
+                multiplyButton.innerText = 'Multiply';
+                multiplyButton.id = 'multiplyButton';
+
+                const divideButton = document.createElement('button');
+                divideButton.type = 'submit';
+                divideButton.innerText = 'Divide';
+
+                const hr = document.createElement('hr');
+
+                const resultDiv = document.createElement('div');
+                const resultLabel = document.createElement('label');
+                resultLabel.innerText = 'Result - ';
+                const result = document.createElement('input');
+                result.type = 'number';
+                result.value = 0;
+                result.id = 'result';
+                result.readOnly = true;
+                resultDiv.appendChild(resultLabel);
+                resultDiv.appendChild(result);
+
+                container.appendChild(firstNumberDiv);
+                container.appendChild(secondNumberDiv);
+                container.appendChild(addButton);
+                container.appendChild(subtractButton);
+                container.appendChild(multiplyButton);
+                container.appendChild(divideButton);
+                container.appendChild(hr);
+                container.appendChild(resultDiv);
+                
+                this.addEventListeners(addButton, subtractButton, multiplyButton, divideButton);
+            }
+        }
+
+        const calculator = new Calculator();
+        calculator.render();
     </script>
 </body>
 

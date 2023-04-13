@@ -18,7 +18,43 @@
         Відобразити таблицю 3*4 з випадковими числами (її треба динамічно створити і вставити на сторінку)
     </p>
 
+    <div class="container" id="table"></div>
+
     <script>
+        class Table {
+            constructor(rows, cols) {
+                this.rows = rows;
+                this.cols = cols;
+            }
+
+            getRows() {
+                let rows = '';
+
+                for (let i = 0; i < this.rows; i++) {
+                    rows += `<tr>${this.getCells()}</tr>`;
+                }
+
+                return rows;
+            }
+
+            getCells() {
+                let cells = '';
+
+                for (let i = 0; i < this.cols; i++) {
+                    cells += `<td>${Math.floor(Math.random() * 100)}</td>`;
+                }
+
+                return cells;
+            }
+
+            render() {
+                const container = document.getElementById('table');
+
+                container.innerHTML = `<table>${this.getRows()}</table>`;
+            }
+        }
+
+        window.onload = new Table(3, 4).render();
     </script>
 </body>
 
