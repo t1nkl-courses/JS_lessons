@@ -6,6 +6,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Lesson 19 / Задача 5</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .container {
+            width: 100%;
+        }
+
+        .tank {
+            width: 100px;
+            height: 100px;
+            background-color: green;
+            position: absolute;
+            transition: top 1s;
+        }
+
+        /* create explosion animation */
+
+        .tank--exploded {
+            background-color: red;
+        }
+
+        .tank--exploded::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+            border-radius: 50%;
+            animation: explosion 1s;
+        }
+
+        @keyframes explosion {
+            0% {
+                width: 100px;
+                height: 100px;
+            }
+
+            50% {
+                width: 200px;
+                height: 200px;
+            }
+
+            100% {
+                width: 300px;
+                height: 300px;
+                opacity: 0;
+            }
+        }
+
+        .tank--exploded::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+            border-radius: 50%;
+            animation: explosion 1s;
+        }
+
+        .score {
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-size: 100px;
+            color: red;
+        }
+    </style>
 </head>
 
 <body>
@@ -23,6 +97,170 @@
     <div class="container" id="task"></div>
 
     <script>
+        class Tank {
+            constructor() {
+                this.element = document.createElement('div');
+                this.element.classList.add('tank');
+                this.element.style.top = '0px';
+                this.element.style.left = `${Math.floor(Math.random() * 1000)}px`;
+                this.element.addEventListener('click', () => {
+                    this.explode();
+                    this.incrementScore();
+                });
+            }
+
+            explode() {
+                this.element.classList.add('tank--exploded');
+                setTimeout(() => {
+                    this.element.remove();
+                }, 1000);
+            }
+
+            incrementScore() {
+                game.score.increment();
+            }
+
+            render() {
+                return this.element;
+            }
+
+            move() {
+                this.element.style.top = `${parseInt(this.element.style.top) + 10}px`;
+            }
+
+            destroy() {
+                this.element.remove();
+            }
+        }
+
+        class TankGenerator {
+            constructor() {
+                this.tanks = [];
+                this.interval = setInterval(() => {
+                    this.generate();
+                }, 1000);
+            }
+
+            generate() {
+                const tank = new Tank();
+                this.tanks.push(tank);
+                document.getElementById('task').appendChild(tank.render());
+            }
+
+            destroy() {
+                clearInterval(this.interval);
+            }
+
+            render() {
+                return this.tanks.map(tank => tank.render());
+            }
+        }
+
+        class Score {
+            constructor() {
+                this.score = 0;
+                this.element = document.createElement('div');
+                this.element.classList.add('score');
+                this.element.innerHTML = this.score;
+            }
+
+            increment() {
+                this.score++;
+                this.element.innerHTML = this.score;
+            }
+
+            render() {
+                return this.element;
+            }
+        }
+
+        class Game {
+            constructor() {
+                this.tankGenerator = new TankGenerator();
+                this.score = new Score();
+                this.interval = setInterval(() => {
+                    this.tankGenerator.tanks.forEach(tank => {
+                        tank.move();
+                        if (parseInt(tank.element.style.top) >= window.innerHeight) {
+                            tank.destroy();
+                            this.gameLost();
+                        }
+                    });
+                }, 100);
+            }
+
+            destroy() {
+                clearInterval(this.interval);
+                this.tankGenerator.destroy();
+            }
+
+            render() {
+                return [
+                    ...this.tankGenerator.render(),
+                    this.score.render()
+                ];
+            }
+
+            start() {
+                document.getElementById('task').innerHTML = '';
+                this.tankGenerator.tanks.forEach(tank => tank.destroy());
+                this.tankGenerator.tanks = [];
+                this.score.score = 0;
+                this.score.element.innerHTML = this.score.score;
+                this.interval = setInterval(() => {
+                    this.tankGenerator.tanks.forEach(tank => {
+                        tank.move();
+                        
+                        if (parseInt(tank.element.style.top) >= window.innerHeight) {
+                            tank.destroy();
+                            this.gameLost();
+                        }
+                    });
+
+                    if (this.tankGenerator.tanks.length === 10) {
+                        this.gameWon();
+                    }
+                }, 100);
+            }
+
+            gameLost() {
+                this.destroy();
+                
+                const gameLost = document.createElement('div');
+                gameLost.innerHTML = 'Game lost';
+                gameLost.style.fontSize = '100px';
+                gameLost.style.color = 'red';
+                gameLost.style.position = 'absolute';
+                gameLost.style.top = '0';
+                gameLost.style.left = '0';
+                gameLost.style.width = '100%';
+                gameLost.style.textAlign = 'center';
+                document.getElementById('task').appendChild(gameLost);
+            }
+
+            gameWon() {
+                this.destroy();
+                
+                const gameWon = document.createElement('div');
+                gameWon.innerHTML = 'Game won';
+                gameWon.style.fontSize = '100px';
+                gameWon.style.color = 'green';
+                gameWon.style.position = 'absolute';
+                gameWon.style.top = '0';
+                gameWon.style.left = '0';
+                gameWon.style.width = '100%';
+                gameWon.style.textAlign = 'center';
+                document.getElementById('task').appendChild(gameWon);
+            }
+        }
+
+        const game = new Game();
+        for (let i = 0; i <= 10; i++) {
+            document.getElementById('task').appendChild(game.render()[i]);
+        }
+        document.getElementById('task').addEventListener('click', () => {
+            game.start();
+        });
     </script>
 </body>
 
