@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 19 / Задача 3</title>
+    <style>
+        body {
+            overflow: hidden;
+            background-color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="../index.html">Lesson 19</a> / <a href="./task3.html">Задача 3</a>
+    <hr>
+
+    <h1>Задача 3.</h1>
+
+    <p>
+        Відобразити падаючий сніг.
+        Сніжинка з’являється у верхній частині екрану і з випадковою швидкістю рухається вниз.
+        Як тільки сніжинка досягає нижньої частини екрану вона знову повинна з’явитись у верхній частині екрану.
+    </p>
+
+    <script>
+        class Snowflake {
+            constructor() {
+                this.x = Math.random() * window.innerWidth;
+                this.y = Math.random() * window.innerHeight;
+                this.speed = Math.random() * 10;
+                this.size = Math.random() * 10;
+                this.element = document.createElement('div');
+                this.element.style.position = 'absolute';
+                this.element.style.left = this.x + 'px';
+                this.element.style.top = this.y + 'px';
+                this.element.style.width = this.size + 'px';
+                this.element.style.height = this.size + 'px';
+                this.element.style.backgroundColor = 'rgb(' + Math.floor(Math.random() * 255) + ',' + Math.floor(Math.random() * 255) + ',' + Math.floor(Math.random() * 255) + ')';
+                this.element.style.borderRadius = '50%';
+                this.element.style.zIndex = '100';
+                
+                document.body.appendChild(this.element);
+            }
+
+            move() {
+                this.y += this.speed;
+                this.element.style.top = this.y + 'px';
+                
+                if (this.y > window.innerHeight) {
+                    this.y = 0;
+                }
+            }
+        }
+
+        const SNOWFLAKES_COUNT = Math.floor(Math.random() * 500 + 500);
+        const snowflakes = [];
+        const interval = setInterval(() => {
+            if (snowflakes.length < SNOWFLAKES_COUNT) {
+                snowflakes.push(new Snowflake());
+            }
+        }, 100);
+
+        setInterval(() => {
+            for (let i = 0; i < snowflakes.length; i++) {
+                snowflakes[i].move();
+            }
+        }, 100);
+    </script>
+</body>
+
+</html>

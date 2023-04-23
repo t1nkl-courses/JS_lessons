@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 21 / Задача 6</title>
+</head>
+
+<body>
+    <a href="../index.html">Lesson 21</a> / <a href="./task6.html">Задача 6</a>
+    <hr>
+
+    <h1>Задача 6.</h1>
+
+    <p>
+        Динамічний пошук.
+        Є список працівників і поле пошуку.
+        При введенні відображаються усі, які містять вказаний фрагмент
+    </p>
+
+    <div class="container" id="task"></div>
+
+    <script>
+        class Employee {
+            constructor(name, surname, position, salary) {
+                this.name = name;
+                this.surname = surname;
+                this.position = position;
+                this.salary = salary;
+            }
+        }
+
+        class EmployeeList {
+            constructor() {
+                this.employees = [
+                    new Employee('Ivan', 'Ivanov', 'Developer', 1000),
+                    new Employee('Petro', 'Petrov', 'Developer', 1000),
+                    new Employee('Ivan', 'Petrov', 'Developer', 1000),
+                    new Employee('Petro', 'Ivanov', 'Developer', 1000),
+                    new Employee('Ivan', 'Ivanov', 'Manager', 2000),
+                    new Employee('Petro', 'Petrov', 'Manager', 2000),
+                    new Employee('Ivan', 'Petrov', 'Manager', 2000),
+                    new Employee('Petro', 'Ivanov', 'Manager', 2000),
+                    new Employee('Ivan', 'Ivanov', 'Tester', 3000),
+                    new Employee('Petro', 'Petrov', 'Tester', 3000),
+                    new Employee('Ivan', 'Petrov', 'Tester', 3000),
+                    new Employee('Petro', 'Ivanov', 'Tester', 3000),
+                ];
+            }
+
+            getEmployees() {
+                return this.employees;
+            }
+        }
+
+
+        class EmployeeListSearch {
+            constructor() {
+                this.container = document.createElement('div');
+                this.container.classList.add('container');
+
+                this.searchInput = document.createElement('input');
+                this.searchInput.type = 'text';
+                this.searchInput.placeholder = 'Search...';
+                this.searchInput.addEventListener('input', this.searchInputHandler.bind(this));
+
+                this.employeeList = new EmployeeList();
+
+                this.render();
+            }
+
+            searchInputHandler(event) {
+                const value = event.target.value;
+
+                const employees = this.employeeList.getEmployees();
+
+                const filteredEmployees = employees.filter(employee => {
+                    return employee.name.includes(value) || employee.surname.includes(value) || employee.position.includes(value);
+                });
+
+                const customEvent = new CustomEvent('searchEmployee', {
+                    detail: {
+                        employees: filteredEmployees
+                    }
+                });
+
+                this.container.dispatchEvent(customEvent);
+            }
+
+            render() {
+                this.container.append(this.searchInput);
+            }
+        }
+
+        class EmployeeListSearchResult {
+            constructor() {
+                this.container = document.createElement('div');
+                this.container.classList.add('container');
+
+                this.employeeListSearch = new EmployeeListSearch();
+
+                this.employeeListSearch.container.addEventListener('searchEmployee', this.searchHandler.bind(this));
+
+                this.render();
+            }
+
+            searchHandler(event) {
+                const employees = event.detail.employees;
+
+                this.container.innerHTML = '';
+
+                employees.forEach(employee => {
+                    const employeeContainer = document.createElement('div');
+                    employeeContainer.classList.add('employee');
+
+                    const name = document.createElement('div');
+                    name.classList.add('name');
+                    name.innerText = employee.name;
+
+                    const surname = document.createElement('div');
+                    surname.classList.add('surname');
+                    surname.innerText = employee.surname;
+
+                    const position = document.createElement('div');
+                    position.classList.add('position');
+                    position.innerText = employee.position;
+
+                    const salary = document.createElement('div');
+                    salary.classList.add('salary');
+                    salary.innerText = employee.salary;
+
+                    employeeContainer.append(name, surname, position, salary);
+
+                    this.container.append(employeeContainer);
+                });
+            }
+
+            render() {
+                this.container.append(this.employeeListSearch.container);
+            }
+        }
+
+        const employeeListSearchResult = new EmployeeListSearchResult();
+        document.getElementById('task').append(employeeListSearchResult.container);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 21 / Задача 5</title>
+</head>
+
+<body>
+    <a href="../index.html">Lesson 21</a> / <a href="./task5.html">Задача 5</a>
+    <hr>
+
+    <h1>Задача 5.</h1>
+
+    <p>
+        На формі вводять 7 числових значень (вік, зріст, вага, заробітна плата, стаж, номер відділу, порядковий номер).
+        Додати подію обробки події click на форму і якщо клік на input, то автоматично замінювати значення його на 0.
+    </p>
+
+    <script>
+        class Form {
+            constructor() {
+                this.form = document.createElement('form');
+                this.form.setAttribute('action', '#');
+                this.form.setAttribute('method', 'get');
+                this.form.setAttribute('name', 'form');
+                this.form.setAttribute('id', 'form');
+                this.form.setAttribute('onsubmit', 'return false;');
+
+                this.form.addEventListener('click', this.onClick);
+
+                this.form.appendChild(this.createInput('Вік', 'age'));
+                this.form.appendChild(this.createInput('Зріст', 'height'));
+                this.form.appendChild(this.createInput('Вага', 'weight'));
+                this.form.appendChild(this.createInput('Заробітна плата', 'salary'));
+                this.form.appendChild(this.createInput('Стаж', 'experience'));
+                this.form.appendChild(this.createInput('Номер відділу', 'department'));
+                this.form.appendChild(this.createInput('Порядковий номер', 'number'));
+
+                document.body.appendChild(this.form);
+            }
+
+            createInput(labelText, inputName) {
+                const label = document.createElement('label');
+                label.setAttribute('for', inputName);
+                label.innerText = labelText;
+
+                const input = document.createElement('input');
+                input.setAttribute('type', 'number');
+                input.setAttribute('name', inputName);
+                input.setAttribute('id', inputName);
+
+                const div = document.createElement('div');
+                div.appendChild(label);
+                div.appendChild(input);
+
+                return div;
+            }
+
+            onClick(event) {
+                if (event.target.tagName === 'INPUT') {
+                    event.target.value = 0;
+                }
+            }
+        }
+
+        const form = new Form();
+    </script>
+</body>
+
+</html>
