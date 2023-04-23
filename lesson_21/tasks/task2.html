@@ -16,10 +16,64 @@
 
     <p>
         Дано 5 елементів input.
-        При введенні значення у якийсь із них необхідно автоматично заповнювати інші (усі попередні у спадному порядку(кожен попередній має значення на 1 менше за наступний), усі наступні на 1 більше (кожен наступне на 1 більше за попереднього)
+        При введенні значення у якийсь із них необхідно автоматично заповнювати інші (усі попередні у спадному
+        порядку(кожен попередній має значення на 1 менше за наступний), усі наступні на 1 більше (кожен наступне на 1
+        більше за попереднього)
     </p>
 
+    <div class="container" id="task"></div>
+
     <script>
+        class Input {
+            constructor() {
+                this.input = document.createElement('input');
+                this.input.type = 'number';
+                this.input.addEventListener('input', this.inputHandler.bind(this));
+            }
+
+            inputHandler(event) {
+                const value = event.target.value;
+
+                const inputs = document.querySelectorAll('input');
+                const index = Array.from(inputs).indexOf(event.target);
+
+                for (let i = 0; i < inputs.length; i++) {
+                    if (i < index) {
+                        inputs[i].value = value - (index - i);
+                    } else if (i > index) {
+                        inputs[i].value = value - (index - i);
+                    }
+                }
+            }
+
+            render() {
+                return this.input;
+            }
+        }
+
+        class Task {
+            constructor() {
+                this.container = document.createElement('div');
+                this.container.classList.add('container');
+
+                this.inputs = [];
+
+                for (let i = 0; i < 5; i++) {
+                    this.inputs.push(new Input());
+                }
+
+                this.inputs.forEach(input => {
+                    this.container.appendChild(input.render());
+                });
+            }
+
+            render() {
+                return this.container;
+            }
+        }
+
+        const task = new Task();
+        document.getElementById('task').appendChild(task.render());
     </script>
 </body>
 

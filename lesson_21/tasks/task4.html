@@ -16,10 +16,64 @@
 
     <p>
         Дано 3 таблиці розмірності 3*3 з випадковими числами.
-        Якщо відбувається клік на якійсь із клітинок, то до відповідної таблиці додається червона рамка (спробуйте додати можливість відображення кількості кліків біля назви таблиці з використанням відповідно доданого для цього атрибута).
+        Якщо відбувається клік на якійсь із клітинок, то до відповідної таблиці додається червона рамка (спробуйте
+        додати можливість відображення кількості кліків біля назви таблиці з використанням відповідно доданого для цього
+        атрибута).
     </p>
 
     <script>
+        class Table {
+            constructor(id, name) {
+                this.id = id;
+                this.name = name;
+                this.clicks = 0;
+            }
+
+            createTable() {
+                const table = document.createElement('table');
+                table.setAttribute('id', this.id);
+                table.setAttribute('border', '1');
+                table.setAttribute('cellspacing', '0');
+                table.setAttribute('cellpadding', '5');
+                table.setAttribute('style', 'border-collapse: collapse;');
+
+                const caption = document.createElement('caption');
+                caption.innerHTML = this.name;
+                table.appendChild(caption);
+
+                for (let i = 0; i < 3; i++) {
+                    const tr = document.createElement('tr');
+
+                    for (let j = 0; j < 3; j++) {
+                        const td = document.createElement('td');
+                        td.innerHTML = Math.floor(Math.random() * 100);
+                        tr.appendChild(td);
+                    }
+
+                    table.appendChild(tr);
+                }
+
+                table.addEventListener('click', (event) => {
+                    const target = event.target;
+
+                    if (target.tagName === 'TD') {
+                        this.clicks++;
+                        target.style.border = '1px solid red';
+                        caption.innerHTML = this.name + ' (' + this.clicks + ')';
+                    }
+                });
+
+                return table;
+            }
+        }
+
+        const table1 = new Table('table1', 'Table 1');
+        const table2 = new Table('table2', 'Table 2');
+        const table3 = new Table('table3', 'Table 3');
+
+        document.body.appendChild(table1.createTable());
+        document.body.appendChild(table2.createTable());
+        document.body.appendChild(table3.createTable());
     </script>
 </body>
 

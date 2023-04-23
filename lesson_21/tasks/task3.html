@@ -15,11 +15,41 @@
     <h1>Задача 3.</h1>
 
     <p>
-        Дано 5 випадковим чином згенерованих нумерованих списків з рандомними числами (кількість елементів у списку випадкова від 1 до 10, елементи випадкові – від 1 до 100).
-        При натисненні на кнопку нумеровані списки з парною кількістю елементів зафарбувати у зелений колір, інші у червоний.
+        Дано 5 випадковим чином згенерованих нумерованих списків з рандомними числами (кількість елементів у списку
+        випадкова від 1 до 10, елементи випадкові – від 1 до 100).
+        При натисненні на кнопку нумеровані списки з парною кількістю елементів зафарбувати у зелений колір, інші у
+        червоний.
     </p>
 
+    <div class="container" id="task"></div>
+
     <script>
+        const container = document.getElementById('task');
+        const button = document.createElement('button');
+        button.innerText = 'Змінити колір списків';
+        container.appendChild(button);
+
+        const lists = Array.from({ length: 5 }, () => {
+            const list = document.createElement('ol');
+            const listLength = Math.floor(Math.random() * 10) + 1;
+            const items = Array.from({ length: listLength }, () => {
+                const item = document.createElement('li');
+                item.innerText = Math.floor(Math.random() * 100) + 1;
+                return item;
+            });
+            list.append(...items);
+            
+            return list;
+        });
+
+        container.append(...lists);
+
+        button.addEventListener('click', () => {
+            lists.forEach(list => {
+                const color = list.children.length % 2 === 0 ? 'green' : 'red';
+                list.style.color = color;
+            });
+        });
     </script>
 </body>
 

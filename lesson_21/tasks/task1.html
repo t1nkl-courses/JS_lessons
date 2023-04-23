@@ -19,7 +19,29 @@
         При кліку на якийсь із них усі наступні повинні бути зафарбовані у червоний колір.
     </p>
 
+    <div class="container" id="task"></div>
+
     <script>
+        const container = document.getElementById('task');
+        const divs = [];
+        
+        for (let i = 0; i < 10; i++) {
+            divs[i] = document.createElement('div');
+            divs[i].innerHTML = 'Hello!';
+            divs[i].style.color = 'black';
+            divs[i].style.margin = '10px';
+            divs[i].style.padding = '10px';
+            divs[i].style.border = '1px solid black';
+            divs[i].style.display = 'inline-block';
+            
+            divs[i].onclick = function () {
+                for (let j = i; j < 10; j++) {
+                    divs[j].style.color = 'red';
+                }
+            }
+            
+            container.appendChild(divs[i]);
+        }
     </script>
 </body>
 
