@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 19 / Задача 5</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .container {
+            width: 100%;
+        }
+
+        .tank {
+            width: 100px;
+            height: 100px;
+            background-color: green;
+            position: absolute;
+            transition: top 1s;
+        }
+
+        /* create explosion animation */
+
+        .tank--exploded {
+            background-color: red;
+        }
+
+        .tank--exploded::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+            border-radius: 50%;
+            animation: explosion 1s;
+        }
+
+        @keyframes explosion {
+            0% {
+                width: 100px;
+                height: 100px;
+            }
+
+            50% {
+                width: 200px;
+                height: 200px;
+            }
+
+            100% {
+                width: 300px;
+                height: 300px;
+                opacity: 0;
+            }
+        }
+
+        .tank--exploded::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+            border-radius: 50%;
+            animation: explosion 1s;
+        }
+
+        .score {
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-size: 100px;
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="../index.html">Lesson 19</a> / <a href="./task5.html">Задача 5</a>
+    <hr>
+
+    <h1>Задача 5.</h1>
+
+    <p>
+        Байрактар.
+        З верхньої частини екрану у випадковій позиції по горизонталі з’являються танки, які їдуть вниз.
+        При кліку на танк він вибухає і зникає з екрану.
+    </p>
+
+    <div class="container" id="task"></div>
+
+    <script>
+        // Tank class
+        class Tank {
+            constructor() {
+                this.div = document.createElement("div");
+                this.div.className = "tank";
+                this.div.style.left = Math.floor(Math.random() * 90) + "vw";
+                this.div.addEventListener("click", this.explode.bind(this));
+                document.body.appendChild(this.div);
+            }
+
+            move() {
+                let top = parseInt(this.div.style.top) || 0;
+                top += 5;
+                this.div.style.top = top + "px";
+                if (top > window.innerHeight - 100) {
+                    game.gameLost();
+                    this.destroy();
+                }
+            }
+
+            explode() {
+                game.score.increment();
+                this.destroy();
+                if (game.score.value === 10) {
+                    game.gameWon();
+                }
+            }
+
+            destroy() {
+                this.div.remove();
+                game.tanks.splice(game.tanks.indexOf(this), 1);
+            }
+        }
+
+        // TankGenerator class
+        class TankGenerator {
+            constructor() {
+                this.tanks = [];
+                this.interval = setInterval(this.generate.bind(this), 1000);
+            }
+
+            generate() {
+                if (this.tanks.length < 20) { // Limit to 20 tanks
+                    let tank = new Tank();
+                    this.tanks.push(tank);
+                } else {
+                    game.gameLost();
+                }
+            }
+        }
+
+        // Score class
+        class Score {
+            constructor() {
+                this.value = 0;
+                this.div = document.createElement("div");
+                this.div.className = "score";
+                document.body.appendChild(this.div);
+            }
+
+            increment() {
+                this.value++;
+                this.div.innerHTML = `Score: ${this.value}`;
+            }
+        }
+
+        // Game class
+        class Game {
+            constructor() {
+                this.tankGenerator = new TankGenerator();
+                this.score = new Score();
+                this.timer = setInterval(this.moveTanks.bind(this), 100);
+                this.gameOver = false;
+                this.maxTanks = 20; // Maximum number of tanks
+                this.tanksDestroyed = 0; // Number of tanks destroyed
+            }
+
+            moveTanks() {
+                if (!this.gameOver) {
+                    this.tankGenerator.tanks.forEach((tank) => tank.move());
+                }
+            }
+
+            gameLost() {
+                clearInterval(this.timer);
+                this.gameOver = true;
+                alert(`Game over! You lost. You destroyed ${this.tanksDestroyed} tanks.`);
+                this.reset();
+            }
+
+            gameWon() {
+                clearInterval(this.timer);
+                this.gameOver = true;
+                alert(`Congratulations! You won! You destroyed ${this.tanksDestroyed} tanks.`);
+                this.reset();
+            }
+
+            reset() {
+                this.tankGenerator.tanks.forEach((tank) => tank.destroy());
+                this.tankGenerator.tanks = [];
+                this.score.value = 0;
+                this.score.div.innerHTML = `Score: ${this.score.value}`;
+                this.tanksDestroyed = 0;
+            }
+        }
+
+        // Start game on click
+        document.addEventListener("click", () => {
+            game = new Game();
+        });
+
+    </script>
+</body>
+
+</html>
