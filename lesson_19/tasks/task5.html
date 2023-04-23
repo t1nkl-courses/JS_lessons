@@ -97,170 +97,117 @@
     <div class="container" id="task"></div>
 
     <script>
+        // Tank class
         class Tank {
             constructor() {
-                this.element = document.createElement('div');
-                this.element.classList.add('tank');
-                this.element.style.top = '0px';
-                this.element.style.left = `${Math.floor(Math.random() * 1000)}px`;
-                this.element.addEventListener('click', () => {
-                    this.explode();
-                    this.incrementScore();
-                });
-            }
-
-            explode() {
-                this.element.classList.add('tank--exploded');
-                setTimeout(() => {
-                    this.element.remove();
-                }, 1000);
-            }
-
-            incrementScore() {
-                game.score.increment();
-            }
-
-            render() {
-                return this.element;
+                this.div = document.createElement("div");
+                this.div.className = "tank";
+                this.div.style.left = Math.floor(Math.random() * 90) + "vw";
+                this.div.addEventListener("click", this.explode.bind(this));
+                document.body.appendChild(this.div);
             }
 
             move() {
-                this.element.style.top = `${parseInt(this.element.style.top) + 10}px`;
+                let top = parseInt(this.div.style.top) || 0;
+                top += 5;
+                this.div.style.top = top + "px";
+                if (top > window.innerHeight - 100) {
+                    game.gameLost();
+                    this.destroy();
+                }
+            }
+
+            explode() {
+                game.score.increment();
+                this.destroy();
+                if (game.score.value === 10) {
+                    game.gameWon();
+                }
             }
 
             destroy() {
-                this.element.remove();
+                this.div.remove();
+                game.tanks.splice(game.tanks.indexOf(this), 1);
             }
         }
 
+        // TankGenerator class
         class TankGenerator {
             constructor() {
                 this.tanks = [];
-                this.interval = setInterval(() => {
-                    this.generate();
-                }, 1000);
+                this.interval = setInterval(this.generate.bind(this), 1000);
             }
 
             generate() {
-                const tank = new Tank();
-                this.tanks.push(tank);
-                document.getElementById('task').appendChild(tank.render());
-            }
-
-            destroy() {
-                clearInterval(this.interval);
-            }
-
-            render() {
-                return this.tanks.map(tank => tank.render());
+                if (this.tanks.length < 20) { // Limit to 20 tanks
+                    let tank = new Tank();
+                    this.tanks.push(tank);
+                } else {
+                    game.gameLost();
+                }
             }
         }
 
+        // Score class
         class Score {
             constructor() {
-                this.score = 0;
-                this.element = document.createElement('div');
-                this.element.classList.add('score');
-                this.element.innerHTML = this.score;
+                this.value = 0;
+                this.div = document.createElement("div");
+                this.div.className = "score";
+                document.body.appendChild(this.div);
             }
 
             increment() {
-                this.score++;
-                this.element.innerHTML = this.score;
-            }
-
-            render() {
-                return this.element;
+                this.value++;
+                this.div.innerHTML = `Score: ${this.value}`;
             }
         }
 
+        // Game class
         class Game {
             constructor() {
                 this.tankGenerator = new TankGenerator();
                 this.score = new Score();
-                this.interval = setInterval(() => {
-                    this.tankGenerator.tanks.forEach(tank => {
-                        tank.move();
-                        if (parseInt(tank.element.style.top) >= window.innerHeight) {
-                            tank.destroy();
-                            this.gameLost();
-                        }
-                    });
-                }, 100);
+                this.timer = setInterval(this.moveTanks.bind(this), 100);
+                this.gameOver = false;
+                this.maxTanks = 20; // Maximum number of tanks
+                this.tanksDestroyed = 0; // Number of tanks destroyed
             }
 
-            destroy() {
-                clearInterval(this.interval);
-                this.tankGenerator.destroy();
-            }
-
-            render() {
-                return [
-                    ...this.tankGenerator.render(),
-                    this.score.render()
-                ];
-            }
-
-            start() {
-                document.getElementById('task').innerHTML = '';
-                this.tankGenerator.tanks.forEach(tank => tank.destroy());
-                this.tankGenerator.tanks = [];
-                this.score.score = 0;
-                this.score.element.innerHTML = this.score.score;
-                this.interval = setInterval(() => {
-                    this.tankGenerator.tanks.forEach(tank => {
-                        tank.move();
-                        
-                        if (parseInt(tank.element.style.top) >= window.innerHeight) {
-                            tank.destroy();
-                            this.gameLost();
-                        }
-                    });
-
-                    if (this.tankGenerator.tanks.length === 10) {
-                        this.gameWon();
-                    }
-                }, 100);
+            moveTanks() {
+                if (!this.gameOver) {
+                    this.tankGenerator.tanks.forEach((tank) => tank.move());
+                }
             }
 
             gameLost() {
-                this.destroy();
-                
-                const gameLost = document.createElement('div');
-                gameLost.innerHTML = 'Game lost';
-                gameLost.style.fontSize = '100px';
-                gameLost.style.color = 'red';
-                gameLost.style.position = 'absolute';
-                gameLost.style.top = '0';
-                gameLost.style.left = '0';
-                gameLost.style.width = '100%';
-                gameLost.style.textAlign = 'center';
-                document.getElementById('task').appendChild(gameLost);
+                clearInterval(this.timer);
+                this.gameOver = true;
+                alert(`Game over! You lost. You destroyed ${this.tanksDestroyed} tanks.`);
+                this.reset();
             }
 
             gameWon() {
-                this.destroy();
-                
-                const gameWon = document.createElement('div');
-                gameWon.innerHTML = 'Game won';
-                gameWon.style.fontSize = '100px';
-                gameWon.style.color = 'green';
-                gameWon.style.position = 'absolute';
-                gameWon.style.top = '0';
-                gameWon.style.left = '0';
-                gameWon.style.width = '100%';
-                gameWon.style.textAlign = 'center';
-                document.getElementById('task').appendChild(gameWon);
+                clearInterval(this.timer);
+                this.gameOver = true;
+                alert(`Congratulations! You won! You destroyed ${this.tanksDestroyed} tanks.`);
+                this.reset();
+            }
+
+            reset() {
+                this.tankGenerator.tanks.forEach((tank) => tank.destroy());
+                this.tankGenerator.tanks = [];
+                this.score.value = 0;
+                this.score.div.innerHTML = `Score: ${this.score.value}`;
+                this.tanksDestroyed = 0;
             }
         }
 
-        const game = new Game();
-        for (let i = 0; i <= 10; i++) {
-            document.getElementById('task').appendChild(game.render()[i]);
-        }
-        document.getElementById('task').addEventListener('click', () => {
-            game.start();
+        // Start game on click
+        document.addEventListener("click", () => {
+            game = new Game();
         });
+
     </script>
 </body>
 
