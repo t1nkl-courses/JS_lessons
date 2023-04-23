@@ -5,71 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Lesson 19 / Задача 4</title>
+    <title>Lesson 21 / Задача 4</title>
 </head>
 
 <body>
-    <a href="../index.html">Lesson 19</a> / <a href="./task4.html">Задача 4</a>
+    <a href="../index.html">Lesson 21</a> / <a href="./task4.html">Задача 4</a>
     <hr>
 
     <h1>Задача 4.</h1>
 
     <p>
-        Сяючі зорі.
-        Вказана кількість зірочок повинна з’являтися у випадковій частині екрану.
-        Кожна зірка з певним кроком і інтервалом збільшується від мінімального до максимального розміру.
-        Як тільки досягнути максимального розміру зірочка повинна з’являтися у іншій випадковій позиції.
+        Дано 3 таблиці розмірності 3*3 з випадковими числами.
+        Якщо відбувається клік на якійсь із клітинок, то до відповідної таблиці додається червона рамка (спробуйте додати можливість відображення кількості кліків біля назви таблиці з використанням відповідно доданого для цього атрибута).
     </p>
 
-    <div class="container" id="task"></div>
-
     <script>
-        class Star {
-            constructor() {
-                this.x = Math.random() * window.innerWidth;
-                this.y = Math.random() * window.innerHeight;
-                this.size = Math.random() * 10;
-                this.element = document.createElement('div');
-                this.element.style.position = 'absolute';
-                this.element.style.left = this.x + 'px';
-                this.element.style.top = this.y + 'px';
-                this.element.style.width = this.size + 'px';
-                this.element.style.height = this.size + 'px';
-                this.element.style.backgroundColor = 'black';
-                this.element.style.borderRadius = '50%';
-                this.element.style.zIndex = '100';
-                
-                document.body.appendChild(this.element);
-            }
-
-            move() {
-                this.size += 1;
-                this.element.style.width = this.size + 'px';
-                this.element.style.height = this.size + 'px';
-                
-                if (this.size > 100) {
-                    this.size = 0;
-                    this.x = Math.random() * window.innerWidth;
-                    this.y = Math.random() * window.innerHeight;
-                    this.element.style.left = this.x + 'px';
-                    this.element.style.top = this.y + 'px';
-                }
-            }
-        }
-
-        const STARS_COUNT = Math.floor(Math.random() * 200 + 300);
-        const stars = [];
-        const interval = setInterval(() => {
-            if (stars.length < STARS_COUNT) {
-                stars.push(new Star());
-            }
-        }, 100);
-
-        setInterval(() => {
-            for (let i = 0; i < stars.length; i++) {
-                stars[i].move();
-            }
-        }, 100);
     </script>
 </body>
 

@@ -5,158 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Lesson 19 / Задача 2</title>
-    <style>
-        .container,.sportsman{display:flex;justify-content:space-between}.container{width:100%}.sportsmen-list{width:45%;border:1px solid #000;padding:10px}.sportsman{align-items:center;margin-bottom:10px}.sportsman-name{width:50%}.sportsman-country{width:30%}.sportsman-actions{width:20%;display:flex;justify-content:space-between}.sportsman-add,.sportsman-remove{width:20px;height:20px;border:1px solid #000;display:flex;cursor:pointer;color:#fff}.sportsman-add{justify-content:center;align-items:center;background-color:green}.sportsman-remove{justify-content:center;align-items:center;background-color:red}
-    </style>
+    <title>Lesson 21 / Задача 2</title>
 </head>
 
 <body>
-    <a href="../index.html">Lesson 19</a> / <a href="./task2.html">Задача 2</a>
+    <a href="../index.html">Lesson 21</a> / <a href="./task2.html">Задача 2</a>
     <hr>
 
     <h1>Задача 2.</h1>
 
     <p>
-        Дано список спортсменів.
-        Потрібно сформувати список тих, які будуть брати участь у змаганні.
-        При цьому є два стовпці.
-        В одному відображені всі спортсмени, в іншому – список тих, хто був вибраний.
-        При натисканні на зелену стрілку спортсмен переміщається у список для змагань.
-        При натисканні на червону стрілку спортсмен переміщається у загальний список.
+        Дано 5 елементів input.
+        При введенні значення у якийсь із них необхідно автоматично заповнювати інші (усі попередні у спадному порядку(кожен попередній має значення на 1 менше за наступний), усі наступні на 1 більше (кожен наступне на 1 більше за попереднього)
     </p>
 
-    <div class="container" id="task"></div>
-
     <script>
-        class Sportsman {
-            constructor(name, country) {
-                this.name = name;
-                this.country = country;
-            }
-        }
-
-        class SportsmenList {
-            constructor() {
-                this.sportsmen = [];
-            }
-
-            addSportsman(sportsman) {
-                this.sportsmen.push(sportsman);
-            }
-
-            removeSportsman(sportsman) {
-                this.sportsmen = this.sportsmen.filter((item) => item !== sportsman);
-            }
-
-            getSportsmen() {
-                return this.sportsmen;
-            }
-        }
-
-        class SportsmenListRenderer {
-            constructor(sportsmenList) {
-                this.sportsmenList = sportsmenList;
-                this.sportsmenListApproved = new SportsmenList();
-            }
-
-            addSportsmanToApproved(sportsman) {
-                this.sportsmenListApproved.addSportsman(sportsman);
-                this.sportsmenList.removeSportsman(sportsman);
-                this.render();
-            }
-
-            removeSportsmanFromApproved(sportsman) {
-                this.sportsmenList.addSportsman(sportsman);
-                this.sportsmenListApproved.removeSportsman(sportsman);
-                this.render();
-            }
-
-            render() {
-                const container = document.getElementById('task');
-                container.innerHTML = '';
-
-                const sportsmenList = this.sportsmenList.getSportsmen();
-                const sportsmenListApproved = this.sportsmenListApproved.getSportsmen();
-
-                const sportsmenListUI = document.createElement('div');
-                sportsmenListUI.classList.add('sportsmen-list');
-
-                const sportsmenListApprovedUI = document.createElement('div');
-                sportsmenListApprovedUI.classList.add('sportsmen-list');
-
-                sportsmenList.forEach((sportsman) => {
-                    const sportsmanUI = document.createElement('div');
-                    sportsmanUI.classList.add('sportsman');
-
-                    const sportsmanNameUI = document.createElement('div');
-                    sportsmanNameUI.classList.add('sportsman-name');
-                    sportsmanNameUI.innerText = sportsman.name;
-
-                    const sportsmanCountryUI = document.createElement('div');
-                    sportsmanCountryUI.classList.add('sportsman-country');
-                    sportsmanCountryUI.innerText = sportsman.country;
-
-                    const sportsmanActionsUI = document.createElement('div');
-                    sportsmanActionsUI.classList.add('sportsman-actions');
-
-                    const sportsmanAddUI = document.createElement('div');
-                    sportsmanAddUI.classList.add('sportsman-add');
-                    sportsmanAddUI.innerText = '>';
-                    sportsmanAddUI.addEventListener('click', () => {
-                        this.addSportsmanToApproved(sportsman);
-                    });
-                    sportsmanActionsUI.appendChild(sportsmanAddUI);
-
-                    sportsmanUI.appendChild(sportsmanNameUI);
-                    sportsmanUI.appendChild(sportsmanCountryUI);
-                    sportsmanUI.appendChild(sportsmanActionsUI);
-
-                    sportsmenListUI.appendChild(sportsmanUI);
-                });
-
-                sportsmenListApproved.forEach((sportsman) => {
-                    const sportsmanUI = document.createElement('div');
-                    sportsmanUI.classList.add('sportsman');
-
-                    const sportsmanNameUI = document.createElement('div');
-                    sportsmanNameUI.classList.add('sportsman-name');
-                    sportsmanNameUI.innerText = sportsman.name;
-
-                    const sportsmanCountryUI = document.createElement('div');
-                    sportsmanCountryUI.classList.add('sportsman-country');
-                    sportsmanCountryUI.innerText = sportsman.country;
-
-                    const sportsmanActionsUI = document.createElement('div');
-                    sportsmanActionsUI.classList.add('sportsman-actions');
-
-                    const sportsmanRemoveUI = document.createElement('div');
-                    sportsmanRemoveUI.classList.add('sportsman-remove');
-                    sportsmanRemoveUI.innerText = '<';
-                    sportsmanRemoveUI.addEventListener('click', () => {
-                        this.removeSportsmanFromApproved(sportsman);
-                    });
-                    sportsmanActionsUI.appendChild(sportsmanRemoveUI);
-
-                    sportsmanUI.appendChild(sportsmanNameUI);
-                    sportsmanUI.appendChild(sportsmanCountryUI);
-                    sportsmanUI.appendChild(sportsmanActionsUI);
-
-                    sportsmenListApprovedUI.appendChild(sportsmanUI);
-                });
-
-                container.appendChild(sportsmenListUI);
-                container.appendChild(sportsmenListApprovedUI);
-            }
-        }
-
-        const sportsmenList = new SportsmenList();
-        for (let i = 0; i < 10; i++) {
-            sportsmenList.addSportsman(new Sportsman(Math.random().toString(36).substring(Math.random() * 10), 'China'));
-        }
-
-        const sportsmenListRenderer = new SportsmenListRenderer(sportsmenList);
-        sportsmenListRenderer.render();
     </script>
 </body>
 
