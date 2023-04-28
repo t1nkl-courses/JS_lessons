@@ -43,6 +43,160 @@
     <div class="container" id="task"></div>
 
     <script>
+        const randomDataArray = [
+            'Qwerty',
+            'Qqqqqq',
+            'Q . w . e . r . t . y',
+            'Qwerty 12345',
+            '12345',
+            '11111',
+            'Qwerty 11111',
+            'Qqqqqq 12345',
+            'Qqqqqq 11111',
+            '1 , 2 , 3 , 4 , 5',
+            'Q . 1 . w . 2 . e . 3 . r . 4 . t . 5 . y',
+        ];
+
+        // Задача 1. Дано масив рядків. Вивести ті, у яких є цифри (використати метод test та регулярні вирази).
+        const task1 = () => {
+            const regExp = /\d/;
+            const result = randomDataArray.filter(item => regExp.test(item));
+            
+            return `<b>Задача 1.</b> - ${result}`;
+        }
+
+        // Задача 2. Дано масив рядків. Вивести ті, у яких немає цифр.
+        const task2 = () => {
+            const regExp = /\D/;
+            const result = randomDataArray.filter(item => regExp.test(item));
+            
+            return `<b>Задача 2.</b> - ${result}`;
+        }
+
+        // Задача 3. Дано масив рядків. Вивести ті, у яких є голосні літери.
+        const task3 = () => {
+            const regExp = /[aeiou]/i;
+            const result = randomDataArray.filter(item => regExp.test(item));
+            
+            return `<b>Задача 3.</b> - ${result}`;
+        }
+
+        // Задача 4. Дано масив рядків. Вивести ті, у яких немає голосних літер.
+        const task4 = () => {
+            const regExp = /[^aeiou]/i;
+            const result = randomDataArray.filter(item => regExp.test(item));
+            
+            return `<b>Задача 4.</b> - ${result}`;
+        }
+
+        // Задача 5. Дано масив рядків. Вивести ті, у яких є або цифра 1 або цифра 3.
+        const task5 = () => {
+            const regExp = /[13]/;
+            const result = randomDataArray.filter(item => regExp.test(item));
+            
+            return `<b>Задача 5.</b> - ${result}`;
+        }
+
+        const randomDataString = randomDataArray.join(' ');
+
+        // Задача 6. Дано рядок тексту, вивести усі числа, які є у тексті.
+        const task6 = () => {
+            const regExp = /\d+/g;
+            const result = randomDataString.match(regExp);
+            
+            return `<b>Задача 6.</b> - ${result}`;
+        }
+
+        // Задача 7. Дано рядок тексту. Знайти усі знаки пунктуації, які були використано.
+        const task7 = () => {
+            const regExp = /[.,\/#!$%\^&\*;:{}=\-_`~()]/g;
+            const result = randomDataString.match(regExp);
+            
+            return `<b>Задача 7.</b> - ${result}`;
+        }
+
+        // Задача 8. Дано рядок тексту. Вивести усі складові, які розділені розділовими знаками.
+        const task8 = () => {
+            const regExp = /[.,\/#!$%\^&\*;:{}=\-_`~()]/g;
+            const result = randomDataString.split(regExp);
+            
+            return `<b>Задача 8.</b> - ${result}`;
+        }
+        
+        // Задача 9. Дано рядок тексту. Перевірити, чи містить він дату у форматі dd.mm.yyyy (dd- день, mm- місяць, yyyy- рік).
+        const task9 = () => {
+            const regExp = /\d{2}\.\d{2}\.\d{4}/;
+            const result = regExp.test(randomDataString);
+            
+            return `<b>Задача 9.</b> - ${result}`;
+        }
+
+        // Задача 10. Дано рядок тексту. Підрахувати кількість двоцифрових чисел у рядку.
+        const task10 = () => {
+            const regExp = /\d{2}/g;
+            const result = randomDataString.match(regExp);
+            
+            return `<b>Задача 10.</b> - ${result.length}`;
+        }
+
+        // Задача 11. Визначити чи може бути рядок тексту номером банківської картки (приклад: «4142-3433-2323-3434»). Знайти усі такі номери.
+        const task11 = () => {
+            const regExp = /\d{4}-\d{4}-\d{4}-\d{4}/g;
+            const result = randomDataString.match(regExp);
+            
+            return `<b>Задача 11.</b> - ${result}`;
+        }
+
+        // Задача 12. Дано адресу сайту. Визначити, чи є він урядовим (містить домен “gov”)
+        const task12 = () => {
+            const regExp = /gov/;
+            const result = regExp.test(randomDataString);
+            
+            return `<b>Задача 12.</b> - ${result}`;
+        }
+
+        // Задача 13. Вибрати усі роки після 2021 року з отриманого повідомлення
+        const task13 = () => {
+            const regExp = /202[2-9]/g;
+            const result = randomDataString.match(regExp);
+            
+            return `<b>Задача 13.</b> - ${result}`;
+        }
+
+        // Задача 14. Дано номер телефону. Перевірити, чи є цей телефон телефоном з України (починаєтсья на «+38»)
+        const task14 = () => {
+            const regExp = /\+38\d{10}/g;
+            const result = regExp.test(randomDataString);
+            
+            return `<b>Задача 14.</b> - ${result}`;
+        }
+
+        // Задача 15. Користувач вводить прізвище та ім’я в одному рядку через пробіл. Замінити пробіл на дефіс.
+        const task15 = () => {
+            const regExp = /\s/;
+            const result = randomDataString.replace(regExp, '-');
+            
+            return `<b>Задача 15.</b> - ${result}`;
+        }
+
+        // Задача 16. Користувач вводить дату у форматі «день.місяць.рік». Отримати рядкове представлення дати у форматі «день/місяць/рік»
+        const task16 = () => {
+            const regExp = /\./g;
+            const result = randomDataString.replace(regExp, '/');
+            
+            return `<b>Задача 16.</b> - ${result}`;
+        }
+
+        // Задача 17. Користувач вводить день (номер дня (0-6) або «sun,mon,tue,wed,thu,fri,sat»). Визначити, чи є це день вихідним
+        const task17 = () => {
+            const regExp = /sun|sat/g;
+            const result = regExp.test(randomDataString);
+            
+            return `<b>Задача 17.</b> - ${result}`;
+        }
+
+        const result = document.getElementById('task');
+        result.innerHTML = `${task1()}<br>${task2()}<br>${task3()}<br>${task4()}<br>${task5()}<br>${task6()}<br>${task7()}<br>${task8()}<br>${task9()}<br>${task10()}<br>${task11()}<br>${task12()}<br>${task13()}<br>${task14()}<br>${task15()}<br>${task16()}<br>${task17()}`;
     </script>
 </body>
 
