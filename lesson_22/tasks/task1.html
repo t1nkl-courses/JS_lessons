@@ -59,6 +59,95 @@
     <div class="container" id="task"></div>
 
     <script>
+        class Client {
+            constructor(id, name, money) {
+                this.id = id;
+                this.name = name;
+                this.money = money;
+            }
+
+            addMoney(money) {
+                this.money += money;
+            }
+
+            withdrawMoney(money) {
+                this.money -= money;
+            }
+
+            toString() {
+                return `ID: ${this.id}, Name: ${this.name}, Money: ${this.money}`;
+            }
+        }
+
+        class GoldenClient extends Client {
+            constructor(id, name, money, creditLimit, creditPercent) {
+                super(id, name, money);
+                this.creditLimit = creditLimit;
+                this.creditPercent = creditPercent;
+            }
+
+            addMoney(money) {
+                super.addMoney(money);
+            }
+
+            withdrawMoney(money) {
+                super.withdrawMoney(money);
+            }
+
+            getPenalty() {
+                return this.money * this.creditPercent / 100;
+            }
+
+            toString() {
+                return `ID: ${this.id}, Name: ${this.name}, Money: ${this.money}, Credit limit: ${this.creditLimit}, Credit percent: ${this.creditPercent}`;
+            }
+        }
+
+        class Bank {
+            constructor() {
+                this.clients = [];
+            }
+
+            addClient(client) {
+                this.clients.push(client);
+            }
+
+            getClients() {
+                return this.clients;
+            }
+
+            getSimpleClients() {
+                return this.clients.filter(client => !(client instanceof GoldenClient));
+            }
+
+            getGoldenClients() {
+                return this.clients.filter(client => client instanceof GoldenClient);
+            }
+
+            getTotalMoney() {
+                return this.clients.reduce((total, client) => total + client.money, 0);
+            }
+        }
+
+        const bank = new Bank();
+
+        bank.addClient(new Client(1, 'Ivan', 1000));
+        bank.addClient(new Client(2, 'Petro', 2000));
+        bank.addClient(new GoldenClient(3, 'Stepan', 3000, 1000, 10));
+        bank.addClient(new GoldenClient(4, 'Oleg', 4000, 2000, 20));
+
+        const task = document.getElementById('task');
+
+        task.innerHTML += '<h2>Всі клієнти</h2>';
+        bank.getClients().forEach(client => task.innerHTML += `<p>${client.toString()}</p>`);
+
+        task.innerHTML += '<h2>Прості клієнти</h2>';
+        bank.getSimpleClients().forEach(client => task.innerHTML += `<p>${client.toString()}</p>`);
+
+        task.innerHTML += '<h2>Золоті клієнти</h2>';
+        bank.getGoldenClients().forEach(client => task.innerHTML += `<p>${client.toString()}</p>`);
+
+        task.innerHTML += `<h2>Загальна сума грошей на рахунках: ${bank.getTotalMoney()}</h2>`;
     </script>
 </body>
 
