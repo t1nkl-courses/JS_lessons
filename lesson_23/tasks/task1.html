@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 23 / Задача 1</title>
+</head>
+
+<body>
+    <a href="../index.html">Lesson 23</a> / <a href="./task1.html">Задача 1</a>
+    <hr>
+
+    <h1>Задача 1.</h1>
+
+    <p>
+        RegExp Date<br>
+        <ul>
+            <li>Задача 1. Користувач іде у відпустку на 56 днів. Визначити дату на момент його повернення.</li>
+            <li>Задача 2. Дано дата виробництва йогурта (вводимо рік, місяць, день) та кількість днів придатності. Визначити чи є він придатним на даний момент.</li>
+            <li>Задача 3. Сформувати масив з 1000 елементів від 1 до 800. Порівняти час сортування бульбашкою і вставкою.</li>
+            <li>Задача 4. Задаємо користувачу задачу з додавання двох чисел. Визначити скільки секунд було використано для розв’язання задачі.</li>
+        </ul>
+    </p>
+
+    <div class="container" id="task"></div>
+
+    <script>
+        // Задача 1. Користувач іде у відпустку на 56 днів. Визначити дату на момент його повернення.
+        const date = new Date();
+        const date2 = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 56);
+        document.getElementById('task').innerHTML += `<p>Задача 1. Користувач іде у відпустку на 56 днів. Визначити дату на момент його повернення: ${date2}</p>`;
+
+        // Задача 2. Дано дата виробництва йогурта (вводимо рік, місяць, день) та кількість днів придатності. Визначити чи є він придатним на даний момент.
+        const date3 = new Date(2019, 11, 1);
+        const date4 = new Date(date3.getFullYear(), date3.getMonth(), date3.getDate() + 10);
+        const date5 = new Date();
+        if (date4 > date5) {
+            document.getElementById('task').innerHTML += `<p>Задача 2. Дано дата виробництва йогурта (вводимо рік, місяць, день) та кількість днів придатності. Визначити чи є він придатним на даний момент: йогурт придатний</p>`;
+        } else {
+            document.getElementById('task').innerHTML += `<p>Задача 2. Дано дата виробництва йогурта (вводимо рік, місяць, день) та кількість днів придатності. Визначити чи є він придатним на даний момент: йогурт не придатний</p>`;
+        }
+
+        // Задача 3. Сформувати масив з 1000 елементів від 1 до 800. Порівняти час сортування бульбашкою і вставкою.
+        const arr = [];
+        for (let i = 0; i < 1000; i++) {
+            arr.push(Math.floor(Math.random() * 800) + 1);
+        }
+        
+        function bubbleSort(arr) {
+            const n = arr.length;
+            
+            for (let i = 0; i < n - 1; i++) {
+                for (let j = 0; j < n - 1 - i; j++) {
+                    if (arr[j + 1] < arr[j]) {
+                        const t = arr[j + 1];
+                        arr[j + 1] = arr[j];
+                        arr[j] = t;
+                    }
+                }
+            }
+            
+            return arr;
+        }
+
+        function insertionSort(arr) {
+            const n = arr.length;
+            
+            for (let i = 0; i < n; i++) {
+                const v = arr[i], j = i - 1;
+                
+                while (j >= 0 && arr[j] > v) {
+                    arr[j + 1] = arr[j];
+                    j--;
+                }
+                
+                arr[j + 1] = v;
+            }
+            
+            return arr;
+        }
+        
+        const date6 = new Date();
+        bubbleSort(arr);
+        const date7 = new Date();
+        insertionSort(arr);
+        const date8 = new Date();
+        document.getElementById('task').innerHTML += `<p>Задача 3. Сформувати масив з 1000 елементів від 1 до 800. Порівняти час сортування бульбашкою і вставкою: час сортування бульбашкою ${date7 - date6} мс, час сортування вставкою ${date8 - date7} мс</p>`;
+
+        // Задача 4. Задаємо користувачу задачу з додавання двох чисел. Визначити скільки секунд було використано для розв’язання задачі.
+        const firstNumber = parseFloat(prompt('Введіть перше число'));
+        const secondNumber = parseFloat(prompt('Введіть друге число'));
+        const date9 = new Date();
+        const result = firstNumber + secondNumber;
+        const date10 = new Date();
+        document.getElementById('task').innerHTML += `<p>Задача 4. Задаємо користувачу задачу з додавання двох чисел. Визначити скільки секунд було використано для розв’язання задачі: ${date10 - date9} мс</p>`;
+    </script>
+</body>
+
+</html>

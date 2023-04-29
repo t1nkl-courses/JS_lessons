@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 22 / Задача 1</title>
+</head>
+
+<body>
+    <a href="../index.html">Lesson 22</a> / <a href="./task1.html">Задача 1</a>
+    <hr>
+
+    <h1>Задача 1.</h1>
+
+    <p>
+        Створити клас Client<br>
+        <ul>
+            <li>Властивості:</li>
+            <ul>
+                <li>ID</li>
+                <li>ПІБ</li>
+                <li>Кількість грошей на рахунку</li>
+            </ul>
+            <li>Методи:</li>
+            <ul>
+                <li>Додавання грошей</li>
+                <li>Зняття грошей</li>
+                <li>ToString</li>
+            </ul>
+        </ul>
+        На основі цього класу створити клас GoldenClient<br>
+        <ul>
+            <li>Властивості:</li>
+            <ul>
+                <li>ID</li>
+                <li>ПІБ</li>
+                <li>Кількість грошей на рахунку</li>
+                <li>Ліміт кредитних коштів</li>
+                <li>Відсоток за використання кредитних коштів</li>
+            </ul>
+            <li>Методи:</li>
+            <ul>
+                <li>Додавання грошей</li>
+                <li>Зняття грошей</li>
+                <li>Визначення пені за використання кредитних коштів</li>
+                <li>ToString</li>
+            </ul>
+        </ul>
+        Створити клас Bank, у якому зберігається масив клієнтів. Виконати такі операції:<br>
+        <ul>
+            <li>Вивести усіх простих клієнтів</li>
+            <li>Вивести усіх клієнтів GoldenClient</li>
+            <li>Знати сумарну кількість грошей на рахунку</li>
+        </ul>
+    </p>
+
+    <div class="container" id="task"></div>
+
+    <script>
+        class Client {
+            constructor(id, name, money) {
+                this.id = id;
+                this.name = name;
+                this.money = money;
+            }
+
+            addMoney(money) {
+                this.money += money;
+            }
+
+            withdrawMoney(money) {
+                this.money -= money;
+            }
+
+            toString() {
+                return `ID: ${this.id}, Name: ${this.name}, Money: ${this.money}`;
+            }
+        }
+
+        class GoldenClient extends Client {
+            constructor(id, name, money, creditLimit, creditPercent) {
+                super(id, name, money);
+                this.creditLimit = creditLimit;
+                this.creditPercent = creditPercent;
+            }
+
+            addMoney(money) {
+                super.addMoney(money);
+            }
+
+            withdrawMoney(money) {
+                super.withdrawMoney(money);
+            }
+
+            getPenalty() {
+                return this.money * this.creditPercent / 100;
+            }
+
+            toString() {
+                return `ID: ${this.id}, Name: ${this.name}, Money: ${this.money}, Credit limit: ${this.creditLimit}, Credit percent: ${this.creditPercent}`;
+            }
+        }
+
+        class Bank {
+            constructor() {
+                this.clients = [];
+            }
+
+            addClient(client) {
+                this.clients.push(client);
+            }
+
+            getClients() {
+                return this.clients;
+            }
+
+            getSimpleClients() {
+                return this.clients.filter(client => !(client instanceof GoldenClient));
+            }
+
+            getGoldenClients() {
+                return this.clients.filter(client => client instanceof GoldenClient);
+            }
+
+            getTotalMoney() {
+                return this.clients.reduce((total, client) => total + client.money, 0);
+            }
+        }
+
+        const bank = new Bank();
+
+        bank.addClient(new Client(1, 'Ivan', 1000));
+        bank.addClient(new Client(2, 'Petro', 2000));
+        bank.addClient(new GoldenClient(3, 'Stepan', 3000, 1000, 10));
+        bank.addClient(new GoldenClient(4, 'Oleg', 4000, 2000, 20));
+
+        const task = document.getElementById('task');
+
+        task.innerHTML += '<h2>Всі клієнти</h2>';
+        bank.getClients().forEach(client => task.innerHTML += `<p>${client.toString()}</p>`);
+
+        task.innerHTML += '<h2>Прості клієнти</h2>';
+        bank.getSimpleClients().forEach(client => task.innerHTML += `<p>${client.toString()}</p>`);
+
+        task.innerHTML += '<h2>Золоті клієнти</h2>';
+        bank.getGoldenClients().forEach(client => task.innerHTML += `<p>${client.toString()}</p>`);
+
+        task.innerHTML += `<h2>Загальна сума грошей на рахунках: ${bank.getTotalMoney()}</h2>`;
+    </script>
+</body>
+
+</html>

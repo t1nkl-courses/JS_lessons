@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 22 / Задача 3</title>
+</head>
+
+<body>
+    <a href="../index.html">Lesson 22</a> / <a href="./task3.html">Задача 3</a>
+    <hr>
+
+    <h1>Задача 3.</h1>
+
+    <p>
+        Користувач задає місяць навчання учня (перевіряти чи є числом, чи від 1 до 12, чи не канікули) та оцінку (перевіряти чи є числом, чи від 1 до 100).
+        Вивести чи зможе він виправити оцінку (якщо оцінка погана і це не останній місяць у семестрі).
+        Обробку усіх помилок зробити з використанням відповідних класів.
+    </p>
+
+    <div class="container" id="task"></div>
+
+    <script>
+        class MonthError extends Error {
+            constructor(message) {
+                super(message);
+                this.name = "MonthError";
+            }
+        }
+
+        class MarkError extends Error {
+            constructor(message) {
+                super(message);
+                this.name = "MarkError";
+            }
+        }
+
+        class Student {
+            constructor(month, mark) {
+                this.month = month;
+                this.mark = mark;
+            }
+
+            get month() {
+                return this._month;
+            }
+
+            set month(value) {
+                if (isNaN(value) || value < 1 || value > 12) {
+                    throw new MonthError("Місяць повинен бути числом від 1 до 12");
+                }
+                
+                this._month = value;
+            }
+
+            get mark() {
+                return this._mark;
+            }
+
+            set mark(value) {
+                if (isNaN(value) || value < 1 || value > 100) {
+                    throw new MarkError("Оцінка повинна бути числом від 1 до 100");
+                }
+                
+                this._mark = value;
+            }
+
+            toString() {
+                return `Студент навчається в ${this.month} місяці і має оцінку ${this.mark}`;
+            }
+        }
+
+        class StudentHandler {
+            constructor(student) {
+                this.student = student;
+            }
+
+            get student() {
+                return this._student;
+            }
+
+            set student(value) {
+                if (!(value instanceof Student)) {
+                    throw new Error("Параметр повинен бути екземпляром класу Student");
+                }
+                
+                this._student = value;
+            }
+
+            canCorrectMark() {
+                if (this.student.month < 9 && this.student.mark < 60) {
+                    return true;
+                }
+                
+                return false;
+            }
+        }
+
+        const student = new Student(8, 59);
+        const studentHandler = new StudentHandler(student);
+
+        try {
+            if (studentHandler.canCorrectMark()) {
+                document.getElementById("task").innerHTML = student.toString();
+            } else {
+                throw new Error("Оцінку не можна виправити");
+            }
+        } catch (error) {
+            document.getElementById("task").innerHTML = error.message;
+        }
+    </script>
+</body>
+
+</html>

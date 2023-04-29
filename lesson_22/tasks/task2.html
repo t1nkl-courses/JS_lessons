@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 22 / Задача 2</title>
+</head>
+
+<body>
+    <a href="../index.html">Lesson 22</a> / <a href="./task2.html">Задача 2</a>
+    <hr>
+
+    <h1>Задача 2.</h1>
+
+    <p>
+        Розробити Класи:<br>
+        <ul>
+            <li>House</li>
+            <ul>
+                <li>Властивості:</li>
+                <ul>
+                    <li>Координата X</li>
+                    <li>Координата Y</li>
+                    <li>шлях до зображення</li>
+                    <li>інтервал оновлення</li>
+                </ul>
+                <li>Методи:</li>
+                <ul>
+                    <li>генерування елемента розмітки</li>
+                    <li>оновлення через вказаний інтервал - збільшення або зменшення масштабу (об’єкт не рухається)</li>
+                </ul>
+            </ul>
+            <li>Dog</li>
+            <ul>
+                <li>Властивості:</li>
+                <ul>
+                    <li>Координата X</li>
+                    <li>Координата Y</li>
+                    <li>шлях до зображення</li>
+                    <li>інтервал оновлення</li>
+                </ul>
+                <li>Методи:</li>
+                <ul>
+                    <li>генерування елемента розмітки</li>
+                    <li>оновлення через вказаний інтервал - випадкове зміщення по горизонталі (зміна координати X)</li>
+                </ul>
+            </ul>
+            <li>Bird</li>
+            <ul>
+                <li>Властивості:</li>
+                <ul>
+                    <li>Координата X</li>
+                    <li>Координата Y</li>
+                    <li>шлях до зображення</li>
+                    <li>інтервал оновлення</li>
+                </ul>
+                <li>Методи:</li>
+                <ul>
+                    <li>генерування елемента розмітки</li>
+                    <li>оновлення через вказаний інтервал - випадкове переміщення у довільному напрямку</li>
+                </ul>
+            </ul>
+        </ul>
+        Подумайте яким має бути спільний клас предок. Які властивості і методи в ньому повинні бути.
+    </p>
+
+    <div class="container" id="task"></div>
+
+    <script>
+        class Animal {
+            constructor(x, y, img, interval) {
+                this.x = x;
+                this.y = y;
+                this.img = img;
+                this.interval = interval;
+            }
+
+            generate() {
+                const div = document.createElement('div');
+                div.style.position = 'absolute';
+                div.style.left = this.x + 'px';
+                div.style.top = this.y + 'px';
+                div.style.width = '100px';
+                div.style.height = '100px';
+                div.style.backgroundImage = `url(${this.img})`;
+                div.style.backgroundSize = '100%';
+                
+                document.querySelector('#task').appendChild(div);
+            }
+
+            update() {
+                setInterval(() => {
+                    this.x += 10;
+                    this.y += 10;
+                    document.querySelector('#task div').style.left = this.x + 'px';
+                    document.querySelector('#task div').style.top = this.y + 'px';
+                }, this.interval);
+            }
+        }
+
+        class House extends Animal {
+            constructor(x, y, img, interval) {
+                super(x, y, img, interval);
+            }
+        }
+
+        class Dog extends Animal {
+            constructor(x, y, img, interval) {
+                super(x, y, img, interval);
+            }
+
+            update() {
+                setInterval(() => {
+                    this.x += 10;
+                    document.querySelector('#task div').style.left = this.x + 'px';
+                }, this.interval);
+            }
+        }
+
+        class Bird extends Animal {
+            constructor(x, y, img, interval) {
+                super(x, y, img, interval);
+            }
+
+            update() {
+                setInterval(() => {
+                    this.x += 10;
+                    this.y += 10;
+                    document.querySelector('#task div').style.left = this.x + 'px';
+                    document.querySelector('#task div').style.top = this.y + 'px';
+                }, this.interval);
+            }
+        }
+
+        const house = new House(100, 100, 'https://static.vecteezy.com/system/resources/previews/001/200/294/original/house-png.png', 1000);
+        house.generate();
+        house.update();
+
+        const dog = new Dog(100, 100, 'https://static.vecteezy.com/system/resources/previews/001/200/028/original/dog-png.png', 1000);
+        dog.generate();
+        dog.update();
+
+        const bird = new Bird(100, 100, 'https://png.pngtree.com/png-clipart/20220628/ourmid/pngtree-flock-of-birds-silhouettes-flying-birds-clipart-png-image_5371927.png', 1000);
+        bird.generate();
+        bird.update();
+    </script>
+</body>
+
+</html>
